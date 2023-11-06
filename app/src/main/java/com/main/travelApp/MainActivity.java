@@ -2,26 +2,39 @@ package com.main.travelApp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.View;
 import android.widget.TextView;
 
+import com.main.travelApp.databinding.ActivityLoginBinding;
+
 public class MainActivity extends AppCompatActivity {
-    TextView txtForgotPassword;
+    private ActivityLoginBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         init();
     }
 
     private void init(){
         String forgotPassword = "Quên mật khẩu";
-        txtForgotPassword = findViewById(R.id.txtForgotPassword);
 
         SpannableString mSpannableString = new SpannableString(forgotPassword);
         mSpannableString.setSpan(new UnderlineSpan(), 0, forgotPassword.length(), 0);
-        txtForgotPassword.setText(mSpannableString);
+        binding.txtForgotPassword.setText(mSpannableString);
+
+        binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
