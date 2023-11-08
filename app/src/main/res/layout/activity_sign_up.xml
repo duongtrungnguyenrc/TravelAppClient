@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:background="#f5f5fa"
         android:padding="20dp"
-        tools:context=".MainActivity">
+        tools:context=".LoginActivity">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

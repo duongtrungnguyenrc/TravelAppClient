@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="fab_3_rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="NavigationTheme" parent="Theme.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="fontFamily">@font/alata</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:height">0dp</item>
+        <item name="android:width">0dp</item>
+    </style>
+</resources>
