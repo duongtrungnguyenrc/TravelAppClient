@@ -43,4 +43,9 @@ dependencies {
     // Lombok implementation
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    //View pager 2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    implementation 'com.balysv:material-ripple:1.0.2'
 }

@@ -1,4 +1,4 @@
-package com.main.travelApp;
+package com.main.travelApp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationBarView;
+import com.main.travelApp.R;
 import com.main.travelApp.databinding.ActivityMainBinding;
 import com.main.travelApp.fragments.BlogFragment;
 import com.main.travelApp.fragments.ExploreFragment;

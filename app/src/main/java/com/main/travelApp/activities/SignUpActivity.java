@@ -1,4 +1,4 @@
-package com.main.travelApp;
+package com.main.travelApp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
