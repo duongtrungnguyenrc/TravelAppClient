@@ -38,15 +38,16 @@
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:shapeAppearanceOverlay="@style/fab_3_rounded"
+        android:backgroundTint="@color/yellow"
+        android:outlineSpotShadowColor="@android:color/transparent"
         android:src="@drawable/baseline_search_24"
         app:layout_anchor="@id/bottomAppBar"
-        android:backgroundTint="@color/yellow"
-        app:tint="@color/white"
-        android:outlineSpotShadowColor="@android:color/transparent"
-        app:maxImageSize="30dp">
+        app:maxImageSize="30dp"
+        app:shapeAppearanceOverlay="@style/fab_3_rounded"
+        app:tint="@color/white">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

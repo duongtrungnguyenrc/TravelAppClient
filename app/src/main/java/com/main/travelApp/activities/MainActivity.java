@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.main.travelApp.R;
+import com.main.travelApp.components.BottomSheet;
 import com.main.travelApp.databinding.ActivityMainBinding;
 import com.main.travelApp.fragments.BlogFragment;
 import com.main.travelApp.fragments.ExploreFragment;
@@ -40,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         profileFragment = new ProfileFragment();
 
         replaceFragment(homeFragment);
+
+        binding.btnSearch.setOnClickListener((view) -> {
+            BottomSheet.show(this);
+        });
 
         binding.bottomNavView.setBackground(null);
         binding.bottomNavView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
