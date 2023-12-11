@@ -1,8 +1,5 @@
 package com.main.travelApp.fragments;
 
-import android.graphics.RenderEffect;
-import android.graphics.Shader;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,18 +7,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.main.travelApp.R;
 import com.main.travelApp.adapters.PlaceListAdapter;
-import com.main.travelApp.adapters.PostAdapter;
+import com.main.travelApp.adapters.NewestPostsAdapter;
 import com.main.travelApp.adapters.TourListAdapter;
+import com.main.travelApp.databinding.FragmentHomeBinding;
 import com.main.travelApp.models.Post;
 import com.main.travelApp.models.Tour;
 
@@ -31,25 +25,22 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private TourListAdapter tourListAdapter;
     private PlaceListAdapter placeListAdapter;
-    private PostAdapter postAdapter;
+    private NewestPostsAdapter newestPostsAdapter;
     private List<Tour> tours;
     private List<Post> posts;
-    private RecyclerView rcvTours, rcvPlaces;
-    private ViewPager2 pgPosts;
+    private FragmentHomeBinding homeBinding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        homeBinding = FragmentHomeBinding.inflate(inflater, container, false);
+
+        return homeBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        rcvTours = view.findViewById(R.id.rcvTours);
-        rcvPlaces = view.findViewById(R.id.rcvPlaces);
-        pgPosts = view.findViewById(R.id.pgPosts);
 
         init();
     }
@@ -61,23 +52,27 @@ public class HomeFragment extends Fragment {
 
         tourListAdapter = new TourListAdapter();
         placeListAdapter = new PlaceListAdapter();
-        postAdapter = new PostAdapter();
+        newestPostsAdapter = new NewestPostsAdapter();
 
         placeListAdapter.setTours(top4Tours);
         tourListAdapter.setTours(tours);
-        postAdapter.setPosts(posts);
+        newestPostsAdapter.setPosts(posts);
 
-        rcvTours.setAdapter(tourListAdapter);
-        rcvTours.setLayoutManager(new LinearLayoutManager(
+        homeBinding.rcvTours.setAdapter(tourListAdapter);
+        homeBinding.rcvTours.setLayoutManager(new LinearLayoutManager(
                 getContext(), LinearLayoutManager.HORIZONTAL, false
         ));
 
-        rcvPlaces.setAdapter(placeListAdapter);
-        rcvPlaces.setLayoutManager(new GridLayoutManager(
-                getContext(), 2
-        ));
+        homeBinding.rcvPlaces.setAdapter(placeListAdapter);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        homeBinding.rcvPlaces.setLayoutManager(gridLayoutManager);
 
-        pgPosts.setAdapter(postAdapter);
+        homeBinding.pgPosts.setAdapter(newestPostsAdapter);
 
     }
 

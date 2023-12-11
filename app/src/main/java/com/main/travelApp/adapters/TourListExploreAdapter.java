@@ -17,7 +17,7 @@ import com.main.travelApp.models.Tour;
 import java.util.List;
 import java.util.Random;
 
-public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyViewHolder> {
+public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExploreAdapter.MyViewHolder> {
     private List<Tour> tours;
     private ViewPager2 viewPager2;
 
@@ -42,17 +42,15 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyView
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new MyViewHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_view_tour_home, parent, false)
+                        .inflate(R.layout.item_view_tour_explore, parent, false)
         );
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txtTourName.setText(tours.get(position).getTourName());
-        holder.txtDepartDate.setText(tours.get(position).getDepartDate());
-        holder.txtPrice.setText(String.valueOf(tours.get(position).getPrice()));
-        holder.txtDuration.setText(String.valueOf(tours.get(position).getDuration()) + " ngày");
         holder.txtLocation.setText(tours.get(position).getDestination());
+        holder.txtPrice.setText(String.valueOf(tours.get(position).getPrice()));
         holder.rbRating.setRating(tours.get(position).getRatedStar());
         int[] listImage = new int[] {
                 R.drawable.intro,
@@ -61,7 +59,7 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyView
                 R.drawable.pic3
         };
         Random random = new Random();
-        holder.imgThumbnail.setImageResource(listImage[1]);
+        holder.imgThumbnail.setImageResource(listImage[random.nextInt(4)]);
     }
 
     @Override
@@ -70,16 +68,14 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyView
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView txtLocation, txtTourName, txtDepartDate, txtDuration, txtPrice;
+        TextView txtTourName, txtPrice, txtLocation;
         RatingBar rbRating;
         ImageView imgThumbnail;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtDuration = itemView.findViewById(R.id.txtDuration);
             txtLocation = itemView.findViewById(R.id.txtLocation);
             txtPrice = itemView.findViewById(R.id.txtPrice);
             txtTourName = itemView.findViewById(R.id.txtTourName);
-            txtDepartDate = itemView.findViewById(R.id.txtDepartDate);
 
             rbRating = itemView.findViewById(R.id.rbRating);
 
