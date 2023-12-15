@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
-import com.main.travelApp.activities.PostDetailActivity;
+import com.main.travelApp.ui.activities.PostDetailActivity;
 import com.main.travelApp.databinding.ItemViewPostBinding;
 import com.main.travelApp.models.Post;
 
