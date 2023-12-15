@@ -10,23 +10,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
+import com.main.travelApp.models.GeneralPost;
 import com.main.travelApp.ui.activities.PostDetailActivity;
 import com.main.travelApp.databinding.ItemViewPostBinding;
 import com.main.travelApp.models.Post;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.MyViewHolder> {
-    private List<Post> posts;
+    private List<GeneralPost> posts;
     private Context context;
 
-    public AllPostAdapter(List<Post> posts, Context context) {
-        this.posts = posts;
+    public AllPostAdapter(Context context) {
         this.context = context;
     }
 
-    public void setPosts(List<Post> posts) {
+    public void setPosts(List<GeneralPost> posts) {
         this.posts = posts;
+        notifyDataSetChanged();
     }
     public void setContext(Context context){
         this.context = context;
@@ -44,7 +46,11 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.binding.txtPostTitle.setText(posts.get(position).getTitle());
         holder.binding.txtAuthor.setText(posts.get(position).getAuthor());
-        holder.binding.imgPostThumbnail.setImageResource(R.drawable.pic3);
+        Picasso.get()
+                .load(posts.get(position).getImg())
+                .placeholder(R.color.light_gray)
+                .error(R.color.light_gray)
+                .into(holder.binding.imgPostThumbnail);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +63,7 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return posts.size();
+        return posts != null ? posts.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

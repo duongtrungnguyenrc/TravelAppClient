@@ -1,11 +1,16 @@
 package com.main.travelApp.services.api;
 
+import android.content.Context;
+
+import com.main.travelApp.R;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
+    private static final String BASE_URL = "http://10.0.2.2:8080/api/";
 
     public static Retrofit getClient() {
 
@@ -14,7 +19,7 @@ public class APIClient {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         return new Retrofit.Builder()
-                .baseUrl("http://192.168.31.213:8080/api/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

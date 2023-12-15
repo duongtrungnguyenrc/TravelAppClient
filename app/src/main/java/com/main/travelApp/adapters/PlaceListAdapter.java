@@ -11,19 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
-import com.main.travelApp.models.Tour;
+import com.main.travelApp.models.GeneralTour;
 
 import java.util.List;
 
 public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.MyViewHolder> {
-    private List<Tour> tours;
+    private List<GeneralTour> generalTours;
 
-    public List<Tour> getTours() {
-        return tours;
+    public List<GeneralTour> getTours() {
+        return generalTours;
     }
 
-    public void setTours(List<Tour> tours) {
-        this.tours = tours;
+    public void setTours(List<GeneralTour> generalTours) {
+        this.generalTours = generalTours;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,14 +36,14 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.rbPlaceRating.setRating(tours.get(position).getRatedStar());
-        holder.txtTotalBooked.setText(tours.get(position).getTotalBooked() + " lượt đặt tour");
-        holder.txtPlaceName.setText(tours.get(position).getDestination());
+        holder.rbPlaceRating.setRating((float) generalTours.get(position).getRatedStar());
+        holder.txtTotalBooked.setText(generalTours.get(position).getMaxPeople() + " lượt đặt tour");
+        holder.txtPlaceName.setText(generalTours.get(position).getLocation());
     }
 
     @Override
     public int getItemCount() {
-        return tours != null ? tours.size() : 0;
+        return generalTours != null ? generalTours.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

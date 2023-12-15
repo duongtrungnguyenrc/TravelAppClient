@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,20 +22,20 @@ import com.main.travelApp.adapters.AllPostAdapter;
 import com.main.travelApp.adapters.NewestPostsAdapter;
 import com.main.travelApp.adapters.TopPostsAdapter;
 import com.main.travelApp.databinding.FragmentBlogBinding;
-import com.main.travelApp.models.Post;
-import com.main.travelApp.utils.LinearLayoutManagerUtil;
+import com.main.travelApp.models.GeneralPost;
+import com.main.travelApp.utils.LayoutManagerUtil;
+import com.main.travelApp.viewmodels.BlogViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlogFragment extends Fragment {
     private FragmentBlogBinding blogBinding;
     private NewestPostsAdapter newestPostsAdapter;
     private TopPostsAdapter topPostsAdapter;
     private AllPostAdapter allPostAdapter;
-    private List<Post> newestPosts;
-    private List<Post> topPosts;
-    private List<Post> allPosts;
+    private BlogViewModel blogViewModel;
     private Handler newestPostsHandler = new Handler();
     private Runnable newestPostsRunnable = new Runnable() {
         @Override
@@ -54,21 +55,16 @@ public class BlogFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        blogViewModel = new ViewModelProvider(getActivity()).get(BlogViewModel.class);
         init();
     }
 
     private void init(){
-        fetchNewestPosts();
-        fetchTopPosts();
-        fetchAllPosts();
-
         newestPostsAdapter = new NewestPostsAdapter();
         topPostsAdapter = new TopPostsAdapter();
-        allPostAdapter = new AllPostAdapter(allPosts, getContext());
+        allPostAdapter = new AllPostAdapter(getContext());
 
-        newestPostsAdapter.setPosts(newestPosts);
         newestPostsAdapter.setViewPager2(blogBinding.pgNewestPosts);
-        topPostsAdapter.setPosts(topPosts);
 
         initViewPager(blogBinding.pgNewestPosts, newestPostsAdapter);
 
@@ -76,8 +72,14 @@ public class BlogFragment extends Fragment {
         blogBinding.rcvTopPosts.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         blogBinding.rcvAllPosts.setAdapter(allPostAdapter);
-        blogBinding.rcvAllPosts.setLayoutManager(LinearLayoutManagerUtil.disabledScrollManager(getContext(), LinearLayoutManager.VERTICAL));
+        blogBinding.rcvAllPosts.setLayoutManager(LayoutManagerUtil.disabledScrollLinearManager(getContext(), LinearLayoutManager.VERTICAL));
         blogBinding.rcvAllPosts.setItemAnimator(new DefaultItemAnimator());
+
+        blogViewModel.getNewestPosts().observe(getViewLifecycleOwner(), posts -> {
+            newestPostsAdapter.setPosts(posts);
+            topPostsAdapter.setPosts(posts);
+            allPostAdapter.setPosts(posts);
+        });
     }
 
     private void initViewPager(ViewPager2 viewPager2, RecyclerView.Adapter adapter){
@@ -106,29 +108,6 @@ public class BlogFragment extends Fragment {
                 newestPostsHandler.postDelayed(newestPostsRunnable, 3000);
             }
         });
-    }
-
-    private void fetchAllPosts(){
-        allPosts = newestPosts;
-    }
-
-    private void fetchNewestPosts(){
-        Post post1 = new Post(1, "Top 5 địa điểm du lịch đẹp nhất Đà Lạt", "Mô tả các địa điểm du lịch hấp dẫn ở Đà Lạt", "2 giờ trước", "Nguyễn Hoàng Anh", "da-lat-1.jpg");
-        Post post2 = new Post(2, "Khám phá các bãi biển đẹp ở Nha Trang", "Giới thiệu về các bãi biển nổi tiếng ở Nha Trang", "4 giờ trước", "Lê Thị Hằng", "nha-trang-2.jpg");
-        Post post3 = new Post(3, "Trải nghiệm du lịch tại phố cổ Hội An lịch sử", "Mô tả các điểm tham quan hấp dẫn tại phố cổ Hội An", "6 giờ trước", "Trần Việt Hoàng", "hoi-an-3.jpg");
-        Post post4 = new Post(4, "Đi du lịch Sapa mùa xuân - những điều cần biết", "Hướng dẫn du lịch Sapa vào mùa xuân", "8 giờ trước", "Nguyễn Thị Hải Yến", "sapa-4.jpg");
-        Post post5 = new Post(5, "Khám phá vẻ đẹp của thành phố Hồ Chí Minh qua du lịch", "Giới thiệu các điểm du lịch hấp dẫn ở TP. Hồ Chí Minh", "10 giờ trước", "Lê Tuấn Anh", "ho-chi-minh-5.jpg");
-
-        newestPosts = new ArrayList<>();
-        newestPosts.add(post1);
-        newestPosts.add(post2);
-        newestPosts.add(post3);
-        newestPosts.add(post4);
-        newestPosts.add(post5);
-    }
-
-    private void fetchTopPosts(){
-        topPosts = newestPosts;
     }
 
     @Override

@@ -10,20 +10,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
 import com.main.travelApp.databinding.ItemViewTopPostBinding;
+import com.main.travelApp.models.GeneralPost;
 import com.main.travelApp.models.Post;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import lombok.val;
 
 public class TopPostsAdapter extends RecyclerView.Adapter<TopPostsAdapter.MyViewHolder> {
-    private List<Post> posts;
+    private List<GeneralPost> posts;
 
-    public void setPosts(List<Post> posts) {
+    public void setPosts(List<GeneralPost> posts) {
         this.posts = posts;
+        notifyDataSetChanged();
     }
 
-    public List<Post> getPosts() {
+    public List<GeneralPost> getPosts() {
         return posts;
     }
 
@@ -38,13 +41,17 @@ public class TopPostsAdapter extends RecyclerView.Adapter<TopPostsAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.binding.imgPostThumbnail.setImageResource(R.drawable.pic1);
+        Picasso.get()
+                .load(posts.get(position).getImg())
+                .placeholder(R.color.light_gray)
+                .error(R.color.light_gray)
+                .into(holder.binding.imgPostThumbnail);
         holder.binding.txtPostTitle.setText(posts.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return posts.size();
+        return posts != null ? posts.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

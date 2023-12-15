@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.main.travelApp.R;
+import com.main.travelApp.models.GeneralPost;
 import com.main.travelApp.models.Post;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class NewestPostsAdapter extends RecyclerView.Adapter<NewestPostsAdapter.MyViewHolder> {
-    private List<Post> posts;
+    private List<GeneralPost> posts;
     private ViewPager2 viewPager2;
     private Context context;
     private Runnable runnable = new Runnable() {
@@ -40,12 +42,13 @@ public class NewestPostsAdapter extends RecyclerView.Adapter<NewestPostsAdapter.
         this.context = context;
     }
 
-    public List<Post> getPosts() {
+    public List<GeneralPost> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
+    public void setPosts(List<GeneralPost> posts) {
         this.posts = posts;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -61,11 +64,14 @@ public class NewestPostsAdapter extends RecyclerView.Adapter<NewestPostsAdapter.
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txtTitle.setText(posts.get(position).getTitle());
         holder.txtAuthor.setText("Tác giả: " + posts.get(position).getAuthor());
-        holder.txtPostTime.setText(posts.get(position).getPostTime());
-        holder.txtContentDemo.setText(posts.get(position).getDemoContent());
-        holder.imgBackground.setImageResource(R.drawable.pic1);
+        holder.txtPostTime.setText(posts.get(position).getTime());
+        holder.txtContentDemo.setText(posts.get(position).getDescription());
+        Picasso.get().load(posts.get(position).getImg())
+                        .placeholder(R.color.light_gray)
+                        .error(R.color.light_gray)
+                        .into(holder.imgBackground);
 
-        if(position == posts.size() - 2 && viewPager2 != null){
+        if(viewPager2 != null && position == posts.size() - 2){
             viewPager2.post(runnable);
         }
     }

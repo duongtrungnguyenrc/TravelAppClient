@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.main.travelApp.R;
-import com.main.travelApp.models.Tour;
+import com.main.travelApp.models.GeneralTour;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Random;
 
 public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyViewHolder> {
-    private List<Tour> tours;
+    private List<GeneralTour> generalTours;
     private ViewPager2 viewPager2;
 
     public ViewPager2 getViewPager2() {
@@ -29,12 +30,13 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyView
         this.viewPager2 = viewPager2;
     }
 
-    public List<Tour> getTours() {
-        return tours;
+    public List<GeneralTour> getTours() {
+        return generalTours;
     }
 
-    public void setTours(List<Tour> tours) {
-        this.tours = tours;
+    public void setTours(List<GeneralTour> generalTours) {
+        this.generalTours = generalTours;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -48,25 +50,22 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.txtTourName.setText(tours.get(position).getTourName());
-        holder.txtDepartDate.setText(tours.get(position).getDepartDate());
-        holder.txtPrice.setText(String.valueOf(tours.get(position).getPrice()));
-        holder.txtDuration.setText(String.valueOf(tours.get(position).getDuration()) + " ngày");
-        holder.txtLocation.setText(tours.get(position).getDestination());
-        holder.rbRating.setRating(tours.get(position).getRatedStar());
-        int[] listImage = new int[] {
-                R.drawable.intro,
-                R.drawable.pic1,
-                R.drawable.pic2,
-                R.drawable.pic3
-        };
-        Random random = new Random();
-        holder.imgThumbnail.setImageResource(listImage[1]);
+        holder.txtTourName.setText(generalTours.get(position).getName());
+        holder.txtDepartDate.setText(generalTours.get(position).getDepart());
+        holder.txtPrice.setText(String.valueOf(generalTours.get(position).getPrice()));
+        holder.txtDuration.setText(String.valueOf(generalTours.get(position).getDuration()) + " ngày");
+        holder.txtLocation.setText(generalTours.get(position).getLocation());
+        holder.rbRating.setRating((float) generalTours.get(position).getRatedStar());
+        Picasso.get()
+                .load(generalTours.get(position).getImg())
+                .placeholder(R.color.light_gray)
+                .error(R.color.light_gray)
+                .into(holder.imgThumbnail);
     }
 
     @Override
     public int getItemCount() {
-        return tours != null ? tours.size() : 0;
+        return generalTours != null ? generalTours.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

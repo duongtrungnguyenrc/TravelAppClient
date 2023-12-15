@@ -13,7 +13,7 @@ import com.main.travelApp.databinding.ActivityPostDetailBinding;
 import com.main.travelApp.models.Paragraph;
 import com.main.travelApp.models.Post;
 import com.main.travelApp.models.Rate;
-import com.main.travelApp.utils.LinearLayoutManagerUtil;
+import com.main.travelApp.utils.LayoutManagerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,17 +48,17 @@ public class PostDetailActivity extends AppCompatActivity {
 
         fetchPost();
         paragraphAdapter = new ParagraphAdapter(paragraphs);
-        relevantPostAdapter = new AllPostAdapter(relevantPosts, this);
+//        relevantPostAdapter = new AllPostAdapter(relevantPosts, this);
         postCommentAdapter = new PostCommentAdapter(comments, this);
 
         binding.rcvParagraphs.setItemAnimator(new DefaultItemAnimator());
-        binding.rcvParagraphs.setLayoutManager(LinearLayoutManagerUtil.disabledScrollManager(this, LinearLayoutManager.VERTICAL));
+        binding.rcvParagraphs.setLayoutManager(LayoutManagerUtil.disabledScrollLinearManager(this, LinearLayoutManager.VERTICAL));
         binding.rcvParagraphs.setAdapter(paragraphAdapter);
         binding.rcvRelevantPost.setItemAnimator(new DefaultItemAnimator());
-        binding.rcvRelevantPost.setLayoutManager(LinearLayoutManagerUtil.disabledScrollManager(this, LinearLayoutManager.VERTICAL));
+        binding.rcvRelevantPost.setLayoutManager(LayoutManagerUtil.disabledScrollLinearManager(this, LinearLayoutManager.VERTICAL));
         binding.rcvRelevantPost.setAdapter(relevantPostAdapter);
         binding.rcvComment.setItemAnimator(new DefaultItemAnimator());
-        binding.rcvComment.setLayoutManager(LinearLayoutManagerUtil.disabledScrollManager(this, LinearLayoutManager.VERTICAL));
+        binding.rcvComment.setLayoutManager(LayoutManagerUtil.disabledScrollLinearManager(this, LinearLayoutManager.VERTICAL));
         binding.rcvComment.setAdapter(postCommentAdapter);
     }
 

@@ -1,4 +1,4 @@
-package com.main.travelApp.Callbacks;
+package com.main.travelApp.callbacks;
 
 public interface ActionCallback<T>{
     default void onSuccess(T result){}

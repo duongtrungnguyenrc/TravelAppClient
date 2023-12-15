@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.main.travelApp.R;
-import com.main.travelApp.models.Tour;
+import com.main.travelApp.models.GeneralTour;
 
 import java.util.List;
 import java.util.Random;
 
 public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExploreAdapter.MyViewHolder> {
-    private List<Tour> tours;
+    private List<GeneralTour> generalTours;
     private ViewPager2 viewPager2;
 
     public ViewPager2 getViewPager2() {
@@ -29,12 +29,12 @@ public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExplore
         this.viewPager2 = viewPager2;
     }
 
-    public List<Tour> getTours() {
-        return tours;
+    public List<GeneralTour> getTours() {
+        return generalTours;
     }
 
-    public void setTours(List<Tour> tours) {
-        this.tours = tours;
+    public void setTours(List<GeneralTour> generalTours) {
+        this.generalTours = generalTours;
     }
 
     @NonNull
@@ -48,10 +48,10 @@ public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExplore
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.txtTourName.setText(tours.get(position).getTourName());
-        holder.txtLocation.setText(tours.get(position).getDestination());
-        holder.txtPrice.setText(String.valueOf(tours.get(position).getPrice()));
-        holder.rbRating.setRating(tours.get(position).getRatedStar());
+        holder.txtTourName.setText(generalTours.get(position).getName());
+        holder.txtLocation.setText(generalTours.get(position).getLocation());
+        holder.txtPrice.setText(String.valueOf(generalTours.get(position).getPrice()));
+        holder.rbRating.setRating((float) generalTours.get(position).getRatedStar());
         int[] listImage = new int[] {
                 R.drawable.intro,
                 R.drawable.pic1,
@@ -64,7 +64,7 @@ public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExplore
 
     @Override
     public int getItemCount() {
-        return tours != null ? tours.size() : 0;
+        return generalTours != null ? generalTours.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
