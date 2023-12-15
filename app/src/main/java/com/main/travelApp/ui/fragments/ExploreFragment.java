@@ -1,4 +1,4 @@
-package com.main.travelApp.fragments;
+package com.main.travelApp.ui.fragments;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;

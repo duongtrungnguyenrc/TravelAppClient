@@ -1,4 +1,4 @@
-package com.main.travelApp.activities;
+package com.main.travelApp.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,16 +7,26 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.main.travelApp.R;
-import com.main.travelApp.components.BottomSheet;
+import com.main.travelApp.models.Tour;
+import com.main.travelApp.services.api.APIClient;
+import com.main.travelApp.services.api.APIInterface;
+import com.main.travelApp.ui.components.BottomSheet;
 import com.main.travelApp.databinding.ActivityMainBinding;
-import com.main.travelApp.fragments.BlogFragment;
-import com.main.travelApp.fragments.ExploreFragment;
-import com.main.travelApp.fragments.HomeFragment;
-import com.main.travelApp.fragments.ProfileFragment;
+import com.main.travelApp.ui.fragments.BlogFragment;
+import com.main.travelApp.ui.fragments.ExploreFragment;
+import com.main.travelApp.ui.fragments.HomeFragment;
+import com.main.travelApp.ui.fragments.ProfileFragment;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -24,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private BlogFragment blogFragment;
     private ExploreFragment exploreFragment;
     private ProfileFragment profileFragment;
+    private APIInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +43,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         init();
+
+        // test call api
+
+//        apiInterface = APIClient.getClient().create(APIInterface.class);
+//
+//        Call<List<Tour>> tours = apiInterface.getAllTours(1, 20);
+//        tours.enqueue(new Callback<List<Tour>>() {
+//            @Override
+//            public void onResponse(Call<List<Tour>> call, Response<List<Tour>> response) {
+//                if (response.isSuccessful()) {
+//                    Log.d("tour", response.body().toString());
+//                }
+//                else {
+//                    Log.d("tour", response.message());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Tour>> call, Throwable t) {
+//                Log.d("tour", t.getMessage());
+//
+//            }
+//        });
+
+        // end test
     }
 
     private void init(){

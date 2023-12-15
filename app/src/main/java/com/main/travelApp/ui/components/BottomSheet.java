@@ -1,4 +1,4 @@
-package com.main.travelApp.components;
+package com.main.travelApp.ui.components;
 
 import android.app.Dialog;
 import android.content.Context;
