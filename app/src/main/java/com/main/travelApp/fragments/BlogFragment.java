@@ -22,6 +22,7 @@ import com.main.travelApp.adapters.NewestPostsAdapter;
 import com.main.travelApp.adapters.TopPostsAdapter;
 import com.main.travelApp.databinding.FragmentBlogBinding;
 import com.main.travelApp.models.Post;
+import com.main.travelApp.utils.LinearLayoutManagerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +64,10 @@ public class BlogFragment extends Fragment {
 
         newestPostsAdapter = new NewestPostsAdapter();
         topPostsAdapter = new TopPostsAdapter();
-        allPostAdapter = new AllPostAdapter();
+        allPostAdapter = new AllPostAdapter(allPosts, getContext());
 
         newestPostsAdapter.setPosts(newestPosts);
         newestPostsAdapter.setViewPager2(blogBinding.pgNewestPosts);
-
-        allPostAdapter.setPosts(allPosts);
-
         topPostsAdapter.setPosts(topPosts);
 
         initViewPager(blogBinding.pgNewestPosts, newestPostsAdapter);
@@ -77,16 +75,8 @@ public class BlogFragment extends Fragment {
         blogBinding.rcvTopPosts.setAdapter(topPostsAdapter);
         blogBinding.rcvTopPosts.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
         blogBinding.rcvAllPosts.setAdapter(allPostAdapter);
-        blogBinding.rcvAllPosts.setLayoutManager(layoutManager);
+        blogBinding.rcvAllPosts.setLayoutManager(LinearLayoutManagerUtil.disabledScrollManager(getContext(), LinearLayoutManager.VERTICAL));
         blogBinding.rcvAllPosts.setItemAnimator(new DefaultItemAnimator());
     }
 

@@ -23,8 +23,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_14
+        targetCompatibility JavaVersion.VERSION_14
     }
     buildFeatures {
         viewBinding true
@@ -48,4 +48,7 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     implementation 'com.balysv:material-ripple:1.0.2'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
 }
