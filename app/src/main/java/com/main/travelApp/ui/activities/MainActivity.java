@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         replaceFragment(homeFragment);
 
-        binding.btnSearch.setOnClickListener((view) -> {
-            BottomSheet.show(this);
-        });
+//        binding.btnSearch.setOnClickListener((view) -> {
+//            BottomSheet.show(this);
+//        });
 
         binding.bottomNavView.setBackground(null);
         binding.bottomNavView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

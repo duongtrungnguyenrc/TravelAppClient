@@ -59,7 +59,11 @@ public class HomeFragment extends Fragment {
         homeViewModel.getTours().observe(getViewLifecycleOwner(), tours -> {
             Log.d("tour", "init: " + tours.size());
             tourListAdapter.setTours(tours);
-            placeListAdapter.setTours(tours.subList(0, 4));
+        });
+
+        homeViewModel.getPlaces().observe(getViewLifecycleOwner(), places -> {
+            Log.d("tour", "init: " + places.size());
+            placeListAdapter.setPlaces(places.subList(0, 4));
         });
 
         homeBinding.rcvTours.setAdapter(tourListAdapter);

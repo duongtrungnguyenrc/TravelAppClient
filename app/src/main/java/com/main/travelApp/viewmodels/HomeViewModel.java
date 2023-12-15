@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.main.travelApp.models.GeneralPost;
 import com.main.travelApp.models.GeneralTour;
+import com.main.travelApp.models.Place;
 import com.main.travelApp.repositories.impls.PostRepositoryImpl;
 import com.main.travelApp.repositories.impls.TourRepositoryImpl;
 import com.main.travelApp.repositories.interfaces.PostRepository;
@@ -19,6 +20,7 @@ public class HomeViewModel extends ViewModel {
     private PostRepository postRepository;
     private LiveData<List<GeneralTour>> tours;
     private LiveData<List<GeneralPost>> posts;
+    private LiveData<List<Place>> places;
     private Application application;
 
     public HomeViewModel(){
@@ -26,6 +28,7 @@ public class HomeViewModel extends ViewModel {
         postRepository = PostRepositoryImpl.getInstance();
         tours = tourRepository.findAll(1, 10);
         posts = postRepository.findNewestPosts();
+        places = tourRepository.findTopDestination();
     }
 
     public void setApplication(Application application){
@@ -38,5 +41,8 @@ public class HomeViewModel extends ViewModel {
 
     public LiveData<List<GeneralPost>> getNewestPosts(){
         return posts;
+    }
+    public LiveData<List<Place>> getPlaces(){
+        return places;
     }
 }

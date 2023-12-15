@@ -78,8 +78,32 @@ public class BlogFragment extends Fragment {
         blogViewModel.getNewestPosts().observe(getViewLifecycleOwner(), posts -> {
             newestPostsAdapter.setPosts(posts);
             topPostsAdapter.setPosts(posts);
-            allPostAdapter.setPosts(posts);
         });
+
+        blogViewModel.getAllPosts()
+                .observe(getViewLifecycleOwner(), blogsResponse -> {
+                    if(blogsResponse != null){
+                        allPostAdapter.setPosts(blogsResponse.getPosts());
+                    }
+                });
+
+       blogBinding.nextPage.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               if(blogViewModel.getAllPostPage() < blogViewModel.getAllPosts().getValue().getPages()){
+                   blogViewModel.setAllPostPage(blogViewModel.getAllPostPage() + 1);
+               }
+           }
+       });
+
+       blogBinding.previousPage.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               if(blogViewModel.getAllPostPage() > 1){
+                   blogViewModel.setAllPostPage(blogViewModel.getAllPostPage() - 1);
+               }
+           }
+       });
     }
 
     private void initViewPager(ViewPager2 viewPager2, RecyclerView.Adapter adapter){

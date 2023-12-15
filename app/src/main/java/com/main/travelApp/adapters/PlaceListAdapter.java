@@ -12,18 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
 import com.main.travelApp.models.GeneralTour;
+import com.main.travelApp.models.Place;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.MyViewHolder> {
-    private List<GeneralTour> generalTours;
+    private List<Place> places;
 
-    public List<GeneralTour> getTours() {
-        return generalTours;
+    public List<Place> getPlaces() {
+        return places;
     }
 
-    public void setTours(List<GeneralTour> generalTours) {
-        this.generalTours = generalTours;
+    public void setPlaces(List<Place> places) {
+        this.places = places;
         notifyDataSetChanged();
     }
 
@@ -36,14 +38,19 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.rbPlaceRating.setRating((float) generalTours.get(position).getRatedStar());
-        holder.txtTotalBooked.setText(generalTours.get(position).getMaxPeople() + " lượt đặt tour");
-        holder.txtPlaceName.setText(generalTours.get(position).getLocation());
+        holder.rbPlaceRating.setRating((float) places.get(position).getRatedStar());
+        holder.txtTotalBooked.setText(places.get(position).getTotalBooked() + " lượt đặt tour");
+        holder.txtPlaceName.setText(places.get(position).getName());
+        Picasso.get()
+                .load(places.get(position).getBackground())
+                .error(R.color.light_gray)
+                .placeholder(R.color.light_gray)
+                .into(holder.imgBackground);
     }
 
     @Override
     public int getItemCount() {
-        return generalTours != null ? generalTours.size() : 0;
+        return places != null ? places.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

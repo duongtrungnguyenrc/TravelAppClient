@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.main.travelApp.models.GeneralPost;
 import com.main.travelApp.repositories.interfaces.PostRepository;
+import com.main.travelApp.response.AllPostResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.services.api.APIClient;
 import com.main.travelApp.services.api.IPostService;
@@ -52,5 +53,29 @@ public class PostRepositoryImpl implements PostRepository {
             }
         });
         return posts;
+    }
+
+    @Override
+    public MutableLiveData<AllPostResponse> findAll(int page, int limit) {
+        MutableLiveData<AllPostResponse> liveData = new MutableLiveData<>();
+        Call<BaseResponse<AllPostResponse>> call = postService.getAllPosts(page, limit);
+        call.enqueue(new Callback<BaseResponse<AllPostResponse>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<AllPostResponse>> call, Response<BaseResponse<AllPostResponse>> response) {
+                Log.d("POST_findAll", "onResponse: " + response.message());
+                if(response.isSuccessful() && response != null){
+                    liveData.setValue(response.body().getData());
+                }else{
+                    liveData.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<AllPostResponse>> call, Throwable t) {
+                t.printStackTrace();
+                liveData.setValue(null);
+            }
+        });
+        return liveData;
     }
 }
