@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+=======
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+>>>>>>> 4e7a47ece2612db2abe290fdfd40f190b72be4db
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,7 +20,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".ui.activities.MainActivity"
+=======
+            android:name=".activities.PostDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
+>>>>>>> 4e7a47ece2612db2abe290fdfd40f190b72be4db
             android:exported="false" />
         <activity
             android:name=".ui.activities.SignUpActivity"
