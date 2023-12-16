@@ -17,24 +17,24 @@
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:layout_gravity="bottom"
+        android:outlineSpotShadowColor="@color/black"
+        app:backgroundTint="@color/white"
         app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="30dp"
-        android:outlineSpotShadowColor="@color/black">
+        app:fabCradleRoundedCornerRadius="30dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavView"
-            android:theme="@style/NavigationTheme"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/transparent"
+            android:outlineProvider="none"
             android:outlineSpotShadowColor="@android:color/transparent"
-            app:menu="@menu/menu_bottom_app"
+            android:theme="@style/NavigationTheme"
+            app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
             app:itemIconTint="@color/yellow"
             app:itemTextColor="@color/yellow"
-            android:outlineProvider="none"
-            app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
-            android:layout_marginEnd="20dp"
-            android:background="@android:color/transparent">
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:menu="@menu/menu_bottom_app"></com.google.android.material.bottomnavigation.BottomNavigationView>
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
 
     private void init(){
 
-        tourListAdapter = new TourListAdapter();
+        tourListAdapter = new TourListAdapter(getActivity());
         placeListAdapter = new PlaceListAdapter();
         newestPostsAdapter = new NewestPostsAdapter();
 

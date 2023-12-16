@@ -1,5 +1,9 @@
 package com.main.travelApp.adapters;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +17,19 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.main.travelApp.R;
 import com.main.travelApp.models.GeneralTour;
+import com.main.travelApp.ui.activities.TourDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Random;
 
-public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyViewHolder> {
+public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.ViewHolder> {
     private List<GeneralTour> generalTours;
     private ViewPager2 viewPager2;
+    private final Context context;
+
+    public TourListAdapter(Context context) {
+        this.context = context;
+    }
 
     public ViewPager2 getViewPager2() {
         return viewPager2;
@@ -41,15 +50,16 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyView
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.item_view_tour_home, parent, false)
         );
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtTourName.setText(generalTours.get(position).getName());
         holder.txtDepartDate.setText(generalTours.get(position).getDepart());
         holder.txtPrice.setText(String.valueOf(generalTours.get(position).getPrice()));
@@ -61,6 +71,14 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyView
                 .placeholder(R.color.light_gray)
                 .error(R.color.light_gray)
                 .into(holder.imgThumbnail);
+
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(TourListAdapter.this.context, TourDetailActivity.class);
+            Log.d("tour-id", String.valueOf(generalTours.get(position).getId()));
+            intent.putExtra("tour-id", generalTours.get(position).getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -68,11 +86,12 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyView
         return generalTours != null ? generalTours.size() : 0;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtLocation, txtTourName, txtDepartDate, txtDuration, txtPrice;
         RatingBar rbRating;
         ImageView imgThumbnail;
-        public MyViewHolder(@NonNull View itemView) {
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtDuration = itemView.findViewById(R.id.txtDuration);
             txtLocation = itemView.findViewById(R.id.txtLocation);
@@ -81,7 +100,6 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.MyView
             txtDepartDate = itemView.findViewById(R.id.txtDepartDate);
 
             rbRating = itemView.findViewById(R.id.rbRating);
-
             imgThumbnail = itemView.findViewById(R.id.imgTourBackground);
         }
     }

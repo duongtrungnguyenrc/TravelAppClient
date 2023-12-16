@@ -2,6 +2,8 @@ package com.main.travelApp.ui.fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,6 +20,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         profileBinding = FragmentProfileBinding.inflate(inflater, container, false);
+
+
         return profileBinding.getRoot();
     }
 }

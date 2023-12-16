@@ -2,8 +2,8 @@
 <resources>
     <color name="black">#000</color>
     <color name="white">#fff</color>
-    <color name="yellow">#c7923e</color>
-    <color name="colorPrimary">#c7923e</color>
+    <color name="yellow">#1ca0e1</color>
+    <color name="colorPrimary">#1ca0e1</color>
     <color name="colorPrimaryDark">#68450F</color>
     <color name="colorPrimaryLight">#EDC27D</color>
     <color name="blue">#007aff</color>
@@ -14,6 +14,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="lavender">#8692f7</color>
     <color name="grey">#f1f3f4</color>
-    <color name="gray">#c6c6c6</color>
+    <color name="gray">#8F8F8F</color>
     <color name="light_gray">#8F8F8F</color>
 </resources>
