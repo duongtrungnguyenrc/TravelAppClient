@@ -29,6 +29,15 @@ public class PostCommentAdapter extends RecyclerView.Adapter<PostCommentAdapter.
         this.context = context;
     }
 
+    public PostCommentAdapter(Context context) {
+        this.context = context;
+    }
+
+    public void setComments(List<Rate> comments) {
+        this.comments = comments;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -77,7 +86,7 @@ public class PostCommentAdapter extends RecyclerView.Adapter<PostCommentAdapter.
 
     @Override
     public int getItemCount() {
-        return comments.size();
+        return comments != null ? comments.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

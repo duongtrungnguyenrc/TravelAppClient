@@ -77,7 +77,6 @@ public class BlogFragment extends Fragment {
 
         blogViewModel.getNewestPosts().observe(getViewLifecycleOwner(), posts -> {
             newestPostsAdapter.setPosts(posts);
-            topPostsAdapter.setPosts(posts);
         });
 
         blogViewModel.getAllPosts()
@@ -86,6 +85,11 @@ public class BlogFragment extends Fragment {
                         allPostAdapter.setPosts(blogsResponse.getPosts());
                     }
                 });
+
+        blogViewModel.getTopPosts().observe(getViewLifecycleOwner(), posts -> {
+            if(posts != null)
+                topPostsAdapter.setPosts(posts);
+        });
 
        blogBinding.nextPage.setOnClickListener(new View.OnClickListener() {
            @Override

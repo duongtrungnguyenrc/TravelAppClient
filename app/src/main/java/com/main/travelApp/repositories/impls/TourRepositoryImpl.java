@@ -33,14 +33,14 @@ public class TourRepositoryImpl implements TourRepository {
     }
 
     @Override
-    public LiveData<List<GeneralTour>> findAll(int page, int limit) {
-        MutableLiveData<List<GeneralTour>> tourList = new MutableLiveData<>();
+    public MutableLiveData<AllTourResponse> findAll(int page, int limit) {
+        MutableLiveData<AllTourResponse> tourRepsonse = new MutableLiveData<>();
         Call<BaseResponse<AllTourResponse>> call = tourService.getAllTours(page, limit);
         call.enqueue(new Callback<BaseResponse<AllTourResponse>>() {
             @Override
             public void onResponse(Call<BaseResponse<AllTourResponse>> call, Response<BaseResponse<AllTourResponse>> response) {
                 if(response.isSuccessful() && response != null){
-                    tourList.setValue(response.body().getData().getTours());
+                    tourRepsonse.setValue(response.body().getData());
                 }else{
                     Log.d("TOUR_findAll", "onResponse: " + response.message());
                 }
@@ -49,10 +49,10 @@ public class TourRepositoryImpl implements TourRepository {
             @Override
             public void onFailure(Call<BaseResponse<AllTourResponse>> call, Throwable t) {
                 t.printStackTrace();
-                tourList.setValue(null);
+                tourRepsonse.setValue(null);
             }
         });
-        return tourList;
+        return tourRepsonse;
     }
 
     @Override

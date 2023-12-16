@@ -11,12 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.main.travelApp.R;
 import com.main.travelApp.databinding.ItemViewTopPostBinding;
 import com.main.travelApp.models.GeneralPost;
-import com.main.travelApp.models.Post;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import lombok.val;
 
 public class TopPostsAdapter extends RecyclerView.Adapter<TopPostsAdapter.MyViewHolder> {
     private List<GeneralPost> posts;
@@ -47,6 +44,8 @@ public class TopPostsAdapter extends RecyclerView.Adapter<TopPostsAdapter.MyView
                 .error(R.color.light_gray)
                 .into(holder.binding.imgPostThumbnail);
         holder.binding.txtPostTitle.setText(posts.get(position).getTitle());
+        holder.binding.txtViews.setText(String.valueOf(posts.get(position).getViews()));
+        holder.binding.txtPostType.setText(posts.get(position).getType());
     }
 
     @Override

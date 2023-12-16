@@ -1,37 +1,20 @@
 package com.main.travelApp.models;
 
 public class Paragraph {
+    private long id;
     private String content;
-    private String imgName;
-    private String imgSrc;
+    private Image image;
+    private long layout;
 
-    public Paragraph(String content, String imgName, String imgSrc) {
-        this.content = content;
-        this.imgName = imgName;
-        this.imgSrc = imgSrc;
-    }
+    public long getID() { return id; }
+    public void setID(long value) { this.id = value; }
 
-    public String getContent() {
-        return content;
-    }
+    public String getContent() { return content; }
+    public void setContent(String value) { this.content = value; }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+    public Image getImage() { return image; }
+    public void setImage(Image value) { this.image = value; }
 
-    public String getImgName() {
-        return imgName;
-    }
-
-    public void setImgName(String imgName) {
-        this.imgName = imgName;
-    }
-
-    public String getImgSrc() {
-        return imgSrc;
-    }
-
-    public void setImgSrc(String imgSrc) {
-        this.imgSrc = imgSrc;
-    }
+    public long getLayout() { return layout; }
+    public void setLayout(long value) { this.layout = value; }
 }

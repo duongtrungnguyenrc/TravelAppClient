@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.main.travelApp.R;
 import com.main.travelApp.models.GeneralTour;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Random;
@@ -35,6 +36,7 @@ public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExplore
 
     public void setTours(List<GeneralTour> generalTours) {
         this.generalTours = generalTours;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -52,14 +54,11 @@ public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExplore
         holder.txtLocation.setText(generalTours.get(position).getLocation());
         holder.txtPrice.setText(String.valueOf(generalTours.get(position).getPrice()));
         holder.rbRating.setRating((float) generalTours.get(position).getRatedStar());
-        int[] listImage = new int[] {
-                R.drawable.intro,
-                R.drawable.pic1,
-                R.drawable.pic2,
-                R.drawable.pic3
-        };
-        Random random = new Random();
-        holder.imgThumbnail.setImageResource(listImage[random.nextInt(4)]);
+        Picasso.get()
+                .load(generalTours.get(position).getImg())
+                .placeholder(R.color.light_gray)
+                .error(R.color.light_gray)
+                .into(holder.imgThumbnail);
     }
 
     @Override

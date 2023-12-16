@@ -12,13 +12,14 @@ import com.main.travelApp.repositories.impls.PostRepositoryImpl;
 import com.main.travelApp.repositories.impls.TourRepositoryImpl;
 import com.main.travelApp.repositories.interfaces.PostRepository;
 import com.main.travelApp.repositories.interfaces.TourRepository;
+import com.main.travelApp.response.AllTourResponse;
 
 import java.util.List;
 
 public class HomeViewModel extends ViewModel {
     private TourRepository tourRepository;
     private PostRepository postRepository;
-    private LiveData<List<GeneralTour>> tours;
+    private LiveData<AllTourResponse> tours;
     private LiveData<List<GeneralPost>> posts;
     private LiveData<List<Place>> places;
     private Application application;
@@ -35,7 +36,7 @@ public class HomeViewModel extends ViewModel {
         this.application = application;
     }
 
-    public LiveData<List<GeneralTour>> getTours(){
+    public LiveData<AllTourResponse> getTours(){
         return tours;
     }
 

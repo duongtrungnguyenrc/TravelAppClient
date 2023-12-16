@@ -72,4 +72,25 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frameLayout, fragment);
         transaction.commit();
     }
+
+    public void changeFragment(int fragmentIndex){
+        switch (fragmentIndex){
+            case 1 -> {
+                binding.bottomNavView.setSelectedItemId(R.id.menuItemHome);
+                replaceFragment(homeFragment);
+            }
+            case 2 -> {
+                binding.bottomNavView.setSelectedItemId(R.id.menuItemExplore);
+                replaceFragment(exploreFragment);
+            }
+            case 3 -> {
+                binding.bottomNavView.setSelectedItemId(R.id.menuItemBlog);
+                replaceFragment(blogFragment);
+            }
+            case 4 -> {
+                binding.bottomNavView.setSelectedItemId(R.id.menuItemProfile);
+                replaceFragment(profileFragment);
+            }
+        }
+    }
 }

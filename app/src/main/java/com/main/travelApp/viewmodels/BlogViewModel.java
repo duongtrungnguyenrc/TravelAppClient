@@ -15,6 +15,7 @@ public class BlogViewModel extends ViewModel {
     private PostRepository postRepository;
     private LiveData<List<GeneralPost>> newestPosts;
     private MutableLiveData<AllPostResponse> allPostsResponse;
+    private LiveData<List<GeneralPost>> topPosts;
     private int allPostPage;
     private int allPostLimit;
 
@@ -26,6 +27,7 @@ public class BlogViewModel extends ViewModel {
 
         newestPosts = postRepository.findNewestPosts();
         allPostsResponse = postRepository.findAll(allPostPage, allPostLimit);
+        topPosts = postRepository.findTopPosts();
     }
 
     public int getAllPostPage() {
@@ -55,4 +57,7 @@ public class BlogViewModel extends ViewModel {
         return allPostsResponse;
     }
 
+    public LiveData<List<GeneralPost>> getTopPosts() {
+        return topPosts;
+    }
 }

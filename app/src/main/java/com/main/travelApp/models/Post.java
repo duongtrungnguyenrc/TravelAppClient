@@ -1,20 +1,28 @@
 package com.main.travelApp.models;
 
+import java.util.List;
+
 public class Post {
     private long id;
     private String title;
-    private String demoContent;
-    private String postTime;
+    private String type;
+    private String time;
     private String author;
-    private String thumbnail;
+    private String img;
+    private List<Paragraph> paragraphs;
+    private String description;
 
-    public Post(long id, String title, String demoContent, String postTime, String author, String thumbnail) {
+    public Post(long id, String title, String type, String time, String author, String img, List<Paragraph> paragraphs) {
         this.id = id;
         this.title = title;
-        this.demoContent = demoContent;
-        this.postTime = postTime;
+        this.type = type;
+        this.time = time;
         this.author = author;
-        this.thumbnail = thumbnail;
+        this.img = img;
+        this.paragraphs = paragraphs;
+    }
+
+    public Post() {
     }
 
     public long getId() {
@@ -33,20 +41,20 @@ public class Post {
         this.title = title;
     }
 
-    public String getDemoContent() {
-        return demoContent;
+    public String getType() {
+        return type;
     }
 
-    public void setDemoContent(String demoContent) {
-        this.demoContent = demoContent;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getPostTime() {
-        return postTime;
+    public String getTime() {
+        return time;
     }
 
-    public void setPostTime(String postTime) {
-        this.postTime = postTime;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getAuthor() {
@@ -57,11 +65,27 @@ public class Post {
         this.author = author;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getImg() {
+        return img;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public List<Paragraph> getParagraphs() {
+        return paragraphs;
+    }
+
+    public void setParagraphs(List<Paragraph> paragraphs) {
+        this.paragraphs = paragraphs;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -6,10 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +16,9 @@ import com.main.travelApp.adapters.PlaceListAdapter;
 import com.main.travelApp.adapters.NewestPostsAdapter;
 import com.main.travelApp.adapters.TourListAdapter;
 import com.main.travelApp.databinding.FragmentHomeBinding;
-import com.main.travelApp.models.GeneralPost;
-import com.main.travelApp.models.Post;
-import com.main.travelApp.models.GeneralTour;
+import com.main.travelApp.ui.activities.MainActivity;
 import com.main.travelApp.utils.LayoutManagerUtil;
 import com.main.travelApp.viewmodels.HomeViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
     private TourListAdapter tourListAdapter;
@@ -48,21 +41,19 @@ public class HomeFragment extends Fragment {
         homeViewModel = new ViewModelProvider(getActivity()).get(HomeViewModel.class);
 
         init();
+        setEvents();
     }
 
     private void init(){
-
         tourListAdapter = new TourListAdapter();
         placeListAdapter = new PlaceListAdapter();
         newestPostsAdapter = new NewestPostsAdapter();
 
         homeViewModel.getTours().observe(getViewLifecycleOwner(), tours -> {
-            Log.d("tour", "init: " + tours.size());
-            tourListAdapter.setTours(tours);
+            tourListAdapter.setTours(tours.getTours());
         });
 
         homeViewModel.getPlaces().observe(getViewLifecycleOwner(), places -> {
-            Log.d("tour", "init: " + places.size());
             placeListAdapter.setPlaces(places.subList(0, 4));
         });
 
@@ -74,14 +65,30 @@ public class HomeFragment extends Fragment {
         homeBinding.rcvPlaces.setAdapter(placeListAdapter);
 
         homeViewModel.getNewestPosts().observe(getViewLifecycleOwner(), posts -> {
-            posts.forEach(post -> {
-                Log.d("HomeFragment", "init: " + post.getTitle());
-            });
             newestPostsAdapter.setPosts(posts);
         });
 
         homeBinding.rcvPlaces.setLayoutManager(LayoutManagerUtil.disabledScrollGridManager(getContext(), 2));
 
         homeBinding.pgPosts.setAdapter(newestPostsAdapter);
+    }
+
+    private void setEvents(){
+        homeBinding.btnMoreTour.setOnClickListener(onClickListener());
+        homeBinding.btnMoreTour1.setOnClickListener(onClickListener());
+        homeBinding.btnMoreBlog.setOnClickListener(onClickListener());
+    }
+
+    private View.OnClickListener onClickListener(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(view == homeBinding.btnMoreTour || view == homeBinding.btnMoreTour1){
+                    ((MainActivity) requireActivity()).changeFragment(2);
+                }else if(view == homeBinding.btnMoreBlog){
+                    ((MainActivity) requireActivity()).changeFragment(3);
+                }
+            }
+        };
     }
 }
