@@ -1,12 +1,16 @@
 package com.main.travelApp.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Place {
     private String name;
+    @SerializedName("orderQuantity")
     private int totalBooked;
-    private String ratedStar;
+    private double ratedStar;
+    @SerializedName("img")
     private String background;
 
-    public Place(String name, int totalBooked, String ratedStar, String background) {
+    public Place(String name, int totalBooked, double ratedStar, String background) {
         this.name = name;
         this.totalBooked = totalBooked;
         this.ratedStar = ratedStar;
@@ -29,11 +33,11 @@ public class Place {
         this.totalBooked = totalBooked;
     }
 
-    public String getRatedStar() {
+    public double getRatedStar() {
         return ratedStar;
     }
 
-    public void setRatedStar(String ratedStar) {
+    public void setRatedStar(double ratedStar) {
         this.ratedStar = ratedStar;
     }
 

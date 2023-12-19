@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +12,16 @@ import android.view.ViewGroup;
 import com.main.travelApp.adapters.TourListExploreAdapter;
 import com.main.travelApp.databinding.FragmentExploreBinding;
 import com.main.travelApp.models.GeneralTour;
+import com.main.travelApp.ui.activities.MainActivity;
+import com.main.travelApp.viewmodels.TourViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExploreFragment extends Fragment {
     private TourListExploreAdapter tourAdapter;
-    private List<GeneralTour> generalTours;
     private FragmentExploreBinding exploreBinding;
+    private TourViewModel tourViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,37 +34,39 @@ public class ExploreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        tourViewModel = new ViewModelProvider(requireActivity()).get(TourViewModel.class);
         init(view);
+        setEvents();
     }
 
     private void init(View view){
-        tourAdapter = new TourListExploreAdapter();
-        exploreBinding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
+        tourAdapter = new TourListExploreAdapter(getActivity());
+        tourViewModel.getTours()
+                .observe(getViewLifecycleOwner(), tours -> {
+                    tourAdapter.setTours(tours.getTours());
+                });
 
-        fetchTours();
-
-        tourAdapter.setTours(generalTours);
         exploreBinding.rcvExploreTours.setLayoutManager(new GridLayoutManager(getContext(), 2));
         exploreBinding.rcvExploreTours.setAdapter(tourAdapter);
+
+
+    }
+    private void setEvents(){
+        exploreBinding.btnNextPage.setOnClickListener(onClickListener());
+        exploreBinding.btnPrevPage.setOnClickListener(onClickListener());
     }
 
-    private void fetchTours(){
-        generalTours = new ArrayList<>();
-//        generalTours.add(new GeneralTour(1L, "Tour Hạ Long 11111", 4.5f, "Hanoi", "2023-11-15", 3, 2500000L, 23)); // 2,500,000 VNĐ
-//        generalTours.add(new GeneralTour(2L, "Tour Đà Nẵng", 4.2f, "Ho Chi Minh City", "2023-11-20", 5, 3500000L, 123)); // 3,500,000 VNĐ
-//        generalTours.add(new GeneralTour(3L, "Tour Nha Trang", 4.8f, "Hanoi", "2023-11-25", 4, 4000000L, 8172)); // 4,000,000 VNĐ
-//        generalTours.add(new GeneralTour(4L, "Tour Phú Quốc", 4.7f, "Da Nang", "2023-11-30", 7, 6000000L, 1723)); // 6,000,000 VNĐ
-//        generalTours.add(new GeneralTour(5L, "Tour Sapa", 4.3f, "Hanoi", "2023-12-05", 2, 1500000L, 12873)); // 1,500,000 VNĐ
-//        generalTours.add(new GeneralTour(6L, "Tour Đà Lạt", 4.6f, "Da Nang", "2023-12-10", 3, 1800000L, 1273)); // 1,800,000 VNĐ
-//        generalTours.add(new GeneralTour(7L, "Tour Cần Thơ", 4.9f, "Ho Chi Minh City", "2023-12-15", 2, 1200000L, 1923)); // 1,200,000 VNĐ
-//        generalTours.add(new GeneralTour(8L, "Tour Huế", 4.4f, "Da Nang", "2023-12-20", 4, 3000000L, 52423)); // 3,000,000 VNĐ
-//        generalTours.add(new GeneralTour(9L, "Tour Hội An", 4.1f, "Da Nang", "2023-12-25", 3, 2200000L, 2934)); // 2,200,000 VNĐ
-//        generalTours.add(new GeneralTour(10L, "Tour Mũi Né", 4.0f, "Ho Chi Minh City", "2023-12-30", 4, 2800000L, 28734)); // 2,800,000 VNĐ
+    private View.OnClickListener onClickListener(){
+        return view -> {
+            if(view == exploreBinding.btnNextPage){
+                if(tourViewModel.getPage() < tourViewModel.getTours().getValue().getPages()){
+                    tourViewModel.setPage(tourViewModel.getPage() + 1);
+                }
+            }else if (view == exploreBinding.btnPrevPage){
+                if(tourViewModel.getPage() > 1){
+                    tourViewModel.setPage(tourViewModel.getPage() - 1);
+                }
+            }
+        };
     }
 }

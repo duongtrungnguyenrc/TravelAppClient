@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Travel Application</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="base_url">http://10.0.2.2:8080/api</string>
+
+    <string name="vertical_stepper_form_continue_button">Tiểp tục</string>
+    <string name="vertical_stepper_form_cancel_button">Trở về</string>
+    <string name="vertical_stepper_form_confirm_button">Hoàn tất</string>
+    <string name="vertical_stepper_form_confirmation_step_title">Kết thúc</string>
+
 </resources>

@@ -6,6 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.main.travelApp.models.Place;
+import com.main.travelApp.models.Tour;
 import com.main.travelApp.response.AllTourResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.models.GeneralTour;
@@ -32,14 +34,14 @@ public class TourRepositoryImpl implements TourRepository {
     }
 
     @Override
-    public LiveData<List<GeneralTour>> findAll(int page, int limit) {
-        MutableLiveData<List<GeneralTour>> tourList = new MutableLiveData<>();
+    public MutableLiveData<AllTourResponse> findAll(int page, int limit) {
+        MutableLiveData<AllTourResponse> tourRepsonse = new MutableLiveData<>();
         Call<BaseResponse<AllTourResponse>> call = tourService.getAllTours(page, limit);
         call.enqueue(new Callback<BaseResponse<AllTourResponse>>() {
             @Override
             public void onResponse(Call<BaseResponse<AllTourResponse>> call, Response<BaseResponse<AllTourResponse>> response) {
                 if(response.isSuccessful() && response != null){
-                    tourList.setValue(response.body().getData().getTours());
+                    tourRepsonse.setValue(response.body().getData());
                 }else{
                     Log.d("TOUR_findAll", "onResponse: " + response.message());
                 }
@@ -48,9 +50,58 @@ public class TourRepositoryImpl implements TourRepository {
             @Override
             public void onFailure(Call<BaseResponse<AllTourResponse>> call, Throwable t) {
                 t.printStackTrace();
-                tourList.setValue(null);
+                tourRepsonse.setValue(null);
             }
         });
-        return tourList;
+        return tourRepsonse;
+    }
+
+    @Override
+    public LiveData<List<Place>> findTopDestination() {
+        MutableLiveData<List<Place>> places = new MutableLiveData<>();
+        Call<BaseResponse<List<Place>>> call = tourService.getTopDestination();
+        call.enqueue(new Callback<BaseResponse<List<Place>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<Place>>> call, Response<BaseResponse<List<Place>>> response) {
+                Log.d("TOUR_findTopDestination", "onResponse: " + response.message());
+                if(response.isSuccessful() && response != null){
+                    places.setValue(response.body().getData());
+                }else{
+                    places.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<List<Place>>> call, Throwable t) {
+                t.printStackTrace();
+                places.setValue(null);
+            }
+        });
+        return places;
+    }
+
+    @Override
+    public LiveData<Tour> find(long id) {
+        MutableLiveData<Tour> tour = new MutableLiveData<>();
+        Call<BaseResponse<Tour>> call = tourService.get(id);
+
+        call.enqueue(new Callback<BaseResponse<Tour>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<Tour>> call, Response<BaseResponse<Tour>> response) {
+                if(response.isSuccessful()){
+                    tour.setValue(response.body().getData());
+                }else{
+                    tour.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<Tour>> call, Throwable t) {
+                t.printStackTrace();
+                tour.setValue(null);
+            }
+        });
+
+        return tour;
     }
 }

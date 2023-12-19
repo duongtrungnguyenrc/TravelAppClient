@@ -1,11 +1,12 @@
 package com.main.travelApp.models;
 
 public class GeneralPost {
-    private int id;
+    private long id;
     private String title;
     private String type;
     private String time;
     private String author;
+    private long views;
     private String img;
     private String description;
 
@@ -21,11 +22,19 @@ public class GeneralPost {
         this.description = description;
     }
 
-    public int getId() {
+    public long getViews() {
+        return views;
+    }
+
+    public void setViews(long views) {
+        this.views = views;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

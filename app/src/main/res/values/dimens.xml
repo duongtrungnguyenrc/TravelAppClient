@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="vertical_stepper_form_width_circle">28dp</dimen>
+    <dimen name="vertical_stepper_form_text_size_circle">15sp</dimen>
+    <dimen name="vertical_stepper_form_text_size_title">17sp</dimen>
+    <dimen name="vertical_stepper_form_text_size_subtitle">14sp</dimen>
+    <dimen name="vertical_stepper_form_text_size_error_message">16sp</dimen>
+    <dimen name="vertical_stepper_form_width_vertical_line">2dp</dimen>
+    <dimen name="vertical_stepper_form_space_between_numbers_and_content">16dp</dimen>
+
+</resources>

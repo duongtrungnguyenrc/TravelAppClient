@@ -1,7 +1,9 @@
 package com.main.travelApp.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +45,10 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.binding.txtPostTitle.setText(posts.get(position).getTitle());
         holder.binding.txtAuthor.setText(posts.get(position).getAuthor());
+        holder.binding.txtPostType.setText(posts.get(position).getType());
         Picasso.get()
                 .load(posts.get(position).getImg())
                 .placeholder(R.color.light_gray)
@@ -56,6 +59,8 @@ public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.MyViewHo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, PostDetailActivity.class);
+                intent.putExtra("postId", posts.get(position).getId());
+                Log.d("PostID", "onClick: " + posts.get(position).getId());
                 context.startActivity(intent);
             }
         });

@@ -1,5 +1,6 @@
 package com.main.travelApp.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.main.travelApp.R;
 import com.main.travelApp.models.GeneralPost;
-import com.main.travelApp.models.Post;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class NewestPostsAdapter extends RecyclerView.Adapter<NewestPostsAdapter.
     private List<GeneralPost> posts;
     private ViewPager2 viewPager2;
     private Context context;
-    private Runnable runnable = new Runnable() {
+    private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
             posts.addAll(posts);
@@ -60,6 +60,7 @@ public class NewestPostsAdapter extends RecyclerView.Adapter<NewestPostsAdapter.
         );
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txtTitle.setText(posts.get(position).getTitle());

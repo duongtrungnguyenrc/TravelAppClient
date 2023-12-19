@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -32,22 +32,9 @@
             android:outlineSpotShadowColor="@android:color/transparent"
             android:theme="@style/NavigationTheme"
             app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
-            app:itemIconTint="@color/yellow"
-            app:itemTextColor="@color/yellow"
-            app:menu="@menu/menu_bottom_app"></com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:itemIconTint="@color/gray"
+            app:itemTextColor="@color/gray"
+            app:menu="@menu/menu_bottom_app" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/yellow"
-        android:outlineSpotShadowColor="@android:color/transparent"
-        android:src="@drawable/baseline_search_24"
-        app:layout_anchor="@id/bottomAppBar"
-        app:maxImageSize="30dp"
-        app:shapeAppearanceOverlay="@style/fab_3_rounded"
-        app:tint="@color/white">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

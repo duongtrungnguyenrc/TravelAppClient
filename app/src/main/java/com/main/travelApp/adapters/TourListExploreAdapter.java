@@ -1,5 +1,8 @@
 package com.main.travelApp.adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +16,18 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.main.travelApp.R;
 import com.main.travelApp.models.GeneralTour;
+import com.main.travelApp.ui.activities.TourDetailActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Random;
 
 public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExploreAdapter.MyViewHolder> {
     private List<GeneralTour> generalTours;
-    private ViewPager2 viewPager2;
+    private Context context;
 
-    public ViewPager2 getViewPager2() {
-        return viewPager2;
-    }
-
-    public void setViewPager2(ViewPager2 viewPager2) {
-        this.viewPager2 = viewPager2;
+    public TourListExploreAdapter(Context context) {
+        this.context = context;
     }
 
     public List<GeneralTour> getTours() {
@@ -35,6 +36,7 @@ public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExplore
 
     public void setTours(List<GeneralTour> generalTours) {
         this.generalTours = generalTours;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -52,14 +54,18 @@ public class TourListExploreAdapter extends RecyclerView.Adapter<TourListExplore
         holder.txtLocation.setText(generalTours.get(position).getLocation());
         holder.txtPrice.setText(String.valueOf(generalTours.get(position).getPrice()));
         holder.rbRating.setRating((float) generalTours.get(position).getRatedStar());
-        int[] listImage = new int[] {
-                R.drawable.intro,
-                R.drawable.pic1,
-                R.drawable.pic2,
-                R.drawable.pic3
-        };
-        Random random = new Random();
-        holder.imgThumbnail.setImageResource(listImage[random.nextInt(4)]);
+
+        Picasso.get()
+                .load(generalTours.get(position).getImg())
+                .placeholder(R.color.light_gray)
+                .error(R.color.light_gray)
+                .into(holder.imgThumbnail);
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(TourListExploreAdapter.this.context, TourDetailActivity.class);
+            intent.putExtra("tour-id", generalTours.get(position).getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override

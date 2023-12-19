@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.main.travelApp.R;
 import com.main.travelApp.databinding.FragmentProfileBinding;
+import com.main.travelApp.services.auth.AuthManager;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding profileBinding;
@@ -21,7 +21,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         profileBinding = FragmentProfileBinding.inflate(inflater, container, false);
 
-
+//        Log.d("user", AuthManager.getInstance().getCurrentUser().getFullName());
         return profileBinding.getRoot();
     }
 }

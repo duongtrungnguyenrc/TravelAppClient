@@ -20,6 +20,19 @@ public class ParagraphAdapter extends RecyclerView.Adapter<ParagraphAdapter.MyVi
     public ParagraphAdapter(List<Paragraph> paragraphs){
         this.paragraphs = paragraphs;
     }
+
+    public ParagraphAdapter() {
+    }
+
+    public List<Paragraph> getParagraphs() {
+        return paragraphs;
+    }
+
+    public void setParagraphs(List<Paragraph> paragraphs) {
+        this.paragraphs = paragraphs;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,9 +44,9 @@ public class ParagraphAdapter extends RecyclerView.Adapter<ParagraphAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.binding.txtContent.setText(paragraphs.get(position).getContent());
-        holder.binding.imgName.setText(paragraphs.get(position).getImgName());
+        holder.binding.imgName.setText(paragraphs.get(position).getImage().getName());
         Picasso.get().load(
-                paragraphs.get(position).getImgSrc()
+                paragraphs.get(position).getImage().getSrc()
         )
                 .placeholder(R.color.light_gray)
                 .error(R.color.light_gray)
@@ -42,7 +55,7 @@ public class ParagraphAdapter extends RecyclerView.Adapter<ParagraphAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return paragraphs.size();
+        return paragraphs != null ? paragraphs.size() : 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

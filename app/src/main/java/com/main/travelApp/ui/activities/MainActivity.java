@@ -7,8 +7,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.main.travelApp.R;
@@ -32,20 +36,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        enableFullScreen();
         init();
     }
 
-    private void init(){
+    private void init() {
         homeFragment = new HomeFragment();
         blogFragment = new BlogFragment();
         exploreFragment = new ExploreFragment();
         profileFragment = new ProfileFragment();
 
         replaceFragment(homeFragment);
-
-        binding.btnSearch.setOnClickListener((view) -> {
-            BottomSheet.show(this);
-        });
 
         binding.bottomNavView.setBackground(null);
         binding.bottomNavView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -65,11 +66,38 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void enableFullScreen() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+
     private void replaceFragment(Fragment fragment){
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
         transaction.replace(R.id.frameLayout, fragment);
         transaction.commit();
+    }
+
+    public void changeFragment(int fragmentIndex){
+        switch (fragmentIndex){
+            case 1 -> {
+                binding.bottomNavView.setSelectedItemId(R.id.menuItemHome);
+                replaceFragment(homeFragment);
+            }
+            case 2 -> {
+                binding.bottomNavView.setSelectedItemId(R.id.menuItemExplore);
+                replaceFragment(exploreFragment);
+            }
+            case 3 -> {
+                binding.bottomNavView.setSelectedItemId(R.id.menuItemBlog);
+                replaceFragment(blogFragment);
+            }
+            case 4 -> {
+                binding.bottomNavView.setSelectedItemId(R.id.menuItemProfile);
+                replaceFragment(profileFragment);
+            }
+        }
     }
 }

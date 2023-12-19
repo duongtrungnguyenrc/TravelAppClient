@@ -36,8 +36,8 @@ public class BlogFragment extends Fragment {
     private TopPostsAdapter topPostsAdapter;
     private AllPostAdapter allPostAdapter;
     private BlogViewModel blogViewModel;
-    private Handler newestPostsHandler = new Handler();
-    private Runnable newestPostsRunnable = new Runnable() {
+    private final Handler newestPostsHandler = new Handler();
+    private final Runnable newestPostsRunnable = new Runnable() {
         @Override
         public void run() {
             ViewPager2 viewPager2 = blogBinding.pgNewestPosts;
@@ -45,7 +45,7 @@ public class BlogFragment extends Fragment {
         }
     };
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         blogBinding = FragmentBlogBinding.inflate(inflater, container, false);
@@ -77,9 +77,31 @@ public class BlogFragment extends Fragment {
 
         blogViewModel.getNewestPosts().observe(getViewLifecycleOwner(), posts -> {
             newestPostsAdapter.setPosts(posts);
-            topPostsAdapter.setPosts(posts);
-            allPostAdapter.setPosts(posts);
         });
+
+        blogViewModel.getAllPosts()
+                .observe(getViewLifecycleOwner(), blogsResponse -> {
+                    if(blogsResponse != null){
+                        allPostAdapter.setPosts(blogsResponse.getPosts());
+                    }
+                });
+
+        blogViewModel.getTopPosts().observe(getViewLifecycleOwner(), posts -> {
+            if(posts != null)
+                topPostsAdapter.setPosts(posts);
+        });
+
+       blogBinding.nextPage.setOnClickListener(view -> {
+           if(blogViewModel.getAllPostPage() < blogViewModel.getAllPosts().getValue().getPages()){
+               blogViewModel.setAllPostPage(blogViewModel.getAllPostPage() + 1);
+           }
+       });
+
+       blogBinding.previousPage.setOnClickListener(view -> {
+           if(blogViewModel.getAllPostPage() > 1){
+               blogViewModel.setAllPostPage(blogViewModel.getAllPostPage() - 1);
+           }
+       });
     }
 
     private void initViewPager(ViewPager2 viewPager2, RecyclerView.Adapter adapter){
@@ -91,12 +113,9 @@ public class BlogFragment extends Fragment {
 
         CompositePageTransformer transformer = new CompositePageTransformer();
         transformer.addTransformer(new MarginPageTransformer(40));
-        transformer.addTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                float r = 1 - Math.abs(position);
-                page.setScaleY(0.85f + r * 0.15f);
-            }
+        transformer.addTransformer((page, position) -> {
+            float r = 1 - Math.abs(position);
+            page.setScaleY(0.85f + r * 0.15f);
         });
 
         viewPager2.setPageTransformer(transformer);

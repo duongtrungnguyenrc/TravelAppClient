@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.activities.LoginActivity"
-    android:background="#f5f5fa">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.activities.LoginActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="43dp" />
+            app:layout_constraintGuide_begin="116dp" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -92,6 +92,7 @@
                 android:background="@drawable/custom_edit_text_rounded"
                 android:hint="example233@gmail.com"
                 android:padding="10dp"
+                android:text="duongtrungnguyen00@gmail.com"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -122,6 +123,7 @@
                 android:height="40dp"
                 android:background="@drawable/custom_edit_text_rounded"
                 android:padding="10dp"
+                android:text="Nguyen@123"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -173,7 +175,6 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/custom_button_background"
-                android:padding="8dp"
                 android:text="Đăng ký"
                 android:textColor="@color/black"
                 android:textSize="14sp"
@@ -185,7 +186,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/custom_button_ripple"
-                android:padding="8dp"
                 android:text="Đăng nhập"
                 android:textSize="14sp"
                 app:backgroundTint="#c7923e" />
@@ -217,16 +217,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:layout_marginTop="20dp">
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <Button
                 android:id="@+id/btnFacebook"
                 android:layout_width="0dp"
-                android:layout_marginRight="10dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/custom_button_outline"
                 android:fontFamily="@font/alata"
@@ -234,11 +234,12 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:backgroundTint="@color/black" />
+
             <Button
                 android:id="@+id/btnLinkdedIn"
                 android:layout_width="0dp"
-                android:layout_marginRight="10dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/custom_button_outline"
                 android:fontFamily="@font/alata"
@@ -246,6 +247,7 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:backgroundTint="@color/black" />
+
             <Button
                 android:id="@+id/btnGoogle"
                 android:layout_width="0dp"

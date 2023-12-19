@@ -44,7 +44,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-    //View pager 2
+    // View pager 2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     implementation 'com.balysv:material-ripple:1.0.2'
@@ -54,9 +54,10 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    //Picasso
+    // Picasso
     implementation 'com.squareup.picasso:picasso:2.8'
 
     // Circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 }
