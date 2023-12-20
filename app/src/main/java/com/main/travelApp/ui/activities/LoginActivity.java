@@ -3,6 +3,7 @@ package com.main.travelApp.ui.activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -22,7 +23,6 @@ import com.google.android.gms.auth.api.identity.BeginSignInResult;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.identity.SignInCredential;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,7 +32,13 @@ import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.databinding.ActivityLoginBinding;
 import com.main.travelApp.models.AuthInstance;
 import com.main.travelApp.repositories.impls.AuthRepositoryImpl;
+import com.main.travelApp.ui.components.EnterConfirmCodeDialog;
+import com.main.travelApp.ui.components.EnterConfirmResetPassCodeDialog;
+import com.main.travelApp.ui.components.EnterEmailDialog;
+import com.main.travelApp.ui.components.EnterNewPasswordDialog;
+import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.utils.SharedPreferenceKeys;
+import com.main.travelApp.viewmodels.SignUpViewModel;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -45,12 +51,15 @@ public class LoginActivity extends AppCompatActivity {
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
     private SharedPreferences sharedPreferences;
+    private SignUpViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         sharedPreferences = getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE);
+        viewModel = new ViewModelProvider(this).get(SignUpViewModel.class);
+        viewModel.setContext(this);
         loggedInFilter();
         setContentView(view);
         ScreenManager.enableFullScreen(getWindow());
@@ -136,6 +145,25 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("Google-Auth", e.getLocalizedMessage());
                     }
                 });
+        });
+
+        binding.txtForgotPassword.setOnClickListener(view -> {
+            EnterEmailDialog dialog = new EnterEmailDialog(LoginActivity.this, viewModel);
+            dialog.show(getSupportFragmentManager(), "ENTER_EMAIL_DIALOG");
+        });
+
+        viewModel.getIsResetPasswordMailSent().observe(this, isResetPassSent -> {
+            if(isResetPassSent){
+                EnterConfirmResetPassCodeDialog dialog = new EnterConfirmResetPassCodeDialog(LoginActivity.this, viewModel);
+                dialog.show(getSupportFragmentManager(), "ENTER_CODE_DIALOG");
+            }
+        });
+
+        viewModel.getIsResetPasswordCodeCorrect().observe(this, isResetPassCodeCorrect -> {
+            if(isResetPassCodeCorrect){
+                EnterNewPasswordDialog dialog = new EnterNewPasswordDialog(this, viewModel);
+                dialog.show(getSupportFragmentManager(), "ENTER_PASSWORD_DIALOG");
+            }
         });
 
     }

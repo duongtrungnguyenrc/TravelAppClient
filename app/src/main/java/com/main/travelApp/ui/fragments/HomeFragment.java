@@ -97,14 +97,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     .load(homeViewModel.getCurrentUser().getAvatar())
                     .placeholder(R.color.light_gray)
                     .error(R.color.light_gray)
-                    .into(homeBinding.userAvatar);
+                    .into(homeBinding.imgAvatar);
     }
 
     private void setEvents(){
         homeBinding.btnMoreTour.setOnClickListener(this);
         homeBinding.btnMoreTour1.setOnClickListener(this);
         homeBinding.btnMoreBlog.setOnClickListener(this);
-        homeBinding.userAvatar.setOnClickListener(this);
+        homeBinding.imgAvatar.setOnClickListener(this);
         homeBinding.btnSupport.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), SupportActivity.class);
             startActivity(intent);
@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             ((MainActivity) requireActivity()).changeFragment(2);
         }else if(view == homeBinding.btnMoreBlog){
             ((MainActivity) requireActivity()).changeFragment(3);
-        }else if(view == homeBinding.userAvatar){
+        }else if(view == homeBinding.imgAvatar){
             ((MainActivity) requireActivity()).changeFragment(4);
         }
     }

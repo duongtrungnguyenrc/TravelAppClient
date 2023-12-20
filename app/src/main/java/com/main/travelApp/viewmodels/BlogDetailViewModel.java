@@ -78,10 +78,10 @@ public class BlogDetailViewModel extends ViewModel {
         return rateResponse;
     }
     public void addRate(String accessToken, AddRateRequest request){
-        Toast.makeText(context, accessToken, Toast.LENGTH_SHORT).show();
         rateRepository.addRate(accessToken, request, new ActionCallback<Rate>() {
             @Override
             public void onSuccess(Rate result) {
+                Toast.makeText(context, "Thêm bình luận thành công!", Toast.LENGTH_SHORT).show();
                 rateRepository.findByBlogId(accessToken, id, commentPage, 6).observeForever(rates -> {
                     rateResponse.setValue(rates);
                 });

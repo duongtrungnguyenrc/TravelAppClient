@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +50,8 @@ public class EnterNewPasswordDialog extends DialogFragment {
                 String reNewPassStr = reNewPass.getText().toString();
                 if(newPassStr.equals(reNewPassStr)){
                     viewModel.resetPassword(newPassStr);
+                }else{
+                    Toast.makeText(context, "Xác nhận mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
