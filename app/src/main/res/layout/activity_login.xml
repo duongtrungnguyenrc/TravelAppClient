@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#f5f5fa"
     tools:context=".ui.activities.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,7 +92,7 @@
                 android:background="@drawable/custom_edit_text_rounded"
                 android:hint="example233@gmail.com"
                 android:padding="10dp"
-                android:text="duongtrungnguyen00@gmail.com"
+                android:text="hoanviet882003@gmail.com"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -123,7 +123,7 @@
                 android:height="40dp"
                 android:background="@drawable/custom_edit_text_rounded"
                 android:padding="10dp"
-                android:text="Nguyen@123"
+                android:text="123456"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -188,7 +188,7 @@
                 android:background="@drawable/custom_button_ripple"
                 android:text="Đăng nhập"
                 android:textSize="14sp"
-                app:backgroundTint="#c7923e" />
+                app:backgroundTint="@color/colorPrimary" />
         </LinearLayout>
 
         <View

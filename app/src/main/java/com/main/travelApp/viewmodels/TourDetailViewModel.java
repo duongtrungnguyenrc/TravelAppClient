@@ -38,7 +38,7 @@ public class TourDetailViewModel extends ViewModel {
 
     public void setRatingPage(int commentPage, long id) {
         this.ratingPage = commentPage;
-        rateRepository.findByBlogId(id, commentPage, 6).observeForever(data -> {
+        rateRepository.findByTourId(id, commentPage, 6).observeForever(data -> {
             rateResponse.setValue(data);
         });
     }

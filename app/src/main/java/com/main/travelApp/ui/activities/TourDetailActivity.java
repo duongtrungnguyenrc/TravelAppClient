@@ -9,7 +9,6 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import com.main.travelApp.adapters.ParagraphAdapter;
 import com.main.travelApp.adapters.RatingAdapter;
 import com.main.travelApp.adapters.TourDateAdapter;
 import com.main.travelApp.adapters.TourGalleryAdapter;
-import com.main.travelApp.callbacks.BottomSheetActionHandler;
 import com.main.travelApp.databinding.ActivityTourDetailBinding;
 import com.main.travelApp.models.Paragraph;
 import com.main.travelApp.models.Tour;

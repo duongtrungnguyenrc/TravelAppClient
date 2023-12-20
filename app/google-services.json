@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "603260832482",
+    "project_id": "travewebvn",
+    "storage_bucket": "travewebvn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603260832482:android:660762f9894e327d312cbb",
+        "android_client_info": {
+          "package_name": "com.main.travelApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603260832482-i5qhoe7etd1m49raardbtfcak5v6p2tt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.main.travelApp",
+            "certificate_hash": "31d152d8efc52279f2a61301b6f1ad8a8c1dad99"
+          }
+        },
+        {
+          "client_id": "603260832482-n3me7jgh970dh5ugqibrq6snjhmqhlka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXnvmtnJsgL__0up4T7NMnhBIoOaYafmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603260832482-n3me7jgh970dh5ugqibrq6snjhmqhlka.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

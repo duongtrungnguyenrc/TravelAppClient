@@ -23,6 +23,9 @@ public class Rate {
         this.isActive = isActive;
     }
 
+    public Rate() {
+    }
+
     public Rate(String id, String username, String email, int star, String avatar, int ratedStar, String ratedDate, String content, boolean isActive) {
         this.id = id;
         this.username = username;

@@ -90,6 +90,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/txtUserName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/alata"
@@ -454,7 +455,7 @@
                             android:background="@drawable/custom_button_ripple"
                             android:fontFamily="@font/alata"
                             android:text="Đặt tour ngay!"
-                            app:backgroundTint="@color/yellow" />
+                            app:backgroundTint="@color/colorPrimary" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,7 +61,9 @@ public class BlogFragment extends Fragment {
 
     private void init(){
         newestPostsAdapter = new NewestPostsAdapter();
+        newestPostsAdapter.setContext(getContext());
         topPostsAdapter = new TopPostsAdapter();
+        topPostsAdapter.setContext(getContext());
         allPostAdapter = new AllPostAdapter(getContext());
 
         newestPostsAdapter.setViewPager2(blogBinding.pgNewestPosts);

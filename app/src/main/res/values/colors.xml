@@ -4,8 +4,8 @@
     <color name="white">#fff</color>
     <color name="yellow">#f9d30b</color>
     <color name="colorPrimary">#1ca0e1</color>
-    <color name="colorPrimaryDark">#68450F</color>
-    <color name="colorPrimaryLight">#EDC27D</color>
+    <color name="colorPrimaryDark">#1E668A</color>
+    <color name="colorPrimaryLight">#55C2F8</color>
     <color name="blue">#007aff</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

@@ -20,7 +20,7 @@ public class AuthManager {
 
     public User getCurrentUser() {
         if (this.authInstance != null) {
-            return this.authInstance.getUser();
+            return this.authInstance;
         }
         return null;
     }
