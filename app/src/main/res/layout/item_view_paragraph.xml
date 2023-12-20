@@ -8,8 +8,7 @@
         android:id="@+id/txtContent"
         android:justificationMode="inter_word"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins" />
+        android:layout_height="wrap_content" />
     <ImageView
         android:src="@drawable/intro"
         android:scaleType="centerCrop"

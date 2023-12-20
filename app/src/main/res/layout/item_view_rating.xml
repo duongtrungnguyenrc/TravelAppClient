@@ -44,6 +44,7 @@
                     android:id="@+id/txt_rated_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />
 
@@ -52,6 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
+                    android:layout_marginTop="2dp"
                     android:text="/5"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -61,6 +63,6 @@
             android:id="@+id/txt_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="4"/>
+            android:maxLines="4" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

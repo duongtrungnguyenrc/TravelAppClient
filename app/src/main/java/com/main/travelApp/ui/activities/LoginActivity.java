@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE);
         loggedInFilter();
         setContentView(view);
-        enableFullScreen();
+        ScreenManager.enableFullScreen(getWindow());
         init();
     }
 

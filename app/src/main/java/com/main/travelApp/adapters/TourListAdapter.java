@@ -61,9 +61,7 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtTourName.setText(generalTours.get(position).getName());
-        holder.txtDepartDate.setText(generalTours.get(position).getDepart());
-        holder.txtPrice.setText(String.valueOf(generalTours.get(position).getPrice()));
-        holder.txtDuration.setText(String.valueOf(generalTours.get(position).getDuration()) + " ngày");
+        holder.txtPrice.setText(String.valueOf(generalTours.get(position).getPrice()) + " VND");
         holder.txtLocation.setText(generalTours.get(position).getLocation());
         holder.rbRating.setRating((float) generalTours.get(position).getRatedStar());
         Picasso.get()
@@ -85,18 +83,16 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.ViewHo
         return generalTours != null ? generalTours.size() : 0;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtLocation, txtTourName, txtDepartDate, txtDuration, txtPrice;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView txtLocation, txtTourName, txtPrice;
         RatingBar rbRating;
         ImageView imgThumbnail;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtDuration = itemView.findViewById(R.id.txtDuration);
             txtLocation = itemView.findViewById(R.id.txtLocation);
             txtPrice = itemView.findViewById(R.id.txtPrice);
             txtTourName = itemView.findViewById(R.id.txtTourName);
-            txtDepartDate = itemView.findViewById(R.id.txtDepartDate);
 
             rbRating = itemView.findViewById(R.id.rbRating);
             imgThumbnail = itemView.findViewById(R.id.imgTourBackground);

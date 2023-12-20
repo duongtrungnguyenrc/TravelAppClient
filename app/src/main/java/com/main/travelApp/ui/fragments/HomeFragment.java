@@ -1,5 +1,6 @@
 package com.main.travelApp.ui.fragments;
 
+import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.main.travelApp.adapters.NewestPostsAdapter;
 import com.main.travelApp.adapters.TourListAdapter;
 import com.main.travelApp.databinding.FragmentHomeBinding;
 import com.main.travelApp.ui.activities.MainActivity;
+import com.main.travelApp.ui.activities.SupportActivity;
 import com.main.travelApp.ui.components.ExpiredDialog;
 import com.main.travelApp.utils.LayoutManagerUtil;
 import com.main.travelApp.utils.SharedPreferenceKeys;
@@ -103,6 +105,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         homeBinding.btnMoreTour1.setOnClickListener(this);
         homeBinding.btnMoreBlog.setOnClickListener(this);
         homeBinding.userAvatar.setOnClickListener(this);
+        homeBinding.btnSupport.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), SupportActivity.class);
+            startActivity(intent);
+        });
     }
     @Override
     public void onClick(View view) {

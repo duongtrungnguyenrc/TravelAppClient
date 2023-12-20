@@ -42,53 +42,57 @@
                 app:cardCornerRadius="200dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/txtPostType"
-                    android:background="@color/colorPrimary"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/white"
-                    android:paddingBottom="5dp"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="10dp"
-                    android:textSize="8sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:fontFamily="@font/alata"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kinh nghiệm du lịch"/>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:cardCornerRadius="200dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_marginStart="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
                     android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
                     android:paddingBottom="5dp"
-                    android:gravity="center_vertical">
+                    android:text="Kinh nghiệm du lịch"
+                    android:textColor="@color/gray"
+                    android:textSize="8sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="200dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp">
+
                     <ImageView
                         android:layout_width="10dp"
-                        android:scaleType="fitXY"
-                        app:tint="@color/white"
-                        android:layout_marginEnd="2dp"
                         android:layout_height="10dp"
-                        android:src="@drawable/baseline_remove_red_eye_24"/>
+                        android:layout_marginEnd="2dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/baseline_remove_red_eye_24"
+                        app:tint="@color/gray" />
+
                     <TextView
                         android:id="@+id/txtViews"
-                        android:textColor="@color/white"
-                        android:textSize="8sp"
-                        android:layout_marginBottom="1dp"
-                        android:fontFamily="@font/alata"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3 lượt xem"/>
+                        android:layout_marginBottom="1dp"
+                        android:fontFamily="@font/alata"
+                        android:text="3 lượt xem"
+                        android:textColor="@color/gray"
+                        android:textSize="8sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

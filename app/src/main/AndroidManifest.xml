@@ -18,6 +18,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.SelectTicketActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.SupportActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activities.RatingActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".ui.activities.TourDetailActivity"
             android:exported="false" />
         <activity

@@ -21,6 +21,7 @@ import com.main.travelApp.response.RateResponse;
 import com.main.travelApp.ui.components.ExpiredDialog;
 import com.main.travelApp.utils.LayoutManagerUtil;
 import com.main.travelApp.utils.SharedPreferenceKeys;
+import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.viewmodels.BlogDetailViewModel;
 import com.main.travelApp.viewmodels.factories.BlogDetailViewModelFactory;
 import com.squareup.picasso.Picasso;
@@ -39,7 +40,7 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = ActivityPostDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.tbPostDetail);
+
         long postId = getIntent().getExtras().getLong("postId", 1);
 
         sharedPreferences = getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE);
@@ -50,6 +51,7 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         viewModel.setContext(this);
 
 
+        ScreenManager.enableFullScreen(getWindow());
         init();
         setEvents();
     }
@@ -98,6 +100,7 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         binding.rcvComment.setItemAnimator(new DefaultItemAnimator());
         binding.rcvComment.setLayoutManager(LayoutManagerUtil.disabledScrollLinearManager(this, LinearLayoutManager.VERTICAL));
         binding.rcvComment.setAdapter(postCommentAdapter);
+        binding.btnBack.setOnClickListener(view -> finish());
         binding.btnSubmitComment.setEnabled(false);
     }
 

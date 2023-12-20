@@ -178,7 +178,7 @@
                 android:text="Đăng ký"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:backgroundTint="#fff" />
+                app:backgroundTint="@color/light_grey" />
 
             <Button
                 android:id="@+id/btnSignIn"
