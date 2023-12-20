@@ -536,7 +536,7 @@ public class VerticalStepperFormView extends LinearLayout {
 
     private void onConstructed(Context context, AttributeSet attrs, int defStyleAttr) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        inflater.inflate(R.layout.vertical_stepper_form_layout, this, true);
+        inflater.inflate(R.layout.component_vertical_stepper, this, true);
 
         keyboardTogglingObserver = new KeyboardTogglingObserver();
 

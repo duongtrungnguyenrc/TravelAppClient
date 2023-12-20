@@ -2,9 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="265dp"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_margin="5dp"
     android:background="@color/black"
     app:cardCornerRadius="10dp">
 
@@ -20,7 +20,7 @@
             <ImageView
                 android:id="@+id/imgTourBackground"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="130dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/intro"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -55,14 +55,14 @@
             android:id="@+id/txtTourName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:fontFamily="@font/alata"
             android:maxLines="1"
             android:paddingStart="13dp"
             android:paddingEnd="10dp"
             android:text="Du lịch Đà Nẵng"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -85,66 +85,10 @@
                 android:id="@+id/txtLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/alata"
                 android:paddingBottom="2dp"
                 android:text="Sapa"
-                android:textColor="@color/black"
+                android:textColor="@color/gray"
                 android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:paddingStart="13dp"
-            android:paddingEnd="13dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="start|center_vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="5dp"
-                    android:src="@drawable/baseline_date_range_24" />
-
-                <TextView
-                    android:id="@+id/txtDepartDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/alata"
-                    android:text="16/08/2023"
-                    android:textAlignment="center"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end|center_vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="5dp"
-                    android:src="@drawable/baseline_schedule_24" />
-
-                <TextView
-                    android:id="@+id/txtDuration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/alata"
-                    android:text="2 ngày"
-                    android:textAlignment="center"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -156,13 +100,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/alata"
+                android:paddingTop="3dp"
                 android:paddingEnd="15dp"
                 android:text="500.000 VNĐ"
                 android:textAlignment="textEnd"
                 android:textColor="@color/orange"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

@@ -12,6 +12,7 @@ import com.main.travelApp.response.AllTourResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.models.GeneralTour;
 import com.main.travelApp.repositories.interfaces.TourRepository;
+import com.main.travelApp.response.TourDateResponse;
 import com.main.travelApp.services.api.APIClient;
 import com.main.travelApp.services.api.ITourService;
 
@@ -85,12 +86,12 @@ public class TourRepositoryImpl implements TourRepository {
         MutableLiveData<Tour> tour = new MutableLiveData<>();
         Call<BaseResponse<Tour>> call = tourService.get(id);
 
-        call.enqueue(new Callback<BaseResponse<Tour>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<BaseResponse<Tour>> call, Response<BaseResponse<Tour>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     tour.setValue(response.body().getData());
-                }else{
+                } else {
                     tour.setValue(null);
                 }
             }
@@ -103,5 +104,29 @@ public class TourRepositoryImpl implements TourRepository {
         });
 
         return tour;
+    }
+
+    @Override
+    public MutableLiveData<TourDateResponse> findAllDates(long id) {
+        MutableLiveData<TourDateResponse> dates = new MutableLiveData<>();
+        Call<BaseResponse<TourDateResponse>> call = tourService.getDates(id);
+        call.enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<BaseResponse<TourDateResponse>> call, Response<BaseResponse<TourDateResponse>> response) {
+                if (response.isSuccessful()) {
+                    dates.setValue(response.body().getData());
+                } else {
+                    dates.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<TourDateResponse>> call, Throwable t) {
+                t.printStackTrace();
+                dates.setValue(null);
+            }
+        });
+
+        return dates;
     }
 }

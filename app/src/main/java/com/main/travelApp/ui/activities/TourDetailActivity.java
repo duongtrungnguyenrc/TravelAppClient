@@ -9,26 +9,22 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
 
 import com.main.travelApp.R;
 import com.main.travelApp.adapters.ParagraphAdapter;
 import com.main.travelApp.adapters.RatingAdapter;
 import com.main.travelApp.adapters.TourDateAdapter;
 import com.main.travelApp.adapters.TourGalleryAdapter;
-import com.main.travelApp.callbacks.BottomSheetActionHandler;
 import com.main.travelApp.databinding.ActivityTourDetailBinding;
 import com.main.travelApp.models.Paragraph;
 import com.main.travelApp.models.Tour;
 import com.main.travelApp.ui.components.BottomSheet;
 import com.main.travelApp.ui.components.Stepper.Step;
 import com.main.travelApp.ui.components.Stepper.StepperFormListener;
+import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.utils.TourScheduleStep;
 import com.main.travelApp.viewmodels.TourDetailViewModel;
 import com.squareup.picasso.Picasso;
@@ -40,7 +36,8 @@ import java.util.Objects;
 public class TourDetailActivity extends AppCompatActivity implements StepperFormListener {
     private ActivityTourDetailBinding binding;
     private TourDetailViewModel tourDetailViewModel;
-
+    private BottomSheet overviewBottomSheet;
+    private int tourId = -1;
     private Tour tour;
 
     @Override
@@ -49,10 +46,15 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
         init();
     }
 
+    @SuppressLint("SetTextI18n")
     private void init() {
+        overviewBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_tour_overview, "Thông tin về chuyến đi");
         this.binding = ActivityTourDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        enableFullScreen();
+        ScreenManager.enableFullScreen(getWindow());
+
+        Intent intent = getIntent();
+        tourId = intent.getIntExtra("tour-id", -1);
 
         binding.btnSeeAllOverview.setOnClickListener(view -> {
             showOverviewBottomSheet(tour.getOverview().getParagraphs());
@@ -66,15 +68,7 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
             binding.rootScrollView.smoothScrollTo(0, binding.layoutOverview.getTop() - 50);
         });
 
-        fetchData();
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void fetchData() {
         tourDetailViewModel = new ViewModelProvider(this).get(TourDetailViewModel.class);
-        Intent intent = getIntent();
-
-        int tourId = intent.getIntExtra("tour-id", -1);
 
         if(tourId != -1) {
             tourDetailViewModel.getTour(tourId).observe(this, tour -> {
@@ -98,6 +92,12 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
                     scheduleSteps.add(tourScheduleStep);
                 });
 
+                binding.btnSeeAllComment.setOnClickListener(view -> {
+                    Intent ratingIntent = new Intent(TourDetailActivity.this, RatingActivity.class);
+                    ratingIntent.putExtra("tour-id", tourId);
+                    ratingIntent.putExtra("tour-name", tour.getName());
+                    startActivity(ratingIntent);
+                });
                 binding.stepperForm.setup(TourDetailActivity.this, scheduleSteps).init();
                 binding.txtDescription.setText(Objects.requireNonNull(tour.getOverview().getParagraphs().get(0)).getContent());
                 Picasso.get()
@@ -111,7 +111,7 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
     }
 
     private void fetchRate(long id) {
-        tourDetailViewModel.getRateResponse(id).observe(this, res -> {
+        tourDetailViewModel.getRates(id).observe(this, res -> {
             Log.d("rating", res.toString());
             RatingAdapter ratingAdapter = new RatingAdapter(res.getRates(), this);
             binding.rcvRating.setAdapter(ratingAdapter);
@@ -119,11 +119,6 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
         });
     }
 
-    private void enableFullScreen() {
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
-    }
     private void initViewPager(ViewPager2 viewPager2, RecyclerView.Adapter adapter){
         viewPager2.setAdapter(adapter);
         viewPager2.setClipToPadding(false);
@@ -156,8 +151,6 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
     }
 
     private void showOverviewBottomSheet(List<Paragraph> paragraphs) {
-        BottomSheet overviewBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_tour_overview, "Thông tin về chuyến đi");
-
         overviewBottomSheet.show((dialogWindow, contentView) -> {
             ParagraphAdapter paragraphAdapter = new ParagraphAdapter(paragraphs);
             RecyclerView rcvTourOverview =  contentView.findViewById(R.id.rcv_tour_overview);

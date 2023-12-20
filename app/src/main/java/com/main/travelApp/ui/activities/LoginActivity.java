@@ -16,6 +16,7 @@ import com.main.travelApp.databinding.ActivityLoginBinding;
 import com.main.travelApp.models.AuthInstance;
 import com.main.travelApp.repositories.impls.AuthRepositoryImpl;
 import com.main.travelApp.repositories.interfaces.AuthRepository;
+import com.main.travelApp.utils.ScreenManager;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
@@ -27,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        enableFullScreen();
+        ScreenManager.enableFullScreen(getWindow());
         init();
     }
 
@@ -65,11 +66,5 @@ public class LoginActivity extends AppCompatActivity {
             })
         );
 
-    }
-
-    private void enableFullScreen() {
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 }

@@ -2,6 +2,7 @@ package com.main.travelApp.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
 import com.main.travelApp.models.TourDate;
+import com.main.travelApp.ui.activities.SelectTicketActivity;
 
 import java.util.List;
 
@@ -77,9 +80,14 @@ public class TourDateAdapter extends RecyclerView.Adapter<TourDateAdapter.ViewHo
     public void onBindViewHolder(@NonNull TourDateAdapter.ViewHolder holder, int position) {
         TourDate tourDate = dates.get(position);
             holder.getTxtDateName().setText(tourName + " hạng vé " + tourDate.getType());
-            holder.getTxtStartDate().setText(tourDate.getDepartDate().toString());
+            holder.getTxtStartDate().setText(tourDate.getDepartDate());
             holder.getTxtDatePrice().setText(tourDate.getAdultPrice() + " VND");
+
             holder.getBtnSelectDate().setOnClickListener(view -> {
+                Intent intent = new Intent(context, SelectTicketActivity.class);
+                intent.putExtra("tour-id", 2);
+                intent.putExtra("date-id", tourDate.getId());
+                context.startActivity(intent);
         });
     }
 

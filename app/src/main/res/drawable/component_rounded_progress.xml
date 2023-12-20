@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background layer for the progress bar with border radius -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp" /> <!-- Điều chỉnh góc bo tại đây -->
+            <solid android:color="@color/grey" /> <!-- Màu nền của progress bar -->
+        </shape>
+    </item>
+
+    <!-- Progress layer with custom thickness -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="10dp" /> <!-- Điều chỉnh góc bo tại đây -->
+                <solid android:color="@color/colorPrimary" /> <!-- Màu của phần tiến trình -->
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

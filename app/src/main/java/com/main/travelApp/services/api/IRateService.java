@@ -1,6 +1,7 @@
 package com.main.travelApp.services.api;
 
 import com.main.travelApp.response.BaseResponse;
+import com.main.travelApp.response.RateDetailResponse;
 import com.main.travelApp.response.RateResponse;
 
 import retrofit2.Call;
@@ -13,5 +14,6 @@ public interface IRateService {
     Call<BaseResponse<RateResponse>> getRateByBlogId(@Path("id") long id, @Query("page") int page, @Query("limit") int limit);
 
     @GET("rate/{id}")
-    Call<BaseResponse<RateResponse>> getRateByTourId(@Path("id") long id, @Query("page") int page, @Query("limit") int limit);
+    Call<BaseResponse<RateDetailResponse>> getRateByTourId(@Path("id") long id, @Query("page") int page, @Query("limit") int limit);
+
 }

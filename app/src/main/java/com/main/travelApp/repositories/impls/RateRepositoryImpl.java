@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.main.travelApp.models.Rate;
 import com.main.travelApp.repositories.interfaces.RateRepository;
 import com.main.travelApp.response.BaseResponse;
+import com.main.travelApp.response.RateDetailResponse;
 import com.main.travelApp.response.RateResponse;
 import com.main.travelApp.services.api.APIClient;
 import com.main.travelApp.services.api.IRateService;
@@ -48,22 +49,23 @@ public class RateRepositoryImpl implements RateRepository {
     }
 
     @Override
-    public MutableLiveData<RateResponse> findByTourId(long id, int page, int limit) {
-        MutableLiveData<RateResponse> rateResponse = new MutableLiveData<>();
-        Call<BaseResponse<RateResponse>> call = rateService.getRateByTourId(id, page, limit);
+    public MutableLiveData<RateDetailResponse> findByTourId(long id, int page, int limit) {
+        MutableLiveData<RateDetailResponse> rateResponse = new MutableLiveData<>();
+        Call<BaseResponse<RateDetailResponse>> call = rateService.getRateByTourId(id, page, limit);
         call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<BaseResponse<RateResponse>> call, Response<BaseResponse<RateResponse>> response) {
+            public void onResponse(Call<BaseResponse<RateDetailResponse>> call, Response<BaseResponse<RateDetailResponse>> response) {
                 if (response.isSuccessful()) {
                     rateResponse.setValue(response.body().getData());
                 }
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<RateResponse>> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<RateDetailResponse>> call, Throwable t) {
                 rateResponse.setValue(null);
             }
         });
+
 
         return rateResponse;
     }

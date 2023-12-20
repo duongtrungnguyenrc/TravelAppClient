@@ -1,5 +1,6 @@
 package com.main.travelApp.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.main.travelApp.adapters.NewestPostsAdapter;
 import com.main.travelApp.adapters.TourListAdapter;
 import com.main.travelApp.databinding.FragmentHomeBinding;
 import com.main.travelApp.ui.activities.MainActivity;
+import com.main.travelApp.ui.activities.SupportActivity;
 import com.main.travelApp.utils.LayoutManagerUtil;
 import com.main.travelApp.viewmodels.HomeViewModel;
 
@@ -77,6 +79,10 @@ public class HomeFragment extends Fragment {
         homeBinding.btnMoreTour.setOnClickListener(onClickListener());
         homeBinding.btnMoreTour1.setOnClickListener(onClickListener());
         homeBinding.btnMoreBlog.setOnClickListener(onClickListener());
+        homeBinding.btnSupport.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), SupportActivity.class);
+            startActivity(intent);
+        });
     }
 
     private View.OnClickListener onClickListener(){

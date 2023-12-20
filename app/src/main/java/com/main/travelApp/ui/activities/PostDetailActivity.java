@@ -15,6 +15,7 @@ import com.main.travelApp.adapters.PostCommentAdapter;
 import com.main.travelApp.databinding.ActivityPostDetailBinding;
 import com.main.travelApp.response.RateResponse;
 import com.main.travelApp.utils.LayoutManagerUtil;
+import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.viewmodels.BlogDetailViewModel;
 import com.main.travelApp.viewmodels.factories.BlogDetailViewModelFactory;
 import com.squareup.picasso.Picasso;
@@ -31,12 +32,13 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = ActivityPostDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.tbPostDetail);
+
         long postId = getIntent().getExtras().getLong("postId", 1);
 
         ViewModelProvider.Factory factory = new BlogDetailViewModelFactory(postId);
         viewModel = new ViewModelProvider(this, factory).get(BlogDetailViewModel.class);
 
+        ScreenManager.enableFullScreen(getWindow());
         init();
         setEvents();
     }
@@ -78,6 +80,7 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         binding.rcvComment.setItemAnimator(new DefaultItemAnimator());
         binding.rcvComment.setLayoutManager(LayoutManagerUtil.disabledScrollLinearManager(this, LinearLayoutManager.VERTICAL));
         binding.rcvComment.setAdapter(postCommentAdapter);
+        binding.btnBack.setOnClickListener(view -> finish());
     }
 
     public void setEvents(){

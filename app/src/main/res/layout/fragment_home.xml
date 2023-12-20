@@ -28,10 +28,11 @@
             android:textSize="12sp"/>
 
         <ImageButton
+            android:id="@+id/btn_support"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_support_24"
             android:backgroundTint="@color/transparent"
+            android:src="@drawable/ic_support_24"
             app:tint="@color/white" />
     </LinearLayout>
 
@@ -122,7 +123,7 @@
                             app:cardCornerRadius="45dp">
 
                             <ImageView
-                                android:id="@+id/userAvatar"
+                                android:id="@+id/img_avatar"
                                 android:layout_width="45dp"
                                 android:layout_height="45dp"
                                 android:scaleType="centerCrop"
@@ -137,9 +138,9 @@
                 android:id="@+id/cvWhereYouLike"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="-60dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="15dp"
                 android:elevation="@dimen/cardview_compat_inset_shadow"
                 android:outlineAmbientShadowColor="@color/black"
                 android:outlineSpotShadowColor="@android:color/transparent"
@@ -364,7 +365,7 @@
                         android:drawableTint="@color/blue"
                         android:fontFamily="@font/alata"
                         android:text="Xem thêm"
-                        android:textAlignment="textEnd"
+                        android:textAlignment="center"
                         android:textColor="@color/blue"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -454,7 +455,7 @@
                             android:background="@drawable/custom_button_ripple"
                             android:fontFamily="@font/alata"
                             android:text="Đặt tour ngay!"
-                            app:backgroundTint="@color/yellow" />
+                            app:backgroundTint="@color/colorPrimary" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -472,7 +473,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:padding="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -494,9 +495,7 @@
                         android:id="@+id/rcvPlaces"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="-10dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="-10dp" />
+                        android:layout_marginTop="15dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -512,7 +511,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="100dp"
+                    android:layout_marginBottom="50dp"
                     android:orientation="vertical"
                     android:padding="15dp">
 

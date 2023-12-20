@@ -178,7 +178,7 @@
                 android:text="Đăng ký"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:backgroundTint="#fff" />
+                app:backgroundTint="@color/light_grey" />
 
             <Button
                 android:id="@+id/btnSignIn"
@@ -188,7 +188,7 @@
                 android:background="@drawable/custom_button_ripple"
                 android:text="Đăng nhập"
                 android:textSize="14sp"
-                app:backgroundTint="#c7923e" />
+                app:backgroundTint="@color/colorPrimary" />
         </LinearLayout>
 
         <View

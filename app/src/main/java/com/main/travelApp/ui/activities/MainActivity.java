@@ -22,6 +22,7 @@ import com.main.travelApp.ui.fragments.BlogFragment;
 import com.main.travelApp.ui.fragments.ExploreFragment;
 import com.main.travelApp.ui.fragments.HomeFragment;
 import com.main.travelApp.ui.fragments.ProfileFragment;
+import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.viewmodels.HomeViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        enableFullScreen();
+        ScreenManager.enableFullScreen(getWindow());
         init();
     }
 
@@ -65,13 +66,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void enableFullScreen() {
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
-    }
-
     private void replaceFragment(Fragment fragment){
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

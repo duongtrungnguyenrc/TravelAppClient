@@ -15,7 +15,12 @@ import com.main.travelApp.models.Rate;
 import java.util.List;
 
 public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.ViewHolder> {
-    private final List<Rate> rates;
+    public void setRates(List<Rate> rates) {
+        this.rates = rates;
+        notifyDataSetChanged();
+    }
+
+    private List<Rate> rates;
     private final Context context;
 
     public RatingAdapter(List<Rate> rates, Context context) {

@@ -76,6 +76,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
                                 <androidx.cardview.widget.CardView
@@ -93,7 +94,7 @@
                                         app:cardCornerRadius="45dp">
 
                                         <ImageView
-                                            android:id="@+id/userAvatar"
+                                            android:id="@+id/img_avatar"
                                             android:layout_width="60dp"
                                             android:layout_height="60dp"
                                             android:scaleType="centerCrop"
@@ -119,17 +120,11 @@
                                         android:id="@+id/textView5"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Logged in with google"
+                                        android:layout_marginTop="3dp"
+                                        android:text="duongtrungnguyenrc@gmail.com"
                                         android:textColor="@color/gray"
                                         android:textSize="12sp" />
 
-                                    <TextView
-                                        android:id="@+id/textView6"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="0 posts"
-                                        android:textColor="@color/gray"
-                                        android:textSize="12sp" />
                                 </LinearLayout>
                             </LinearLayout>
 
@@ -205,7 +200,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Thông tin cá nhân"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -250,7 +245,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Mật khẩu &amp; bảo mật"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -295,7 +290,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Lịch sử truy cập"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -340,7 +335,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Lịch sử giao dịch"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -416,7 +411,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Thông báo đẩy"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -461,7 +456,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Điều khoản &amp; dịch vụ"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -530,7 +525,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Đăng xuất"
-                                    android:textSize="12sp"
+                                    android:textSize="14sp"
                                     android:textStyle="bold" />
 
                             </LinearLayout>
