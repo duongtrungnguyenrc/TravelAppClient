@@ -4,11 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/txtContent"
-        android:justificationMode="inter_word"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:justificationMode="inter_word"
+        android:textSize="13sp" />
     <ImageView
         android:src="@drawable/intro"
         android:scaleType="centerCrop"
