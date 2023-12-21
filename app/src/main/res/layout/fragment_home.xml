@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -21,12 +20,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_setting_wrapper"
             android:ems="10"
-            android:hint="Tìm kiếm tour, diểm đến"
             android:inputType="text"
+            android:background="@drawable/bg_setting_wrapper"
             android:padding="10dp"
-            android:textSize="12sp" />
+            android:hint="Tìm kiếm tour, diểm đến"
+            android:textSize="12sp"/>
 
         <ImageButton
             android:id="@+id/btn_support"
@@ -64,11 +63,11 @@
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#eeeeee"
-                android:overScrollMode="always">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eeeeee"
+            android:overScrollMode="always">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
@@ -106,21 +105,22 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_user_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:gravity="end"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/alata"
-                                android:text="Xin chào Hoan Viet!"
-                                android:textColor="@color/white"
-                                android:textSize="13sp"
-                                android:textStyle="bold" />
+                            android:fontFamily="@font/alata"
+                            android:text="Xin chào Hoan Viet!"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -478,6 +478,7 @@
                                 android:background="@drawable/custom_button_ripple"
                                 android:fontFamily="@font/alata"
                                 android:text="Đặt tour ngay!"
+                                android:textSize="12sp"
                                 app:backgroundTint="@color/colorPrimary" />
                         </LinearLayout>
                     </LinearLayout>

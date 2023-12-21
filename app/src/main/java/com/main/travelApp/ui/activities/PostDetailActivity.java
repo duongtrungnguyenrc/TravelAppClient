@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import com.main.travelApp.R;
@@ -13,8 +16,11 @@ import com.main.travelApp.adapters.AllPostAdapter;
 import com.main.travelApp.adapters.ParagraphAdapter;
 import com.main.travelApp.adapters.PostCommentAdapter;
 import com.main.travelApp.databinding.ActivityPostDetailBinding;
+import com.main.travelApp.request.AddRateRequest;
 import com.main.travelApp.response.RateResponse;
+import com.main.travelApp.ui.components.ExpiredDialog;
 import com.main.travelApp.utils.LayoutManagerUtil;
+import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.viewmodels.BlogDetailViewModel;
 import com.main.travelApp.viewmodels.factories.BlogDetailViewModelFactory;
@@ -26,6 +32,8 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
     private AllPostAdapter relevantPostAdapter;
     private PostCommentAdapter postCommentAdapter;
     private BlogDetailViewModel viewModel;
+    private SharedPreferences sharedPreferences;
+    private String accessToken = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +43,13 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
 
         long postId = getIntent().getExtras().getLong("postId", 1);
 
-        ViewModelProvider.Factory factory = new BlogDetailViewModelFactory(postId);
+        sharedPreferences = getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE);
+        accessToken = sharedPreferences.getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, "");
+
+        ViewModelProvider.Factory factory = new BlogDetailViewModelFactory(accessToken, postId);
         viewModel = new ViewModelProvider(this, factory).get(BlogDetailViewModel.class);
+        viewModel.setContext(this);
+
 
         ScreenManager.enableFullScreen(getWindow());
         init();
@@ -68,7 +81,14 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
             binding.txtPostType.setText(data.getPost().getType());
         });
         viewModel.getRateResponse().observe(this, data -> {
-            postCommentAdapter.setComments(data.getRates());
+            postCommentAdapter.submitList(data.getRates());
+        });
+
+        viewModel.getIsExpired().observe(this, isExpired -> {
+            if(isExpired == true){
+                ExpiredDialog dialog = new ExpiredDialog(this, sharedPreferences);
+                dialog.show(getSupportFragmentManager(), "EXPIRED_DIALOG");
+            }
         });
 
         binding.rcvParagraphs.setItemAnimator(new DefaultItemAnimator());
@@ -81,6 +101,7 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         binding.rcvComment.setLayoutManager(LayoutManagerUtil.disabledScrollLinearManager(this, LinearLayoutManager.VERTICAL));
         binding.rcvComment.setAdapter(postCommentAdapter);
         binding.btnBack.setOnClickListener(view -> finish());
+        binding.btnSubmitComment.setEnabled(false);
     }
 
     public void setEvents(){
@@ -95,6 +116,27 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
                 }
             }
         });
+        binding.btnSubmitComment.setOnClickListener(this);
+        binding.edtComment.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.toString().isEmpty()){
+                    binding.btnSubmitComment.setEnabled(false);
+                }else{
+                    binding.btnSubmitComment.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 
@@ -103,6 +145,17 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         if(view == binding.btnPrevPage){
             if(viewModel.getCommentPage() > 1){
                 viewModel.setCommentPage(viewModel.getCommentPage() - 1);
+            }
+        }else if(view == binding.btnSubmitComment){
+            String content = binding.edtComment.getText().toString();
+            if(!content.isEmpty()){
+                AddRateRequest request = new AddRateRequest();
+                request.setStar(5);
+                request.setComment(content);
+                request.setBlogId(viewModel.getId());
+                request.setTourId(null);
+                viewModel.addRate(accessToken, request);
+                binding.edtComment.setText("");
             }
         }
     }

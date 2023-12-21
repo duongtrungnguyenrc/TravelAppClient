@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import com.main.travelApp.ui.fragments.ExploreFragment;
 import com.main.travelApp.ui.fragments.HomeFragment;
 import com.main.travelApp.ui.fragments.ProfileFragment;
 import com.main.travelApp.utils.ScreenManager;
+import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.viewmodels.HomeViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,10 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private BlogFragment blogFragment;
     private ExploreFragment exploreFragment;
     private ProfileFragment profileFragment;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE);
+        loggedInFilter();
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ScreenManager.enableFullScreen(getWindow());
@@ -93,5 +99,19 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(profileFragment);
             }
         }
+    }
+    private void loggedInFilter(){
+        if(sharedPreferences.getString("accessToken", null) == null){
+            clearUserPrefs();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    private void clearUserPrefs(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear().apply();
     }
 }

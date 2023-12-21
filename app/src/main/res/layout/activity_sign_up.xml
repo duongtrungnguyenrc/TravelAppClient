@@ -311,7 +311,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ckbAgreeTerms"
             android:orientation="vertical">
             <Button
-                android:id="@+id/btnSignIn"
+                android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -319,7 +319,7 @@
                 android:padding="8dp"
                 android:text="Đăng ký"
                 android:textSize="14sp"
-                app:backgroundTint="@color/yellow" />
+                app:backgroundTint="@color/colorPrimary" />
             <LinearLayout
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"

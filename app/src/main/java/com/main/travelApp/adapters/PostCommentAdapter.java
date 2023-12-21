@@ -11,6 +11,8 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
@@ -20,22 +22,27 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class PostCommentAdapter extends RecyclerView.Adapter<PostCommentAdapter.MyViewHolder> {
-    private List<Rate> comments;
+public class PostCommentAdapter extends ListAdapter<Rate, PostCommentAdapter.MyViewHolder> {
     private Context context;
+    private static final DiffUtil.ItemCallback<Rate> DIFF_CALLBACK = new DiffUtil.ItemCallback<Rate>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Rate oldItem, @NonNull Rate newItem) {
+            return oldItem.getId().equals(newItem.getId());
+        }
 
-    public PostCommentAdapter(List<Rate> comments, Context context) {
-        this.comments = comments;
-        this.context = context;
-    }
-
+        @Override
+        public boolean areContentsTheSame(@NonNull Rate oldItem, @NonNull Rate newItem) {
+            return oldItem.getAvatar().equals(newItem.getAvatar()) &&
+                    oldItem.getContent().equals(newItem.getContent()) &&
+                    oldItem.getStar() == newItem.getStar() &&
+                    oldItem.getRatedStar() == newItem.getRatedStar() &&
+                    oldItem.getRatedDate().equals(newItem.getRatedDate()) &&
+                    oldItem.getUsername().equals(newItem.getUsername());
+        }
+    };
     public PostCommentAdapter(Context context) {
+        super(DIFF_CALLBACK);
         this.context = context;
-    }
-
-    public void setComments(List<Rate> comments) {
-        this.comments = comments;
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -49,15 +56,15 @@ public class PostCommentAdapter extends RecyclerView.Adapter<PostCommentAdapter.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.binding.btnMore.setVisibility(
-                comments.get(position).isActive() ? View.VISIBLE : View.GONE
+                getItem(position).isActive() ? View.VISIBLE : View.GONE
         );
         Picasso.get()
-                .load(comments.get(position).getAvatar())
+                .load(getItem(position).getAvatar())
                 .placeholder(R.color.light_gray)
                 .error(R.color.light_gray)
                 .into(holder.binding.imgUserAvatar);
-        holder.binding.txtUserName.setText(comments.get(position).getUsername());
-        holder.binding.txtComment.setText(comments.get(position).getContent());
+        holder.binding.txtUserName.setText(getItem(position).getUsername());
+        holder.binding.txtComment.setText(getItem(position).getContent());
         holder.binding.btnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,12 +90,6 @@ public class PostCommentAdapter extends RecyclerView.Adapter<PostCommentAdapter.
             }
         });
     }
-
-    @Override
-    public int getItemCount() {
-        return comments != null ? comments.size() : 0;
-    }
-
     class MyViewHolder extends RecyclerView.ViewHolder {
         private ItemViewPostCommentBinding binding;
 

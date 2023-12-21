@@ -1,9 +1,14 @@
 package com.main.travelApp.repositories.impls;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
+import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.models.Rate;
 import com.main.travelApp.repositories.interfaces.RateRepository;
+import com.main.travelApp.request.AddRateRequest;
+import com.main.travelApp.response.AddRateResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.response.RateDetailResponse;
 import com.main.travelApp.response.RateResponse;
@@ -28,9 +33,9 @@ public class RateRepositoryImpl implements RateRepository {
         return new RateRepositoryImpl();
     }
     @Override
-    public MutableLiveData<RateResponse> findByBlogId(long id, int page, int limit) {
+    public MutableLiveData<RateResponse> findByBlogId(String accessToken, long id, int page, int limit) {
         MutableLiveData<RateResponse> rateResponse = new MutableLiveData<>();
-        Call<BaseResponse<RateResponse>> call = rateService.getRateByBlogId(id, page, limit);
+        Call<BaseResponse<RateResponse>> call = rateService.getRateByBlogId(accessToken, id, page, limit);
         call.enqueue(new Callback<BaseResponse<RateResponse>>() {
             @Override
             public void onResponse(Call<BaseResponse<RateResponse>> call, Response<BaseResponse<RateResponse>> response) {
@@ -68,5 +73,25 @@ public class RateRepositoryImpl implements RateRepository {
 
 
         return rateResponse;
+    }
+
+    @Override
+    public void addRate(String accessToken, AddRateRequest request, ActionCallback<Rate> callback) {
+        Call<BaseResponse<AddRateResponse>> call = rateService.addRate(accessToken, request);
+        call.enqueue(new Callback<BaseResponse<AddRateResponse>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<AddRateResponse>> call, Response<BaseResponse<AddRateResponse>> response) {
+                if(response.isSuccessful()){
+                    callback.onSuccess(response.body().getData().getRateAdded());
+                }else{
+                    callback.onFailure(response.code(), response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<AddRateResponse>> call, Throwable t) {
+                callback.onFailure(t.getMessage());
+            }
+        });
     }
 }

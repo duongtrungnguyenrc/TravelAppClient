@@ -1,39 +1,252 @@
 package com.main.travelApp.ui.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.BeginSignInResult;
+import com.google.android.gms.auth.api.identity.Identity;
+import com.google.android.gms.auth.api.identity.SignInClient;
+import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.main.travelApp.R;
+import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.databinding.ActivitySignUpBinding;
+import com.main.travelApp.models.AuthInstance;
+import com.main.travelApp.repositories.impls.AuthRepositoryImpl;
+import com.main.travelApp.request.SignUpRequest;
+import com.main.travelApp.ui.components.EnterConfirmCodeDialog;
+import com.main.travelApp.ui.components.EnterConfirmResetPassCodeDialog;
+import com.main.travelApp.ui.components.EnterEmailDialog;
+import com.main.travelApp.ui.components.EnterNewPasswordDialog;
+import com.main.travelApp.utils.SharedPreferenceKeys;
+import com.main.travelApp.viewmodels.SignUpViewModel;
 
-public class SignUpActivity extends AppCompatActivity {
+import java.util.HashSet;
+import java.util.Set;
+
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivitySignUpBinding binding;
+    private SignUpViewModel viewModel;
+    private AuthRepositoryImpl authRepository;
+    private SignInClient oneTapClient;
+    private BeginSignInRequest signInRequest;
+    private SharedPreferences sharedPreferences;
+    private static final int REQ_ONE_TAP = 2;
+    private boolean showOneTapUI = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+        sharedPreferences = getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE);
+        viewModel = new ViewModelProvider(this).get(SignUpViewModel.class);
+        viewModel.setContext(this);
         setContentView(view);
         init();
     }
 
     private void init(){
+        oneTapClient = Identity.getSignInClient(this);
+        signInRequest = BeginSignInRequest.builder()
+                .setPasswordRequestOptions(BeginSignInRequest.PasswordRequestOptions.builder()
+                        .setSupported(true)
+                        .build())
+                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                        .setSupported(true)
+                        .setServerClientId(getString(R.string.default_web_client))
+                        .setFilterByAuthorizedAccounts(false)
+                        .build())
+                .build();
+        authRepository = AuthRepositoryImpl.getInstance();
+
         String forgotPassStr = "Quên mật khẩu";
         SpannableString spannableString = new SpannableString(forgotPassStr);
         spannableString.setSpan(new UnderlineSpan(), 0, forgotPassStr.length(), 0);
         binding.txtForgotPassword.setText(spannableString);
-        binding.txtSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+        binding.txtSignIn.setOnClickListener(this);
+        binding.btnSignUp.setOnClickListener(this);
+        binding.txtForgotPassword.setOnClickListener(this);
+        binding.btnGoogle.setOnClickListener(this);
+        viewModel.getIsSignUpSuccess().observe(this, isSignUpSuccess -> {
+            if(isSignUpSuccess){
+                EnterConfirmCodeDialog dialog = new EnterConfirmCodeDialog(SignUpActivity.this, viewModel);
+                dialog.show(getSupportFragmentManager(), "ENTER_CODE_DIALOG");
             }
         });
+        viewModel.getIsResetPasswordMailSent().observe(this, isResetPassSent -> {
+            if(isResetPassSent){
+                EnterConfirmResetPassCodeDialog dialog = new EnterConfirmResetPassCodeDialog(SignUpActivity.this, viewModel);
+                dialog.show(getSupportFragmentManager(), "ENTER_CODE_DIALOG");
+            }
+        });
+
+        viewModel.getIsResetPasswordCodeCorrect().observe(this, isResetPassCodeCorrect -> {
+            if(isResetPassCodeCorrect){
+                EnterNewPasswordDialog dialog = new EnterNewPasswordDialog(this, viewModel);
+                dialog.show(getSupportFragmentManager(), "ENTER_PASSWORD_DIALOG");
+            }
+        });
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == binding.txtSignIn){
+            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }else if (view == binding.btnSignUp){
+                String password = binding.edtPassword.getText().toString();
+                String confirmPassword = binding.edtRePassword.getText().toString();
+                String email = binding.edtEmail.getText().toString();
+                String firstName = binding.edtFirstName.getText().toString();
+                String lastName = binding.edtLastName.getText().toString();
+                String phone = binding.edtPhone.getText().toString();
+                if(email.isEmpty() || firstName.isEmpty() ||
+                lastName.isEmpty() || phone.isEmpty() || password.isEmpty()
+                || confirmPassword.isEmpty()){
+                    Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                }else{
+                    if(isValidEmail(email))
+                        if(password.equals(confirmPassword)){
+                            if(binding.ckbAgreeTerms.isChecked()){
+                                SignUpRequest request = new SignUpRequest();
+                                request.setAddress(null);
+                                request.setEmail(email);
+                                request.setPassword(password);
+                                request.setFullName(firstName + " " + lastName);
+                                request.setPhone(phone);
+                                request.setAvatar(null);
+                                request.setRole(null);
+
+                                viewModel.signUp(request);
+                            }else
+                                Toast.makeText(this, "Bạn chưa chấp nhận điều khoản!", Toast.LENGTH_SHORT).show();
+                        }else
+                            Toast.makeText(this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(this, "Email không đúng định dạng!", Toast.LENGTH_SHORT).show();
+                }
+        }else if(view == binding.txtForgotPassword){
+            EnterEmailDialog dialog = new EnterEmailDialog(SignUpActivity.this, viewModel);
+            dialog.show(getSupportFragmentManager(), "ENTER_EMAIL_DIALOG");
+        }else if(view == binding.btnGoogle){
+            ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+            progressDialog.setMessage("Chờ một xíu...");
+            progressDialog.show();
+            oneTapClient.beginSignIn(signInRequest)
+                    .addOnSuccessListener(this, new OnSuccessListener<BeginSignInResult>() {
+                        @Override
+                        public void onSuccess(BeginSignInResult result) {
+                            try {
+                                startIntentSenderForResult(
+                                        result.getPendingIntent().getIntentSender(), REQ_ONE_TAP,
+                                        null, 0, 0, 0);
+                            } catch (IntentSender.SendIntentException e) {
+                                Log.e("Google-Auth", "Couldn't start One Tap UI: " + e.getLocalizedMessage());
+                            }finally {
+                                progressDialog.dismiss();
+                            }
+                        }
+                    })
+                    .addOnFailureListener(this, new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Log.d("Google-Auth", e.getLocalizedMessage());
+                        }
+                    });
+        }
+    }
+    public final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQ_ONE_TAP:
+                try {
+                    SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(data);
+                    String idToken = credential.getGoogleIdToken();
+                    if (idToken !=  null) {
+                        ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+                        progressDialog.setMessage("Chờ một xíu...");
+                        progressDialog.show();
+                        authRepository.authenticationWithGoogleToken(idToken, new ActionCallback<AuthInstance>() {
+                            @Override
+                            public void onSuccess(AuthInstance result) {
+                                progressDialog.dismiss();
+                                saveUserToSharedPref(result);
+                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(Integer status, String message) {
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (ApiException e) {
+                    switch (e.getStatusCode()) {
+                        case CommonStatusCodes.CANCELED:
+                            Log.d("Google-Auth-Result", "One-tap dialog was closed.");
+                            showOneTapUI = false;
+                            break;
+                        case CommonStatusCodes.NETWORK_ERROR:
+                            Log.d("Google-Auth-Result", "One-tap encountered a network error.");
+                            break;
+                        default:
+                            Log.d("Google-Auth-Result", "Couldn't get credential from result."
+                                    + e.getLocalizedMessage());
+                            break;
+                    }
+                }
+                break;
+        }
+    }
+    private void saveUserToSharedPref(AuthInstance authInstance){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Set<String> rolesSet = new HashSet<>();
+        authInstance.getRoles().forEach(role -> {
+            rolesSet.add(role);
+        });
+
+        editor.putString(SharedPreferenceKeys.USER_ACCESS_TOKEN, getString(R.string.token_type) + " " + authInstance.getAccessToken());
+        editor.putString(SharedPreferenceKeys.USER_ID, authInstance.getId());
+        editor.putString(SharedPreferenceKeys.USER_EMAIL, authInstance.getEmail());
+        editor.putString(SharedPreferenceKeys.USER_AVATAR, authInstance.getAvatar());
+        editor.putString(SharedPreferenceKeys.USER_ADDRESS, authInstance.getAddress());
+        editor.putString(SharedPreferenceKeys.USER_FULL_NAME, authInstance.getFullName());
+        editor.putString(SharedPreferenceKeys.USER_PHONE, authInstance.getPhone());
+        editor.putBoolean(SharedPreferenceKeys.USER_ACTIVE, authInstance.isActive());
+        editor.putStringSet(SharedPreferenceKeys.USER_ROLES, rolesSet);
+
+        editor.apply();
     }
 }
