@@ -33,7 +33,7 @@ public class BottomSheet {
 
         dialog.findViewById(R.id.cancelButton).setOnClickListener(view -> dialog.dismiss());
 
-        ViewGroup root =  dialog.findViewById(R.id.layout_content_wrapper);
+        ViewGroup root = dialog.findViewById(R.id.layout_content_wrapper);
         this.contentView = layoutInflater.inflate(contentLayout, null);
         root.addView(contentView);
     }

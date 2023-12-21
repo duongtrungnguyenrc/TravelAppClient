@@ -2,10 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_margin="10dp"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     android:outlineAmbientShadowColor="@color/black"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="10dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -114,12 +115,12 @@
         <Button
             android:id="@+id/btnDetails"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/custom_button_ripple"
             android:text="Xem chi tiết"
-            android:textSize="10sp"
+            android:textSize="12sp"
             app:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

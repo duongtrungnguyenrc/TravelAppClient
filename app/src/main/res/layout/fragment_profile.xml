@@ -17,7 +17,7 @@
         android:paddingBottom="10dp">
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/edt_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -217,7 +217,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="Thông tin cá nhân"
-                                            android:textSize="12sp"
+                                            android:textSize="14sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -265,7 +265,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="Mật khẩu &amp; bảo mật"
-                                            android:textSize="12sp"
+                                            android:textSize="14sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -313,7 +313,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="Lịch sử truy cập"
-                                            android:textSize="12sp"
+                                            android:textSize="14sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -361,7 +361,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="Lịch sử giao dịch"
-                                            android:textSize="12sp"
+                                            android:textSize="14sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -440,7 +440,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="Thông báo đẩy"
-                                            android:textSize="12sp"
+                                            android:textSize="14sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -488,7 +488,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="Điều khoản &amp; dịch vụ"
-                                            android:textSize="12sp"
+                                            android:textSize="14sp"
                                             android:textStyle="bold" />
 
                                         <TextView
@@ -560,7 +560,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="Đăng xuất"
-                                            android:textSize="12sp"
+                                            android:textSize="14sp"
                                             android:textStyle="bold" />
 
                                     </LinearLayout>

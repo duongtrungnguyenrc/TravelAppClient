@@ -54,7 +54,7 @@ public class AuthRepositoryImpl implements AuthRepository {
                     try {
                         errorBody = response.errorBody().string();
                     } catch (IOException e) {
-                        action.onFailure(e.getMessage());
+                        action.onError(e);
                     }
                     Gson gson = new Gson();
                     BaseResponse<Object> errorResponse = gson.fromJson(errorBody, BaseResponse.class);
@@ -64,7 +64,6 @@ public class AuthRepositoryImpl implements AuthRepository {
 
             @Override
             public void onFailure(Call<BaseResponse<AuthInstance>> call, Throwable t) {
-                Log.d("query-status", t.getMessage());
                 action.onFailure(t.getMessage());
             }
         });

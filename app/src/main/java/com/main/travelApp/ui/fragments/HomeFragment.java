@@ -1,5 +1,6 @@
 package com.main.travelApp.ui.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.inputmethod.InputMethodManager;
 
 import com.main.travelApp.R;
 import com.main.travelApp.adapters.PlaceListAdapter;
@@ -55,6 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         setEvents();
     }
 
+    @SuppressLint("SetTextI18n")
     private void init(){
         tourListAdapter = new TourListAdapter(getActivity());
         placeListAdapter = new PlaceListAdapter();
@@ -98,6 +102,34 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     .placeholder(R.color.light_gray)
                     .error(R.color.light_gray)
                     .into(homeBinding.imgAvatar);
+
+        AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);
+        animation.setDuration(300);
+
+        homeBinding.edtSearch.setOnFocusChangeListener((view, isFocus) -> {
+            if(isFocus) {
+                homeBinding.layoutFloatingSearchResult.startAnimation(animation);
+                homeBinding.layoutFloatingSearchResult.setVisibility(View.VISIBLE);
+                homeBinding.btnSearchCancel.setVisibility(View.VISIBLE);
+                homeBinding.btnSupport.setVisibility(View.GONE);
+            }
+        });
+
+        homeBinding.btnSearchCancel.setOnClickListener(view -> {
+            homeBinding.layoutFloatingSearchResult.setVisibility(View.GONE);
+            homeBinding.btnSearchCancel.setVisibility(View.GONE);
+            homeBinding.btnSupport.setVisibility(View.VISIBLE);
+
+            InputMethodManager inputMethodManager = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            View currentFocus = requireActivity().getCurrentFocus();
+            if (currentFocus != null) {
+                inputMethodManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+            }
+
+            homeBinding.edtSearch.clearFocus();
+
+        });
     }
 
     private void setEvents(){

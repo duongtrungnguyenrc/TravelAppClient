@@ -94,29 +94,41 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         binding.btnSignIn.setOnClickListener(view -> {
-            ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
-            progressDialog.setMessage("Chờ một xíu...");
-            progressDialog.show();
-            authRepository.authentication(
-                    binding.edtEmail.getText().toString(),
-                    binding.edtPassword.getText().toString(),
-                    new ActionCallback<>() {
-                        @Override
-                        public void onSuccess(AuthInstance result) {
-                            progressDialog.dismiss();
-                            saveUserToSharedPref(result);
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                        @Override
-                        public void onFailure(Integer status, String message) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-            }
+                    ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+                    progressDialog.setMessage("Chờ một xíu...");
+                    progressDialog.show();
+                    authRepository.authentication(
+                            binding.edtEmail.getText().toString(),
+                            binding.edtPassword.getText().toString(),
+                            new ActionCallback<>() {
+                                @Override
+                                public void onSuccess(AuthInstance result) {
+                                    progressDialog.dismiss();
+                                    saveUserToSharedPref(result);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                                @Override
+                                public void onFailure(Integer status, String message) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onFailure(String message) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onError(Exception e) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
         );
 
         binding.btnGoogle.setOnClickListener(view -> {
@@ -124,27 +136,27 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.setMessage("Chờ một xíu...");
             progressDialog.show();
             oneTapClient.beginSignIn(signInRequest)
-                .addOnSuccessListener(this, new OnSuccessListener<BeginSignInResult>() {
-                    @Override
-                    public void onSuccess(BeginSignInResult result) {
-                        try {
-                            startIntentSenderForResult(
-                                    result.getPendingIntent().getIntentSender(), REQ_ONE_TAP,
-                                    null, 0, 0, 0);
-                        } catch (IntentSender.SendIntentException e) {
-                            Log.e("Google-Auth", "Couldn't start One Tap UI: " + e.getLocalizedMessage());
-                        }finally {
-                            progressDialog.dismiss();
+                    .addOnSuccessListener(this, new OnSuccessListener<BeginSignInResult>() {
+                        @Override
+                        public void onSuccess(BeginSignInResult result) {
+                            try {
+                                startIntentSenderForResult(
+                                        result.getPendingIntent().getIntentSender(), REQ_ONE_TAP,
+                                        null, 0, 0, 0);
+                            } catch (IntentSender.SendIntentException e) {
+                                Log.e("Google-Auth", "Couldn't start One Tap UI: " + e.getLocalizedMessage());
+                            }finally {
+                                progressDialog.dismiss();
+                            }
                         }
-                    }
-                })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Log.d("Google-Auth", e.getLocalizedMessage());
-                    }
-                });
+                    })
+                    .addOnFailureListener(this, new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Log.d("Google-Auth", e.getLocalizedMessage());
+                        }
+                    });
         });
 
         binding.txtForgotPassword.setOnClickListener(view -> {

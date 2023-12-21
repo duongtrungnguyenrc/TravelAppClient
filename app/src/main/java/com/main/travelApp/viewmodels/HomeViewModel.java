@@ -35,6 +35,15 @@ public class HomeViewModel extends ViewModel {
     private SharedPreferences sharedPreferences;
     private MutableLiveData<Boolean> isExpired;
 
+    public HomeViewModel(){
+        tourRepository = TourRepositoryImpl.getInstance();
+        postRepository = PostRepositoryImpl.getInstance();
+        authRepository = AuthRepositoryImpl.getInstance();
+        tours = tourRepository.findAll(1, 10);
+        posts = postRepository.findNewestPosts();
+        places = tourRepository.findTopDestination();
+    }
+
     public HomeViewModel(SharedPreferences sharedPreferences){
         tourRepository = TourRepositoryImpl.getInstance();
         postRepository = PostRepositoryImpl.getInstance();
