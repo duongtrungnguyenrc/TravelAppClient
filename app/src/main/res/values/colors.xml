@@ -19,6 +19,7 @@
     <color name="gray">#7A7A7A</color>
     <color name="light_gray">#D1D0D0</color>
     <color name="orange">#F68840</color>
+    <color name="green">#308312</color>
 
     <color name="vertical_stepper_form_background_color_disabled_elements">#c8c8c8</color>
     <color name="vertical_stepper_form_background_color_circle">#1976d2</color>

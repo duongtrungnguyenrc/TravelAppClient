@@ -127,15 +127,7 @@
                                                 android:id="@+id/textView5"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:text="Logged in with google"
-                                                android:textColor="@color/gray"
-                                                android:textSize="12sp" />
-
-                                            <TextView
-                                                android:id="@+id/textView6"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:text="0 posts"
+                                                android:text="Đã đăng nhập"
                                                 android:textColor="@color/gray"
                                                 android:textSize="12sp" />
                                         </LinearLayout>

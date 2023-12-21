@@ -18,6 +18,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.UserOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.LoginHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.EditPersonalInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.SelectTicketActivity"
             android:exported="false" />
         <activity
