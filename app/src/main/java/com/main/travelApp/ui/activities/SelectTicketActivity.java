@@ -98,8 +98,6 @@ public class SelectTicketActivity extends AppCompatActivity {
     }
 
     private void showDatePickerBottomSheet() {
-        this.datePickerBottomSheet.show((dialogWindow, contentView) -> {
-
-        });
+        this.datePickerBottomSheet.show();
     }
 }

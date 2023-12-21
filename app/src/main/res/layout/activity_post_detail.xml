@@ -72,16 +72,17 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/txtPostTitle"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/alata"/>
-                <LinearLayout
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/alata"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -96,13 +97,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/alata"
-                        android:textColor="@color/gray" />
+                        android:textColor="@color/gray"
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:layout_width="5dp"
                         android:layout_height="5dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:src="@drawable/baseline_brightness_1_24"
                         app:tint="@color/gray" />
 
@@ -111,16 +113,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/alata"
-                        android:textColor="@color/gray" />
+                        android:textColor="@color/gray"
+                        android:textSize="12sp" />
                 </LinearLayout>
+
                 <RelativeLayout
-                    android:layout_marginTop="13dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcvParagraphs"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
                 </RelativeLayout>
                 <TextView
                     android:layout_width="match_parent"

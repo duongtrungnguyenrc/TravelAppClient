@@ -37,7 +37,7 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
     private ActivityTourDetailBinding binding;
     private TourDetailViewModel tourDetailViewModel;
     private BottomSheet overviewBottomSheet;
-    private int tourId = -1;
+    private long tourId = -1;
     private Tour tour;
 
     @Override
@@ -54,7 +54,7 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
         ScreenManager.enableFullScreen(getWindow());
 
         Intent intent = getIntent();
-        tourId = intent.getIntExtra("tour-id", -1);
+        tourId = intent.getLongExtra("tour-id", -1);
 
         binding.btnSeeAllOverview.setOnClickListener(view -> {
             showOverviewBottomSheet(tour.getOverview().getParagraphs());
@@ -98,6 +98,16 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
                     ratingIntent.putExtra("tour-name", tour.getName());
                     startActivity(ratingIntent);
                 });
+
+
+                overviewBottomSheet.build((dialogWindow, contentView) -> {
+                    ParagraphAdapter paragraphAdapter = new ParagraphAdapter(tour.getOverview().getParagraphs());
+                    RecyclerView rcvTourOverview =  contentView.findViewById(R.id.rcv_tour_overview);
+
+                    rcvTourOverview.setAdapter(paragraphAdapter);
+                    rcvTourOverview.setLayoutManager(new LinearLayoutManager(this));
+                });
+
                 binding.stepperForm.setup(TourDetailActivity.this, scheduleSteps).init();
                 binding.txtDescription.setText(Objects.requireNonNull(tour.getOverview().getParagraphs().get(0)).getContent());
                 Picasso.get()
@@ -151,12 +161,6 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
     }
 
     private void showOverviewBottomSheet(List<Paragraph> paragraphs) {
-        overviewBottomSheet.show((dialogWindow, contentView) -> {
-            ParagraphAdapter paragraphAdapter = new ParagraphAdapter(paragraphs);
-            RecyclerView rcvTourOverview =  contentView.findViewById(R.id.rcv_tour_overview);
-
-            rcvTourOverview.setAdapter(paragraphAdapter);
-            rcvTourOverview.setLayoutManager(new LinearLayoutManager(this));
-        });
+        overviewBottomSheet.show();
     }
 }

@@ -25,7 +25,7 @@ import java.util.List;
 
 public class RatingActivity extends AppCompatActivity {
 
-    private int tourId = -1;
+    private long tourId = -1;
     private String tourName;
     private ActivityRatingBinding binding;
 
@@ -45,7 +45,7 @@ public class RatingActivity extends AppCompatActivity {
     private void init() {
         BottomSheet filterBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_rating_filter, "Sắp xếp & Lọc");
         Intent intent = getIntent();
-        this.tourId = intent.getIntExtra("tour-id", -1);
+        this.tourId = intent.getLongExtra("tour-id", -1);
         this.tourName = intent.getStringExtra("tour-name");
 
         binding.txtHeading.setText(tourName);
@@ -75,7 +75,7 @@ public class RatingActivity extends AppCompatActivity {
                 binding.prgsThreeStar.setProgress((int) Math.round(starDistribution.getThreeStar() / (response.getAverage() / 100)));
                 binding.prgsTwoStar.setProgress((int) Math.round(starDistribution.getTwoStar() / (response.getAverage() / 100)));
 
-                binding.btnOpenFilter.setOnClickListener(view -> filterBottomSheet.show((dialogWindow, contentView) -> {
+                filterBottomSheet.build((dialogWindow, contentView) -> {
                     ((RadioGroup) contentView.findViewById(R.id.filter_group)).setOnCheckedChangeListener((radioGroup, checkedId) -> {
                         if (checkedId == R.id.option_newest) {
                             @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -96,7 +96,9 @@ public class RatingActivity extends AppCompatActivity {
                             ratingAdapter.setRates(filteredComments);
                         }
                     });
-                }));
+                });
+
+                binding.btnOpenFilter.setOnClickListener(view -> filterBottomSheet.show());
             });
         }
     }

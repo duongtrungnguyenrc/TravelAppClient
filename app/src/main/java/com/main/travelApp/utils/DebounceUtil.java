@@ -34,12 +34,7 @@ public class DebounceUtil implements TextWatcher {
             handler.removeCallbacks(runnable);
         }
 
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                listener.onDebouncedTextChanged(editable.toString());
-            }
-        };
+        runnable = () -> listener.onDebouncedTextChanged(editable.toString());
         handler.postDelayed(runnable, DEBOUNCE_DELAY_MS);
     }
 }

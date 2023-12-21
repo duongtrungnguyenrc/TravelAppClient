@@ -1,7 +1,7 @@
 package com.main.travelApp.models;
 
 public class GeneralTour {
-    private int id;
+    private long id;
     private String name;
     private double price;
     private double ratedStar;
@@ -13,7 +13,7 @@ public class GeneralTour {
     private String type;
     private String typeTitle;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

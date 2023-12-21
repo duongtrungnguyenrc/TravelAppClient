@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.widget.ScrollView;
 
 import com.main.travelApp.adapters.MessageAdapter;
 import com.main.travelApp.databinding.ActivitySupportBinding;
@@ -41,7 +42,6 @@ public class SupportActivity extends AppCompatActivity {
         MessageAdapter adapter = new MessageAdapter(messages);
         binding.rcvMessage.setAdapter(adapter);
         binding.rcvMessage.setLayoutManager(new LinearLayoutManager(this));
-
         binding.btnBack.setOnClickListener(view -> finish());
     }
 }

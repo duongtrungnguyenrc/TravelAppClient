@@ -92,7 +92,7 @@
                 android:background="@drawable/custom_edit_text_rounded"
                 android:hint="example233@gmail.com"
                 android:padding="10dp"
-                android:text="hoanviet882003@gmail.com"
+                android:text="duongtrungnguyen00@gmail.com"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -123,7 +123,7 @@
                 android:height="40dp"
                 android:background="@drawable/custom_edit_text_rounded"
                 android:padding="10dp"
-                android:text="123456"
+                android:text="Nguyen@123"
                 android:textSize="13sp" />
         </LinearLayout>
 

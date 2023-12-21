@@ -38,8 +38,11 @@ public class BottomSheet {
         root.addView(contentView);
     }
 
-    public void show(BottomSheetActionHandler actionHandler) {
+    public void build(BottomSheetActionHandler actionHandler) {
         actionHandler.action(dialog, contentView);
+    }
+
+    public void show() {
         dialog.show();
     }
 

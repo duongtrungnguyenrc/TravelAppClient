@@ -601,58 +601,110 @@
             android:padding="10dp"
             android:visibility="gone">
 
-            <ScrollView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/layout_recent_activity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/layout_recent_activity"
+                        android:id="@+id/linearLayout10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Hoạt động gần đây"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btn_clear_activity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:paddingRight="-25dp"
+                            android:text="Xóa"
+                            android:textColor="@color/colorPrimary"
+                            app:cornerRadius="0dp" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_search_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Tour liên quan"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btn_clear_result"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:paddingRight="-25dp"
+                            android:text="Xóa"
+                            android:textColor="@color/colorPrimary"
+                            app:cornerRadius="0dp" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcv_tours_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:id="@+id/linearLayout10"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Hoạt động gần đây"
-                                android:textColor="@color/gray"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-
-                            <Button
-                                android:id="@+id/btn_clear_activity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@color/transparent"
-                                android:paddingRight="-25dp"
-                                android:text="Xóa"
-                                android:textColor="@color/colorPrimary"
-                                app:cornerRadius="0dp" />
-                        </LinearLayout>
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Bài viết liên quan"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcv_posts_result"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
-                    </LinearLayout>
 
+                    </LinearLayout>
                 </LinearLayout>
-            </ScrollView>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>

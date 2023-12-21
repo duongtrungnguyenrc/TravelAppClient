@@ -24,7 +24,7 @@ public class TourDetailViewModel extends ViewModel {
         this.rateRepository = RateRepositoryImpl.getInstance();
     }
 
-    public LiveData<Tour> getTour(int id) {
+    public LiveData<Tour> getTour(long id) {
         return tourRepository.find(id);
     }
 
