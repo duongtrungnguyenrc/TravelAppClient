@@ -81,7 +81,7 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
                 binding.txtRatingCount.setText("(" + tour.getTotalRates() + " lượt đánh giá)");
 
                 TourGalleryAdapter tourGalleryAdapter = new TourGalleryAdapter(tour.getOverview().getParagraphs(), this);
-                TourDateAdapter tourDateAdapter = new TourDateAdapter(tour.getTourDate(), tour.getName(),this);
+                TourDateAdapter tourDateAdapter = new TourDateAdapter(tour.getTourDate(), tour.getName(),this, tour.getId());
                 initViewPager(binding.pgTourGallery, tourGalleryAdapter);
                 binding.rcvTourDate.setAdapter(tourDateAdapter);
                 binding.rcvTourDate.setLayoutManager(new LinearLayoutManager(this));

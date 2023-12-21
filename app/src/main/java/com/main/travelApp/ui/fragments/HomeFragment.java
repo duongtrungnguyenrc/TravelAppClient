@@ -1,5 +1,6 @@
 package com.main.travelApp.ui.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,7 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 
+import com.main.travelApp.R;
 import com.main.travelApp.adapters.PlaceListAdapter;
 import com.main.travelApp.adapters.NewestPostsAdapter;
 import com.main.travelApp.adapters.TourListAdapter;
@@ -71,8 +76,35 @@ public class HomeFragment extends Fragment {
         });
 
         homeBinding.rcvPlaces.setLayoutManager(LayoutManagerUtil.disabledScrollGridManager(getContext(), 2));
-
         homeBinding.pgPosts.setAdapter(newestPostsAdapter);
+
+        AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);
+        animation.setDuration(300);
+
+        homeBinding.edtSearch.setOnFocusChangeListener((view, isFocus) -> {
+            if(isFocus) {
+                homeBinding.layoutFloatingSearchResult.startAnimation(animation);
+                homeBinding.layoutFloatingSearchResult.setVisibility(View.VISIBLE);
+                homeBinding.btnSearchCancel.setVisibility(View.VISIBLE);
+                homeBinding.btnSupport.setVisibility(View.GONE);
+            }
+        });
+
+        homeBinding.btnSearchCancel.setOnClickListener(view -> {
+            homeBinding.layoutFloatingSearchResult.setVisibility(View.GONE);
+            homeBinding.btnSearchCancel.setVisibility(View.GONE);
+            homeBinding.btnSupport.setVisibility(View.VISIBLE);
+
+            InputMethodManager inputMethodManager = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            View currentFocus = requireActivity().getCurrentFocus();
+            if (currentFocus != null) {
+                inputMethodManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+            }
+
+            homeBinding.edtSearch.clearFocus();
+
+        });
     }
 
     private void setEvents(){
@@ -86,14 +118,11 @@ public class HomeFragment extends Fragment {
     }
 
     private View.OnClickListener onClickListener(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(view == homeBinding.btnMoreTour || view == homeBinding.btnMoreTour1){
-                    ((MainActivity) requireActivity()).changeFragment(2);
-                }else if(view == homeBinding.btnMoreBlog){
-                    ((MainActivity) requireActivity()).changeFragment(3);
-                }
+        return view -> {
+            if(view == homeBinding.btnMoreTour || view == homeBinding.btnMoreTour1){
+                ((MainActivity) requireActivity()).changeFragment(2);
+            }else if(view == homeBinding.btnMoreBlog){
+                ((MainActivity) requireActivity()).changeFragment(3);
             }
         };
     }

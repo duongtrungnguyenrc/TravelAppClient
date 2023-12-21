@@ -46,7 +46,7 @@ public class SelectTicketActivity extends AppCompatActivity {
         this.datePickerBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_date_picker, "Chọn ngày");
 
         Intent intent = getIntent();
-        int tourId = intent.getIntExtra("tour-id", -1);
+        long tourId = intent.getLongExtra("tour-id", -1);
         selectedId = intent.getLongExtra("date-id", -1);
 
 
@@ -79,6 +79,7 @@ public class SelectTicketActivity extends AppCompatActivity {
                         .error(R.color.light_gray)
                         .into(binding.imgThumbnail);
                 binding.txtTourName.setText(res.getTourName());
+
                 TourDate selectedDate = findDateById(res.getTourDates(), selectedId);
                 if(selectedDate != null) {
                     binding.txtSelectedDate.setText(selectedDate.getDepartDate());
