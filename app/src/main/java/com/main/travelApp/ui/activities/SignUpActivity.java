@@ -22,10 +22,15 @@ import com.google.android.gms.auth.api.identity.BeginSignInResult;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.main.travelApp.R;
 import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.databinding.ActivitySignUpBinding;
@@ -51,7 +56,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private BeginSignInRequest signInRequest;
     private SharedPreferences sharedPreferences;
     private static final int REQ_ONE_TAP = 2;
+    private static final int REQ_GG_SIGN_IN = 3;
     private boolean showOneTapUI = true;
+    private GoogleSignInOptions gso;
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +87,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         .build())
                 .build();
         authRepository = AuthRepositoryImpl.getInstance();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client))
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
 
         String forgotPassStr = "Quên mật khẩu";
         SpannableString spannableString = new SpannableString(forgotPassStr);
@@ -175,6 +188,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
+                            Intent signInIntent = googleSignInClient.getSignInIntent();
+                            startActivityForResult(signInIntent, REQ_GG_SIGN_IN);
                             Log.d("Google-Auth", e.getLocalizedMessage());
                         }
                     });
@@ -230,6 +245,39 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 break;
+            case REQ_GG_SIGN_IN:
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                handleSignInResult(task);
+        }
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> task){
+        try {
+            ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+            progressDialog.setMessage("Chờ một xíu...");
+            progressDialog.show();
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            String idToken = account.getIdToken();
+            authRepository.authenticationWithGoogleToken(idToken, new ActionCallback<AuthInstance>() {
+                @Override
+                public void onSuccess(AuthInstance result) {
+                    progressDialog.dismiss();
+                    saveUserToSharedPref(result);
+                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                
+                @Override
+                public void onFailure(Integer status, String message) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        } catch (ApiException e) {
+            Log.w("Google-Auth-Result", "signInResult:failed code=" + e.getStatusCode());
+            Toast.makeText(this, "signInResult:failed code=" + e.getStatusCode(), Toast.LENGTH_SHORT).show();
         }
     }
     private void saveUserToSharedPref(AuthInstance authInstance){

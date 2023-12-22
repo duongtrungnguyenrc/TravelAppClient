@@ -52,7 +52,6 @@ public class HomeViewModel extends ViewModel {
         posts = postRepository.findNewestPosts();
         places = tourRepository.findTopDestination();
         this.sharedPreferences = sharedPreferences;
-        bindCurrentUser();
 
         isExpired = new MutableLiveData<>();
         isExpired.setValue(false);
@@ -77,6 +76,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public User getCurrentUser() {
+        bindCurrentUser();
         return currentUser;
     }
 

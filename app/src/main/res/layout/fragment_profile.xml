@@ -99,13 +99,41 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_gravity="center"
                                                 app:cardCornerRadius="45dp">
+                                                <androidx.constraintlayout.widget.ConstraintLayout
+                                                    android:id="@+id/userAvatarWrapper"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content">
+                                                    <ImageView
+                                                        app:layout_constraintTop_toTopOf="parent"
+                                                        app:layout_constraintLeft_toLeftOf="parent"
+                                                        android:id="@+id/userAvatar"
+                                                        android:layout_width="60dp"
+                                                        android:layout_height="60dp"
+                                                        android:scaleType="centerCrop"
+                                                        android:src="@drawable/avatar_profile" />
 
-                                                <ImageView
-                                                    android:id="@+id/userAvatar"
-                                                    android:layout_width="60dp"
-                                                    android:layout_height="60dp"
-                                                    android:scaleType="centerCrop"
-                                                    android:src="@drawable/avatar_profile" />
+                                                    <View
+                                                        android:id="@+id/bgDark"
+                                                        android:layout_width="60dp"
+                                                        android:layout_height="20dp"
+                                                        android:background="@color/black"
+                                                        android:alpha="0.4"
+                                                        app:layout_constraintBottom_toBottomOf="parent"
+                                                        app:layout_constraintLeft_toLeftOf="parent"
+                                                        app:layout_constraintRight_toRightOf="parent">
+                                                    </View>
+                                                    <ImageView
+                                                        app:layout_constraintTop_toTopOf="@id/bgDark"
+                                                        app:layout_constraintStart_toStartOf="@id/bgDark"
+                                                        app:layout_constraintEnd_toEndOf="@id/bgDark"
+                                                        app:layout_constraintBottom_toBottomOf="@id/bgDark"
+                                                        android:elevation="10dp"
+                                                        app:tint="@color/white"
+                                                        android:src="@drawable/baseline_photo_camera_16"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"/>
+                                                </androidx.constraintlayout.widget.ConstraintLayout>
+
                                             </androidx.cardview.widget.CardView>
                                         </androidx.cardview.widget.CardView>
 
@@ -127,15 +155,7 @@
                                                 android:id="@+id/textView5"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:text="Logged in with google"
-                                                android:textColor="@color/gray"
-                                                android:textSize="12sp" />
-
-                                            <TextView
-                                                android:id="@+id/textView6"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:text="0 posts"
+                                                android:text="Đã đăng nhập"
                                                 android:textColor="@color/gray"
                                                 android:textSize="12sp" />
                                         </LinearLayout>
@@ -494,7 +514,7 @@
                                         <TextView
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Kiểm tra và thay đổi thông tin bảo mật"
+                                            android:text="Điều khoản và dịch vụ của chúng tôi"
                                             android:textColor="@color/gray"
                                             android:textSize="12sp" />
                                     </LinearLayout>

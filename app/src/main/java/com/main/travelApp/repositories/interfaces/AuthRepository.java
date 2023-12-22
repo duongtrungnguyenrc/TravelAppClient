@@ -1,6 +1,7 @@
 package com.main.travelApp.repositories.interfaces;
 import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.models.AuthInstance;
+import com.main.travelApp.request.ChangePasswordRequest;
 import com.main.travelApp.request.ConfirmCodeRequest;
 import com.main.travelApp.request.ResetPasswordRequest;
 import com.main.travelApp.request.SignUpRequest;
@@ -16,4 +17,5 @@ public interface AuthRepository {
     public void confirmCode(ConfirmCodeRequest request, ActionCallback<BaseResponse<Object>> callback);
     public void getResetPasswordToken(String email, ActionCallback<String> callback);
     public void resetPassword(ResetPasswordRequest request, ActionCallback<String> callback);
+    public void changePassword(String accessToken, ChangePasswordRequest request, ActionCallback<String> callback);
 }

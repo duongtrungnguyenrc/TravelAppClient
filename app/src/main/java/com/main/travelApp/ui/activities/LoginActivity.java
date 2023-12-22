@@ -23,10 +23,15 @@ import com.google.android.gms.auth.api.identity.BeginSignInResult;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.identity.SignInCredential;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.main.travelApp.R;
 import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.databinding.ActivityLoginBinding;
@@ -46,12 +51,15 @@ import java.util.Set;
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private static final int REQ_ONE_TAP = 2;
+    private static final int REQ_GG_SIGN_IN = 3;
     private boolean showOneTapUI = true;
     private AuthRepositoryImpl authRepository;
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
     private SharedPreferences sharedPreferences;
     private SignUpViewModel viewModel;
+    private GoogleSignInOptions gso;
+    private GoogleSignInClient googleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                         .setFilterByAuthorizedAccounts(false)
                         .build())
                 .build();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client))
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
 
         String forgotPassword = "Quên mật khẩu";
         authRepository = AuthRepositoryImpl.getInstance();
@@ -94,40 +107,40 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         binding.btnSignIn.setOnClickListener(view -> {
-                    ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
-                    progressDialog.setMessage("Chờ một xíu...");
-                    progressDialog.show();
-                    authRepository.authentication(
-                            binding.edtEmail.getText().toString(),
-                            binding.edtPassword.getText().toString(),
-                            new ActionCallback<>() {
-                                @Override
-                                public void onSuccess(AuthInstance result) {
-                                    progressDialog.dismiss();
-                                    saveUserToSharedPref(result);
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                                @Override
-                                public void onFailure(Integer status, String message) {
-                                    progressDialog.dismiss();
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                }
+                ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage("Chờ một xíu...");
+                progressDialog.show();
+                authRepository.authentication(
+                        binding.edtEmail.getText().toString(),
+                        binding.edtPassword.getText().toString(),
+                        new ActionCallback<>() {
+                            @Override
+                            public void onSuccess(AuthInstance result) {
+                                progressDialog.dismiss();
+                                saveUserToSharedPref(result);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                            @Override
+                            public void onFailure(Integer status, String message) {
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            }
 
-                                @Override
-                                public void onFailure(String message) {
-                                    progressDialog.dismiss();
-                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                }
+                            @Override
+                            public void onFailure(String message) {
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            }
 
-                                @Override
-                                public void onError(Exception e) {
-                                    progressDialog.dismiss();
-                                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            @Override
+                            public void onError(Exception e) {
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 }
         );
 
@@ -154,6 +167,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
+                            Intent signInIntent = googleSignInClient.getSignInIntent();
+                            startActivityForResult(signInIntent, REQ_GG_SIGN_IN);
                             Log.d("Google-Auth", e.getLocalizedMessage());
                         }
                     });
@@ -232,6 +247,40 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 break;
+            case REQ_GG_SIGN_IN:
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> task){
+        try {
+            ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+            progressDialog.setMessage("Chờ một xíu...");
+            progressDialog.show();
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            String idToken = account.getIdToken();
+            authRepository.authenticationWithGoogleToken(idToken, new ActionCallback<AuthInstance>() {
+                @Override
+                public void onSuccess(AuthInstance result) {
+                    progressDialog.dismiss();
+                    saveUserToSharedPref(result);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Integer status, String message) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        } catch (ApiException e) {
+            Log.w("Google-Auth-Result", "signInResult:failed code=" + e.getStatusCode());
+            Toast.makeText(this, "signInResult:failed code=" + e.getStatusCode(), Toast.LENGTH_SHORT).show();
         }
     }
 
