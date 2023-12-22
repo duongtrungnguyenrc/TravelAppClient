@@ -8,29 +8,33 @@
     android:paddingStart="15dp"
     android:paddingEnd="15dp"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
-        android:text="Nhập mã xác nhận:"
-        android:fontFamily="@font/alata"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_height="wrap_content"/>
+        android:fontFamily="@font/alata"
+        android:text="Nhập mã xác nhận:"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/edtConfirmCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_edit_text_rounded"
-        android:padding="10dp"
-        android:layout_marginBottom="30dp"
         android:fontFamily="@font/alata"
         android:hint="Nhập mã xác nhận được gửi về email"
-        />
+        android:padding="10dp"
+        android:textSize="14sp" />
+
     <Button
         android:id="@+id/btnSend"
-        android:text="Gửi"
-        app:backgroundTint="@color/colorPrimary"
-        android:background="@drawable/custom_button_ripple"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="40dp"
+        android:background="@drawable/custom_button_ripple"
+        android:text="Gửi"
+        android:textSize="14sp"
+        app:backgroundTint="@color/colorPrimary" />
 </LinearLayout>

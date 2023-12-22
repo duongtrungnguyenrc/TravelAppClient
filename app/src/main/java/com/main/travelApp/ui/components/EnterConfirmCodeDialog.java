@@ -41,12 +41,9 @@ public class EnterConfirmCodeDialog extends DialogFragment {
         EditText edtConfirmCode = dialogView.findViewById(R.id.edtConfirmCode);
         Button btnSend = dialogView.findViewById(R.id.btnSend);
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String confirmCode = edtConfirmCode.getText().toString();
-                viewModel.validateConfirmCode(confirmCode);
-            }
+        btnSend.setOnClickListener(view -> {
+            String confirmCode = edtConfirmCode.getText().toString();
+            viewModel.validateConfirmCode(confirmCode);
         });
 
         return dialog;

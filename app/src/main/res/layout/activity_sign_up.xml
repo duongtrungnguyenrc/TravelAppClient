@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@color/white">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f5f5fa"
         android:padding="20dp"
         tools:context=".ui.activities.LoginActivity">
 
@@ -27,25 +28,19 @@
             app:layout_constraintTop_toTopOf="@+id/guideline3">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
                 android:src="@drawable/logo" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/dm_serif_display"
-                android:text="Travel"
-                android:textSize="33sp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:text="Khám phá vẻ đẹp đa dạng của thê giới cùng những chuyến đi tuyệt vời."
-            android:textSize="15dp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -54,10 +49,11 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/alata"
             android:text="Đăng ký tài khoản"
-            android:textSize="30dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -65,16 +61,17 @@
             android:id="@+id/linearLayout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            android:orientation="vertical">
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:id="@+id/linearLayout2"
                     android:layout_width="0dp"
@@ -89,13 +86,12 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/alata"
                         android:text="Họ"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/edtFirstName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_height="45dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
                         android:height="40dp"
@@ -119,15 +115,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/alata"
                         android:text="Tên"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/edtLastName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:height="40dp"
                         android:background="@drawable/custom_edit_text_rounded"
                         android:hint="Doe"
@@ -137,9 +132,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -150,15 +145,13 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/alata"
                     android:text="Email"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
                     android:height="40dp"
                     android:background="@drawable/custom_edit_text_rounded"
                     android:hint="example223@gmail.com"
@@ -167,9 +160,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -180,15 +173,13 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/alata"
                     android:text="Số điện thoại"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <EditText
                     android:id="@+id/edtPhone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
                     android:height="40dp"
                     android:background="@drawable/custom_edit_text_rounded"
                     android:hint="0123456789"
@@ -197,9 +188,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -213,17 +205,17 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/alata"
                         android:text="Mật khẩu"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/edtPassword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_height="45dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
                         android:height="40dp"
-                        android:background="@drawable/custom_edit_text_rounded" android:padding="10dp"
+                        android:background="@drawable/custom_edit_text_rounded"
+                        android:padding="10dp"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -240,15 +232,14 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/alata"
                         android:text="Nhập lại mật khẩu"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <EditText
                         android:id="@+id/edtRePassword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
                         android:height="40dp"
                         android:background="@drawable/custom_edit_text_rounded"
                         android:padding="10dp"
@@ -272,9 +263,9 @@
                 android:id="@+id/ckbRememberMe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/alata"
+                android:button="@drawable/selector_custom_checkbox"
                 android:text="Lưu mật khẩu"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <View
                 android:layout_width="0dp"
@@ -287,16 +278,16 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/alata"
                 android:text="Quên mật khẩu"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <CheckBox
             android:id="@+id/ckbAgreeTerms"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/alata"
+            android:layout_height="30dp"
+            android:button="@drawable/selector_custom_checkbox"
             android:text="Tôi đồng ý với điều khoản và chính sách bảo mật"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
@@ -306,10 +297,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ckbAgreeTerms"
-            android:orientation="vertical">
+            app:layout_constraintTop_toBottomOf="@+id/ckbAgreeTerms">
+
             <Button
                 android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
@@ -320,24 +312,27 @@
                 android:text="Đăng ký"
                 android:textSize="14sp"
                 app:backgroundTint="@color/colorPrimary" />
+
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
                 <TextView
-                    android:fontFamily="@font/alata"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đã có tài khoản?"/>
-                <TextView
                     android:fontFamily="@font/alata"
-                    android:layout_marginStart="5dp"
+                    android:text="Đã có tài khoản?" />
+
+                <TextView
                     android:id="@+id/txtSignIn"
-                    android:textStyle="bold"
-                    android:textColor="@color/blue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đăng nhập ngay."/>
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/alata"
+                    android:text="Đăng nhập ngay."
+                    android:textColor="@color/blue"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
@@ -367,35 +362,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:layout_marginTop="20dp">
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <Button
                 android:id="@+id/btnFacebook"
                 android:layout_width="0dp"
-                android:layout_marginRight="10dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/custom_button_outline"
                 android:fontFamily="@font/alata"
+                android:padding="10dp"
                 android:text="Facebook"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:backgroundTint="@color/black" />
+
             <Button
                 android:id="@+id/btnLinkdedIn"
                 android:layout_width="0dp"
-                android:layout_marginRight="10dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/custom_button_outline"
                 android:fontFamily="@font/alata"
+                android:padding="10dp"
                 android:text="Linked in"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:backgroundTint="@color/black" />
+
             <Button
                 android:id="@+id/btnGoogle"
                 android:layout_width="0dp"
@@ -403,9 +402,10 @@
                 android:layout_weight="1"
                 android:background="@drawable/custom_button_outline"
                 android:fontFamily="@font/alata"
+                android:padding="10dp"
                 android:text="Google"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:backgroundTint="@color/black" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

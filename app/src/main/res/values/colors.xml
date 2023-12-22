@@ -35,4 +35,6 @@
     <color name="vertical_stepper_form_text_color_cancel_button">#ffffff</color>
     <color name="vertical_stepper_form_text_color_cancel_button_pressed">#ffffff</color>
     <color name="vertical_stepper_form_text_color_error_message">#af1212</color>
+
+    <color name="shimmer_color">#FFF7F5F5</color>
 </resources>
