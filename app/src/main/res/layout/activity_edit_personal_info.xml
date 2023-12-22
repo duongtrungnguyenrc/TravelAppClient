@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chỉnh sửa hồ sơ"
+            android:text="Thông tin cá nhân"
             android:textSize="18sp"
             android:textStyle="bold"/>
     </androidx.appcompat.widget.Toolbar>

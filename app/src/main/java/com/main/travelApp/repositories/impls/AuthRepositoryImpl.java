@@ -8,6 +8,7 @@ import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.models.AuthInstance;
 import com.main.travelApp.repositories.interfaces.AuthRepository;
 import com.main.travelApp.request.AuthenticationRequest;
+import com.main.travelApp.request.ChangePasswordRequest;
 import com.main.travelApp.request.ConfirmCodeRequest;
 import com.main.travelApp.request.ResetPasswordRequest;
 import com.main.travelApp.request.SignUpRequest;
@@ -17,6 +18,7 @@ import com.main.travelApp.response.SignUpResponse;
 import com.main.travelApp.services.api.APIClient;
 import com.main.travelApp.services.api.IAuthService;
 import com.main.travelApp.services.auth.AuthManager;
+import com.main.travelApp.utils.ErrorResponseHandler;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -201,6 +203,28 @@ public class AuthRepositoryImpl implements AuthRepository {
             public void onFailure(Call<BaseResponse<Object>> call, Throwable t) {
                 t.printStackTrace();
                 callback.onFailure("Có lỗi xảy ra, vui lòng thử lại sau!");
+            }
+        });
+    }
+
+    @Override
+    public void changePassword(String accessToken, ChangePasswordRequest request, ActionCallback<String> callback) {
+        Call<BaseResponse<Object>> call = authService.changePassword(accessToken, request);
+        call.enqueue(new Callback<BaseResponse<Object>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<Object>> call, Response<BaseResponse<Object>> response) {
+                if(response.isSuccessful()){
+                    callback.onSuccess(response.body().getMessage());
+                }else{
+                    ErrorResponseHandler<BaseResponse<Object>> handler = new ErrorResponseHandler<>();
+                    BaseResponse<Object> errorBody = handler.getResponseBody(response);
+                    callback.onFailure(errorBody.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<Object>> call, Throwable t) {
+                callback.onFailure(t.getMessage());
             }
         });
     }

@@ -36,7 +36,7 @@ public class UserOrderViewModel extends ViewModel {
         return orders = userRepository.getOrders(sharedPreferences.getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, ""));
     }
 
-    public void cancelOrder(long id, AlertDialog dialog){
+    public void cancelOrder(long id, AlertDialog parentDialog, AlertDialog childDialog){
         String accessToken = sharedPreferences.getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, "");
         userRepository.cancelOrder(accessToken, id, new ActionCallback<String>() {
             @Override
@@ -45,12 +45,14 @@ public class UserOrderViewModel extends ViewModel {
                     orders.setValue(results);
                 });
                 Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                childDialog.dismiss();
+                parentDialog.dismiss();
             }
 
             @Override
             public void onFailure(String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                childDialog.dismiss();
             }
         });
     }

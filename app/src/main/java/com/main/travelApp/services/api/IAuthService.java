@@ -2,6 +2,7 @@ package com.main.travelApp.services.api;
 
 import com.main.travelApp.models.AuthInstance;
 import com.main.travelApp.request.AuthenticationRequest;
+import com.main.travelApp.request.ChangePasswordRequest;
 import com.main.travelApp.request.ConfirmCodeRequest;
 import com.main.travelApp.request.ResetPasswordRequest;
 import com.main.travelApp.request.SignUpRequest;
@@ -31,4 +32,6 @@ public interface IAuthService {
     Call<BaseResponse<String>> sendResetPasswordMail(@Path("email") String email);
     @POST("auth/change-password-with-email")
     Call<BaseResponse<Object>> resetPassword(@Body ResetPasswordRequest request);
+    @POST("auth/change-password")
+    Call<BaseResponse<Object>> changePassword(@Header("Authorization") String accessToken, @Body ChangePasswordRequest request);
 }

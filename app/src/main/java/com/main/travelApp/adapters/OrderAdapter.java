@@ -2,6 +2,7 @@ package com.main.travelApp.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,7 +168,22 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
                         dialog.dismiss();
                     });
                     btnCancelOrder.setOnClickListener(view -> {
-                        viewModel.cancelOrder(currentOrder.getId(), dialog);
+                        MyDialog alertDialog = new MyDialog(context, layoutInflater, R.layout.fragment_confirm_dialog, new MyDialog.Handler() {
+                            @Override
+                            public void handle(AlertDialog childDialog, View contentView) {
+                                ((TextView) contentView.findViewById(R.id.txtMessage)).setText("Bạn có chắc là muốn hủy đặt tour này?");
+                                ((Button) contentView.findViewById(R.id.btnCancel)).setText("Quay lại");
+                                ((Button) contentView.findViewById(R.id.btnChange)).setText("Hủy tour");
+
+                                contentView.findViewById(R.id.btnCancel).setOnClickListener(view -> {
+                                    childDialog.dismiss();
+                                });
+                                contentView.findViewById(R.id.btnChange).setOnClickListener(view -> {
+                                    viewModel.cancelOrder(currentOrder.getId(), dialog, childDialog);
+                                });
+                            }
+                        });
+                        alertDialog.show(fragmentManager, "CANCEL_ORDER_ALERT_DIALOG");
                     });
                 }
             });

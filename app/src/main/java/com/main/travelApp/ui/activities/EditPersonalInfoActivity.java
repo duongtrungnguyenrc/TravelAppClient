@@ -143,12 +143,23 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
             editUserNameDialog.show(getSupportFragmentManager(), "EDIT_ADDRESS_DIALOG");
 
         }else if(view == binding.btnSave){
-            Intent intent = new Intent();
-            intent.putExtra("username", binding.txtUserName.getText());
-            intent.putExtra("phone", binding.txtPhone.getText());
-            intent.putExtra("address", binding.txtAddress.getText());
-            setResult(RESULT_OK, intent);
-            finish();
+            MyDialog alertDialog = new MyDialog(this, getLayoutInflater(), R.layout.fragment_confirm_dialog, new MyDialog.Handler() {
+                @Override
+                public void handle(AlertDialog dialog, View contentView) {
+                    contentView.findViewById(R.id.btnCancel).setOnClickListener(view -> {
+                        dialog.dismiss();
+                    });
+                    contentView.findViewById(R.id.btnChange).setOnClickListener(view -> {
+                        Intent intent = new Intent();
+                        intent.putExtra("username", binding.txtUserName.getText());
+                        intent.putExtra("phone", binding.txtPhone.getText());
+                        intent.putExtra("address", binding.txtAddress.getText());
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    });
+                }
+            });
+            alertDialog.show(getSupportFragmentManager(), "ALERT_DIALOG");
         }
     }
 }

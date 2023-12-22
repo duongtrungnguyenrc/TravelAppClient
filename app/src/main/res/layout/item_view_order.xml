@@ -27,7 +27,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         android:id="@+id/imgTourBackground"
-                        android:src="@drawable/pic1"
+                        android:src="@color/light_gray"
                         android:scaleType="centerCrop"
                         android:layout_width="90dp"
                         android:layout_height="100dp"/>
@@ -35,7 +35,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:id="@+id/txtStatus"
-                        android:text="Đã thanh toán"
+                        android:text="Unknown"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:background="@color/colorPrimary"
@@ -57,7 +57,7 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/txtTourName"
-                android:text="Tour Đà Nẵng"
+                android:text="Unknown"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="14sp"
@@ -71,14 +71,14 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/txtOrderId"
-                    android:text="Mã đơn hàng: 1"
+                    android:text="Mã đơn hàng: Unknown"
                     android:textSize="12sp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/txtOrderedDate"
-                    android:text="Ngày đặt: 11/02/2023 14:49:11"
+                    android:text="Ngày đặt: Unknown"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
                     android:layout_width="0dp"
@@ -90,14 +90,14 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/txtAdults"
-                    android:text="Người lớn: 1"
+                    android:text="Người lớn: Unknown"
                     android:textSize="12sp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/txtChildren"
-                    android:text="Trẻ em: 3"
+                    android:text="Trẻ em: Unknown"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
                     android:layout_width="0dp"
@@ -109,14 +109,14 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/txtStartDate"
-                    android:text="Khởi hành: 11/02/2023"
+                    android:text="Khởi hành: Unknown"
                     android:textSize="12sp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/txtEndDate"
-                    android:text="Kết thúc: 13/02/2023"
+                    android:text="Kết thúc: Unknown"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
                     android:layout_width="0dp"
@@ -125,7 +125,7 @@
             </LinearLayout>
             <TextView
                 android:id="@+id/txtOrderPrice"
-                android:text="250.400 VNĐ"
+                android:text="Unknown VNĐ"
                 android:textStyle="bold"
                 android:layout_marginTop="4dp"
                 android:textColor="@color/orange"

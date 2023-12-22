@@ -246,7 +246,7 @@
             android:textAlignment="textEnd"
             android:textSize="12sp"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
@@ -267,7 +267,7 @@
             android:textAlignment="textEnd"
             android:textSize="12sp"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <LinearLayout
@@ -297,7 +297,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="5dp"
         android:textColor="@color/gray"
         android:textStyle="bold"
         android:textSize="14sp"
