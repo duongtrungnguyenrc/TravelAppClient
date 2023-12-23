@@ -15,7 +15,7 @@
                 android:endColor="#FF5070"
                 android:startColor="@color/design_default_color_error"
                 android:type="linear" />
-            <corners android:radius="4dp" />
+            <corners android:radius="10dp" />
         </shape>
     </item>
 </ripple>

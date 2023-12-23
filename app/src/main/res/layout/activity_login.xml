@@ -107,16 +107,14 @@
                 android:textSize="12sp" />
 
             <RelativeLayout
-                android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/edtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:height="40dp"
+                    android:height="45dp"
                     android:background="@drawable/custom_edit_text_rounded"
                     android:padding="10dp"
                     android:text="Nguyen@123"
