@@ -1,5 +1,6 @@
 package com.main.travelApp.viewmodels;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -17,13 +18,16 @@ import com.main.travelApp.repositories.impls.RateRepositoryImpl;
 import com.main.travelApp.repositories.interfaces.PostRepository;
 import com.main.travelApp.repositories.interfaces.RateRepository;
 import com.main.travelApp.request.AddRateRequest;
+import com.main.travelApp.request.UpdateRateRequest;
 import com.main.travelApp.response.PostDetailResponse;
 import com.main.travelApp.response.RateResponse;
 import com.main.travelApp.ui.components.ExpiredDialog;
+import com.main.travelApp.utils.SharedPreferenceKeys;
 
 public class BlogDetailViewModel extends ViewModel {
     private PostRepository postRepository;
     private RateRepository rateRepository;
+    private SharedPreferences sharedPreferences;
     private MutableLiveData<PostDetailResponse> postDetailResponse;
     private MutableLiveData<RateResponse> rateResponse;
     private int commentPage;
@@ -34,6 +38,10 @@ public class BlogDetailViewModel extends ViewModel {
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public void setSharedPreferences(SharedPreferences sharedPreferences) {
+        this.sharedPreferences = sharedPreferences;
     }
 
     public BlogDetailViewModel(String accessToken, long id){
@@ -100,6 +108,41 @@ public class BlogDetailViewModel extends ViewModel {
             @Override
             public void onFailure(String message) {
                 Toast.makeText(context, "Error: " + message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void updateRate(UpdateRateRequest request, AlertDialog dialog){
+        rateRepository.updateRate(sharedPreferences.getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, ""), request, new ActionCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+                rateRepository.findByBlogId(accessToken, id, commentPage, 6).observeForever(rates -> {
+                    rateResponse.setValue(rates);
+                });
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void deleteRate(Long rateId){
+        rateRepository.deleteRate(sharedPreferences.getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, ""), rateId, new ActionCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+                rateRepository.findByBlogId(accessToken, id, commentPage, 6).observeForever(rates -> {
+                    rateResponse.setValue(rates);
+                });
+            }
+
+            @Override
+            public void onFailure(String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -11,9 +11,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:text="Nhập địa chỉ email:"
-        android:fontFamily="@font/alata"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"/>
     <EditText
@@ -23,12 +22,13 @@
         android:background="@drawable/custom_edit_text_rounded"
         android:padding="10dp"
         android:layout_marginBottom="30dp"
-        android:fontFamily="@font/alata"
+        android:textSize="12sp"
         android:hint="Nhập email tài khoản của bạn"
         />
     <Button
         android:id="@+id/btnSend"
         android:text="Gửi"
+        android:textStyle="bold"
         app:backgroundTint="@color/colorPrimary"
         android:background="@drawable/custom_button_ripple"
         android:layout_width="match_parent"

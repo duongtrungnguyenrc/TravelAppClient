@@ -11,11 +11,16 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.SpannableString;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
@@ -98,11 +103,26 @@ public class LoginActivity extends AppCompatActivity {
         mSpannableString.setSpan(new UnderlineSpan(), 0, forgotPassword.length(), 0);
         binding.txtForgotPassword.setText(mSpannableString);
 
+        binding.edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        binding.btnInputType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    binding.edtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    binding.btnInputType.setBackgroundDrawable(getDrawable(R.drawable.baseline_visibility_off_16));
+                }
+                else{
+                    binding.edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    binding.btnInputType.setBackgroundDrawable(getDrawable(R.drawable.baseline_visibility_16));
+                }
             }
         });
 
@@ -126,7 +146,14 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(Integer status, String message) {
                                 progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                if(status == AuthInstance.NOT_ACTIVATED_CODE){
+                                    viewModel.setConfirmToken(message);
+                                    EnterConfirmCodeDialog dialog = new EnterConfirmCodeDialog(LoginActivity.this, viewModel, true);
+                                    dialog.show(getSupportFragmentManager(), "CONFIRM_CODE_DIALOG");
+                                    Toast.makeText(getApplicationContext(), "Tài khoản của bạn đã bị vô hiệu hóa", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                }
                             }
 
                             @Override

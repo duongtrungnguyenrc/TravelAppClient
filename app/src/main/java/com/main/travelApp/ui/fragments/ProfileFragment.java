@@ -26,13 +26,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.main.travelApp.R;
 import com.main.travelApp.databinding.FragmentProfileBinding;
@@ -182,8 +186,42 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     EditText edtOldPassword = contentView.findViewById(R.id.edtOldPassword);
                     EditText edtNewPassword = contentView.findViewById(R.id.edtNewPass);
                     EditText edtReNewPassword = contentView.findViewById(R.id.edtReNewPass);
+                    ToggleButton btnOldToggle = contentView.findViewById(R.id.btnInputTypeOld);
+                    ToggleButton btnNewToggle = contentView.findViewById(R.id.btnInputTypeNew);
                     Button btnCancel = contentView.findViewById(R.id.btnCancel);
                     Button btnChange = contentView.findViewById(R.id.btnChange);
+
+                    edtOldPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    edtNewPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    edtReNewPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+                    btnNewToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                            if(b){
+                                edtNewPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                                btnNewToggle.setBackgroundDrawable(getContext().getDrawable(R.drawable.baseline_visibility_off_16));
+                            }
+                            else{
+                                edtNewPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                                btnNewToggle.setBackgroundDrawable(getContext().getDrawable(R.drawable.baseline_visibility_16));
+                            }
+                        }
+                    });
+                    btnOldToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                            if(b){
+                                edtOldPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                                btnOldToggle.setBackgroundDrawable(getContext().getDrawable(R.drawable.baseline_visibility_off_16));
+                            }
+                            else{
+                                edtOldPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                                btnOldToggle.setBackgroundDrawable(getContext().getDrawable(R.drawable.baseline_visibility_16));
+                            }
+                        }
+                    });
+
                     btnCancel.setOnClickListener(view -> {
                         dialog.dismiss();
                     });

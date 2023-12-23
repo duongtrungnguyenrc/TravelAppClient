@@ -215,16 +215,32 @@
                         android:text="Mật khẩu"
                         android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/edtPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <RelativeLayout
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:height="40dp"
-                        android:background="@drawable/custom_edit_text_rounded" android:padding="10dp"
-                        android:textSize="13sp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <EditText
+                            android:id="@+id/edtPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:height="40dp"
+                            android:background="@drawable/custom_edit_text_rounded" android:padding="10dp"
+                            android:textSize="13sp" />
+                        <ToggleButton
+                            android:clickable="true"
+                            android:id="@+id/btnInputType"
+                            android:background="@drawable/baseline_visibility_16"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:textOn=""
+                            android:textOff=""
+                            android:layout_alignRight="@id/edtPassword"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"/>
+                    </RelativeLayout>
+
                 </LinearLayout>
 
                 <LinearLayout

@@ -49,7 +49,7 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         ViewModelProvider.Factory factory = new BlogDetailViewModelFactory(accessToken, postId);
         viewModel = new ViewModelProvider(this, factory).get(BlogDetailViewModel.class);
         viewModel.setContext(this);
-
+        viewModel.setSharedPreferences(sharedPreferences);
 
         ScreenManager.enableFullScreen(getWindow());
         init();
@@ -67,6 +67,10 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         paragraphAdapter = new ParagraphAdapter();
         relevantPostAdapter = new AllPostAdapter(this);
         postCommentAdapter = new PostCommentAdapter(this);
+        postCommentAdapter.setFragmentManager(getSupportFragmentManager());
+        postCommentAdapter.setLayoutInflater(getLayoutInflater());
+        postCommentAdapter.setViewModel(viewModel);
+
         viewModel.getPostDetailResponse().observe(this, data -> {
             paragraphAdapter.setParagraphs(data.getPost().getParagraphs());
             relevantPostAdapter.setPosts(data.getRelevantPosts());

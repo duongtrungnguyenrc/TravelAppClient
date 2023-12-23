@@ -12,9 +12,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
@@ -99,9 +102,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         binding.btnSignUp.setOnClickListener(this);
         binding.txtForgotPassword.setOnClickListener(this);
         binding.btnGoogle.setOnClickListener(this);
+        binding.edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        binding.edtRePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        binding.btnInputType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    binding.edtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    binding.btnInputType.setBackgroundDrawable(getDrawable(R.drawable.baseline_visibility_off_16));
+                }
+                else{
+                    binding.edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    binding.btnInputType.setBackgroundDrawable(getDrawable(R.drawable.baseline_visibility_16));
+                }
+            }
+        });
         viewModel.getIsSignUpSuccess().observe(this, isSignUpSuccess -> {
             if(isSignUpSuccess){
-                EnterConfirmCodeDialog dialog = new EnterConfirmCodeDialog(SignUpActivity.this, viewModel);
+                EnterConfirmCodeDialog dialog = new EnterConfirmCodeDialog(SignUpActivity.this, viewModel, false);
                 dialog.show(getSupportFragmentManager(), "ENTER_CODE_DIALOG");
             }
         });
@@ -142,19 +160,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }else{
                     if(isValidEmail(email))
                         if(password.equals(confirmPassword)){
-                            if(binding.ckbAgreeTerms.isChecked()){
-                                SignUpRequest request = new SignUpRequest();
-                                request.setAddress(null);
-                                request.setEmail(email);
-                                request.setPassword(password);
-                                request.setFullName(firstName + " " + lastName);
-                                request.setPhone(phone);
-                                request.setAvatar(null);
-                                request.setRole(null);
+                            if(password.length() >= 6) {
+                                if (binding.ckbAgreeTerms.isChecked()) {
+                                    SignUpRequest request = new SignUpRequest();
+                                    request.setAddress(null);
+                                    request.setEmail(email);
+                                    request.setPassword(password);
+                                    request.setFullName(firstName + " " + lastName);
+                                    request.setPhone(phone);
+                                    request.setAvatar(null);
+                                    request.setRole(null);
 
-                                viewModel.signUp(request);
+                                    viewModel.signUp(request);
+                                } else
+                                    Toast.makeText(this, "Bạn chưa chấp nhận điều khoản!", Toast.LENGTH_SHORT).show();
                             }else
-                                Toast.makeText(this, "Bạn chưa chấp nhận điều khoản!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Mật khẩu ít nhất 6 kí tự!", Toast.LENGTH_SHORT).show();
                         }else
                             Toast.makeText(this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
                     else

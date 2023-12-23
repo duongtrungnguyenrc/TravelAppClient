@@ -1,15 +1,20 @@
 package com.main.travelApp.ui.components;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +47,24 @@ public class EnterNewPasswordDialog extends DialogFragment {
         EditText newPass = dialogView.findViewById(R.id.edtNewPass);
         EditText reNewPass = dialogView.findViewById(R.id.edtReNewPass);
         Button btnSend = dialogView.findViewById(R.id.btnSend);
+        ToggleButton btnInputType = dialogView.findViewById(R.id.btnInputType);
+
+        newPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        reNewPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+        btnInputType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    newPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    btnInputType.setBackgroundDrawable(context.getDrawable(R.drawable.baseline_visibility_off_16));
+                }
+                else{
+                    newPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    btnInputType.setBackgroundDrawable(context.getDrawable(R.drawable.baseline_visibility_16));
+                }
+            }
+        });
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
