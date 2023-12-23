@@ -44,6 +44,7 @@ import com.main.travelApp.ui.components.EnterConfirmCodeDialog;
 import com.main.travelApp.ui.components.EnterConfirmResetPassCodeDialog;
 import com.main.travelApp.ui.components.EnterEmailDialog;
 import com.main.travelApp.ui.components.EnterNewPasswordDialog;
+import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.viewmodels.SignUpViewModel;
 
@@ -72,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         viewModel = new ViewModelProvider(this).get(SignUpViewModel.class);
         viewModel.setContext(this);
         setContentView(view);
+        ScreenManager.enableFullScreen(getWindow());
         init();
     }
 

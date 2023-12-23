@@ -8,6 +8,7 @@
     android:paddingStart="15dp"
     android:paddingEnd="15dp"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
         android:text="Nhập địa chỉ email:"
@@ -32,5 +33,5 @@
         app:backgroundTint="@color/colorPrimary"
         android:background="@drawable/custom_button_ripple"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="40dp"/>
 </LinearLayout>

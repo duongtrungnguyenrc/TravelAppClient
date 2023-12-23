@@ -31,12 +31,14 @@ import com.main.travelApp.response.SearchResponse;
 import com.main.travelApp.ui.activities.MainActivity;
 import com.main.travelApp.ui.activities.SupportActivity;
 import com.main.travelApp.ui.components.ExpiredDialog;
+import com.main.travelApp.ui.components.skeleton.Skeleton;
 import com.main.travelApp.utils.DebounceUtil;
 import com.main.travelApp.utils.LayoutManagerUtil;
 import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.viewmodels.HomeViewModel;
 import com.main.travelApp.viewmodels.factories.HomeViewModelFactory;
 import com.squareup.picasso.Picasso;
+import com.main.travelApp.ui.components.skeleton.SkeletonScreen;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private TourListAdapter tourListAdapter;
@@ -48,6 +50,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private SearchServiceImpl searchService;
     private SearchResultAdapter tourSearchResultAdapter;
     private SearchResultAdapter postSearchResultAdapter;
+
+    private SkeletonScreen tourSkeleton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -76,18 +80,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         tourSearchResultAdapter = new SearchResultAdapter(getActivity());
         postSearchResultAdapter = new SearchResultAdapter(getActivity());
 
+        homeBinding.rcvTours.setAdapter(tourListAdapter);
+        homeBinding.rcvTours.setLayoutManager(new LinearLayoutManager(
+                getContext(), LinearLayoutManager.HORIZONTAL, false
+        ));
+
+        showTourSkeleton();
         homeViewModel.getTours().observe(getViewLifecycleOwner(), tours -> {
             tourListAdapter.setTours(tours.getTours());
+            hideTourSkeleton();
         });
 
         homeViewModel.getPlaces().observe(getViewLifecycleOwner(), places -> {
             placeListAdapter.setPlaces(places.subList(0, 4));
         });
-
-        homeBinding.rcvTours.setAdapter(tourListAdapter);
-        homeBinding.rcvTours.setLayoutManager(new LinearLayoutManager(
-                getContext(), LinearLayoutManager.HORIZONTAL, false
-        ));
 
         homeBinding.rcvPlaces.setAdapter(placeListAdapter);
 
@@ -128,6 +134,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (currentFocus != null) {
             inputMethodManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
         }
+    }
+
+    private void showTourSkeleton() {
+        this.tourSkeleton = Skeleton.bind(homeBinding.rcvTours)
+                .adapter(tourListAdapter)
+                .load(R.layout.item_skeleton_tour)
+                .count(10)
+                .duration(1000)
+                .show();
+    }
+
+    private void hideTourSkeleton() {
+        tourSkeleton.hide();
     }
 
     private void setEvents() {

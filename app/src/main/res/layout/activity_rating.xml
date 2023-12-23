@@ -69,7 +69,7 @@
                 android:id="@+id/txt_total_rates"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Từ 100 đánh giá"
+                android:text="Từ 0 đánh giá"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -90,7 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="5.0"
+                        android:text="0.0"
                         android:textColor="@color/colorPrimary"
                         android:textSize="42sp"
                         android:textStyle="bold" />
@@ -134,14 +134,13 @@
                             android:layout_marginStart="7dp"
                             android:layout_marginEnd="7dp"
                             android:layout_weight="1"
-                            android:progress="60"
                             android:progressDrawable="@drawable/component_rounded_progress" />
 
                         <TextView
                             android:id="@+id/txt_five_star_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="200"
+                            android:text="0"
                             android:textColor="@color/gray"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -167,14 +166,14 @@
                             android:layout_marginStart="7dp"
                             android:layout_marginEnd="7dp"
                             android:layout_weight="1"
-                            android:progress="25"
+                            android:progress="0"
                             android:progressDrawable="@drawable/component_rounded_progress" />
 
                         <TextView
                             android:id="@+id/txt_four_star_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="200"
+                            android:text="0"
                             android:textColor="@color/gray"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -200,14 +199,14 @@
                             android:layout_marginStart="7dp"
                             android:layout_marginEnd="7dp"
                             android:layout_weight="1"
-                            android:progress="12"
+                            android:progress="0"
                             android:progressDrawable="@drawable/component_rounded_progress" />
 
                         <TextView
                             android:id="@+id/txt_three_star_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="200"
+                            android:text="0"
                             android:textColor="@color/gray"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -233,14 +232,13 @@
                             android:layout_marginStart="7dp"
                             android:layout_marginEnd="7dp"
                             android:layout_weight="1"
-                            android:progress="3"
                             android:progressDrawable="@drawable/component_rounded_progress" />
 
                         <TextView
                             android:id="@+id/txt_two_star_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="200"
+                            android:text="0"
                             android:textColor="@color/gray"
                             android:textSize="12sp" />
                     </LinearLayout>

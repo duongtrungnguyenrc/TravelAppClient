@@ -52,7 +52,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="3dp"
             android:layout_marginTop="5dp"
             android:gravity="center_vertical">
 
@@ -81,16 +81,16 @@
             android:ellipsize="end"
             android:fontFamily="@font/alata"
             android:maxLines="1"
-            android:paddingStart="13dp"
+            android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="Du lịch Đà Nẵng"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:paddingStart="13dp">
+            android:paddingStart="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
                 android:id="@+id/txtPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="13dp"
                 android:fontFamily="@font/alata"
                 android:paddingEnd="15dp"
                 android:text="500.000 VNĐ"
