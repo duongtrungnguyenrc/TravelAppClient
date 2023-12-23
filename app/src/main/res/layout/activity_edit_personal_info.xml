@@ -1,167 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:backgroundTint="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbEditPersonalInfo"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         app:navigationIcon="@drawable/ic_arrow_back_24">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thông tin cá nhân"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        android:paddingEnd="15dp"
+        android:orientation="vertical"
         android:paddingStart="15dp"
-        android:orientation="vertical">
+        android:paddingTop="10dp"
+        android:paddingEnd="15dp">
+
         <LinearLayout
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:id="@+id/btnUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
             <TextView
-                android:textSize="12sp"
-                android:text="Họ và tên"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Họ và tên"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <View
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/txtUserName"
-                android:textSize="12sp"
-                android:text="Trần Phan Hoàn Việt"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:text="Trần Phan Hoàn Việt"
                 android:textAlignment="textEnd"
-                android:layout_height="wrap_content"/>
+                android:textSize="12sp" />
+
             <ImageView
-                android:src="@drawable/baseline_navigate_next_24"
                 android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:src="@drawable/baseline_navigate_next_24" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:id="@+id/btnEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
             <TextView
-                android:textSize="12sp"
-                android:text="Email"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <View
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/txtEmail"
-                android:textSize="12sp"
-                android:text="hoanviet882003@gmail.com"
-                android:textStyle="bold"
-                android:textColor="@color/gray"
-                android:layout_marginEnd="5dp"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
                 android:layout_weight="3"
+                android:text="hoanviet882003@gmail.com"
                 android:textAlignment="textEnd"
-                android:layout_height="wrap_content"/>
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <ImageView
-                android:src="@drawable/baseline_content_copy_24"
                 android:layout_width="15dp"
-                android:layout_height="15dp"/>
+                android:layout_height="15dp"
+                android:src="@drawable/baseline_content_copy_24" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:id="@+id/btnAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
             <TextView
-                android:textSize="12sp"
-                android:text="Địa chỉ"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Địa chỉ"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <View
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/txtAddress"
-                android:textSize="12sp"
-                android:text="thôn Phú Thuận, xã Mỹ Sơn, huyện Ninh Sơn, tỉnh Ninh Thuận"
-                android:justificationMode="inter_word"
-                android:textAlignment="textEnd"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:layout_height="wrap_content"/>
+                android:justificationMode="inter_word"
+                android:text="thôn Phú Thuận, xã Mỹ Sơn, huyện Ninh Sơn, tỉnh Ninh Thuận"
+                android:textAlignment="textEnd"
+                android:textSize="12sp" />
+
             <ImageView
-                android:src="@drawable/baseline_navigate_next_24"
                 android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:src="@drawable/baseline_navigate_next_24" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:id="@+id/btnPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
             <TextView
-                android:textSize="12sp"
-                android:text="Số điện thoại"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <View
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/txtPhone"
-                android:textSize="12sp"
-                android:text="0395606425"
-                android:justificationMode="inter_word"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="3"
+                android:justificationMode="inter_word"
+                android:text="0395606425"
                 android:textAlignment="textEnd"
-                android:layout_height="wrap_content"/>
+                android:textSize="12sp" />
+
             <ImageView
-                android:src="@drawable/baseline_navigate_next_24"
                 android:layout_width="20dp"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:src="@drawable/baseline_navigate_next_24" />
         </LinearLayout>
+
         <Button
-            android:minHeight="0dp"
             android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/custom_button_ripple"
+            android:minHeight="0dp"
             android:text="Lưu"
             android:textStyle="bold"
-            app:backgroundTint="@color/colorPrimary"
-            android:background="@drawable/custom_button_ripple"
-            android:layout_width="match_parent"
-            android:layout_marginTop="25dp"
-            android:layout_height="wrap_content"/>
+            app:backgroundTint="@color/colorPrimary" />
     </LinearLayout>
 </LinearLayout>

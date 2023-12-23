@@ -476,7 +476,6 @@
                                 android:layout_gravity="end"
                                 android:layout_marginTop="15dp"
                                 android:background="@drawable/custom_button_ripple"
-                                android:fontFamily="@font/alata"
                                 android:text="Đặt tour ngay!"
                                 android:textSize="12sp"
                                 app:backgroundTint="@color/colorPrimary" />

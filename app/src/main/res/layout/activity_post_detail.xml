@@ -171,7 +171,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/custom_edit_text_elip"
+                        android:background="@drawable/bg_grey_border"
                         android:fontFamily="@font/alata"
                         android:hint="Nhập bình luận"
                         android:paddingStart="15dp"
@@ -183,10 +183,10 @@
                     <ImageButton
                         android:id="@+id/btnSubmitComment"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:background="@drawable/custom_button_ripple"
-                        android:padding="10dp"
+                        android:padding="7dp"
                         android:src="@drawable/baseline_send_24"
                         app:tint="@color/white" />
                 </LinearLayout>

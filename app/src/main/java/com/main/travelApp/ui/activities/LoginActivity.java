@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -112,17 +113,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnInputType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    binding.edtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    binding.btnInputType.setBackgroundDrawable(getDrawable(R.drawable.baseline_visibility_off_16));
-                }
-                else{
-                    binding.edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    binding.btnInputType.setBackgroundDrawable(getDrawable(R.drawable.baseline_visibility_16));
-                }
+        binding.btnInputType.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(b){
+                binding.edtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                binding.btnInputType.setBackgroundDrawable(getDrawable(R.drawable.baseline_visibility_off_16));
+            }
+            else{
+                binding.edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                binding.btnInputType.setBackgroundDrawable(getDrawable(R.drawable.baseline_visibility_16));
             }
         });
 
@@ -220,12 +218,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void enableFullScreen() {
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
     @Override
