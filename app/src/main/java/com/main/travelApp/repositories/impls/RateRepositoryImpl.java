@@ -8,12 +8,14 @@ import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.models.Rate;
 import com.main.travelApp.repositories.interfaces.RateRepository;
 import com.main.travelApp.request.AddRateRequest;
+import com.main.travelApp.request.UpdateRateRequest;
 import com.main.travelApp.response.AddRateResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.response.RateDetailResponse;
 import com.main.travelApp.response.RateResponse;
 import com.main.travelApp.services.api.APIClient;
 import com.main.travelApp.services.api.IRateService;
+import com.main.travelApp.utils.ErrorResponseHandler;
 
 import java.util.List;
 
@@ -73,6 +75,52 @@ public class RateRepositoryImpl implements RateRepository {
 
 
         return rateResponse;
+    }
+
+    @Override
+    public void deleteRate(String accessToken, Long id, ActionCallback<String> callback) {
+        Call<BaseResponse<Object>> call = rateService.deleteRate(accessToken, id);
+        call.enqueue(new Callback<BaseResponse<Object>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<Object>> call, Response<BaseResponse<Object>> response) {
+                if(response.isSuccessful()){
+                    callback.onSuccess(response.body().getMessage());
+                }else{
+                    ErrorResponseHandler<BaseResponse<Object>> errorResponseHandler = new ErrorResponseHandler<>();
+                    BaseResponse<Object> errorBody = errorResponseHandler.getResponseBody(response);
+                    callback.onFailure(errorBody.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<Object>> call, Throwable t) {
+                callback.onFailure(t.getMessage());
+                t.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void updateRate(String accessToken, UpdateRateRequest request, ActionCallback<String> callback) {
+        Call<BaseResponse<Object>> call = rateService.updateRate(accessToken, request);
+        call.enqueue(new Callback<BaseResponse<Object>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<Object>> call, Response<BaseResponse<Object>> response) {
+                if(response.isSuccessful()){
+                    callback.onSuccess(response.body().getMessage());
+                }else{
+                    ErrorResponseHandler<BaseResponse<Object>> errorResponseHandler = new ErrorResponseHandler<>();
+                    BaseResponse<Object> errorBody = errorResponseHandler.getResponseBody(response);
+                    callback.onFailure(errorBody.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<Object>> call, Throwable t) {
+                callback.onFailure(t.getMessage());
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override

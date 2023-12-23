@@ -3,7 +3,7 @@ package com.main.travelApp.repositories.impls;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.internal.LinkedTreeMap;
 import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.models.AuthInstance;
 import com.main.travelApp.repositories.interfaces.AuthRepository;
@@ -21,7 +21,6 @@ import com.main.travelApp.services.auth.AuthManager;
 import com.main.travelApp.utils.ErrorResponseHandler;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,7 +59,12 @@ public class AuthRepositoryImpl implements AuthRepository {
                     }
                     Gson gson = new Gson();
                     BaseResponse<Object> errorResponse = gson.fromJson(errorBody, BaseResponse.class);
-                    action.onFailure(response.code(), errorResponse.getMessage());
+                    if(errorResponse.getCode() == AuthInstance.NOT_ACTIVATED_CODE){
+                        LinkedTreeMap<Object, Object> linkedTreeMap = (LinkedTreeMap<Object, Object>) errorResponse.getData();
+                        action.onFailure(response.code(), linkedTreeMap.get("activateToken").toString());
+                    }else{
+                        action.onFailure(response.code(), errorResponse.getMessage());
+                    }
                 }
             }
 

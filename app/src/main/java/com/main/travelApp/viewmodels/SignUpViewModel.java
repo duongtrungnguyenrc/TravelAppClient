@@ -1,5 +1,6 @@
 package com.main.travelApp.viewmodels;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -37,6 +38,10 @@ public class SignUpViewModel extends ViewModel {
         confirmToken = "";
         forgotPassToken = "";
         resetPasswordEmail = "";
+    }
+
+    public void setConfirmToken(String confirmToken) {
+        this.confirmToken = confirmToken;
     }
 
     public Context getContext() {
@@ -91,6 +96,25 @@ public class SignUpViewModel extends ViewModel {
             @Override
             public void onFailure(String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void validateConfirmCode(String confirmCode, AlertDialog dialog){
+        ConfirmCodeRequest request = new ConfirmCodeRequest();
+        request.setActivateCode(confirmCode);
+        request.setToken(confirmToken);
+        authRepository.confirmCode(request, new ActionCallback<BaseResponse<Object>>() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(context, "Kích hoạt tài khoản thành công!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(String message) {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }

@@ -106,16 +106,31 @@
                 android:text="Password"
                 android:textSize="12sp" />
 
-            <EditText
-                android:id="@+id/edtPassword"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
+            <RelativeLayout
                 android:layout_marginTop="5dp"
-                android:height="40dp"
-                android:background="@drawable/custom_edit_text_rounded"
-                android:padding="10dp"
-                android:text="Nguyen@123"
-                android:textSize="13sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="45dp"
+                    android:background="@drawable/custom_edit_text_rounded"
+                    android:padding="10dp"
+                    android:text="Nguyen@123"
+                    android:textSize="13sp"/>
+                <ToggleButton
+                    android:clickable="true"
+                    android:id="@+id/btnInputType"
+                    android:background="@drawable/baseline_visibility_16"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:textOn=""
+                    android:textOff=""
+                    android:layout_alignRight="@id/edtPassword"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout

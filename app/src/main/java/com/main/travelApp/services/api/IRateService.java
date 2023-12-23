@@ -1,6 +1,8 @@
 package com.main.travelApp.services.api;
 
 import com.main.travelApp.request.AddRateRequest;
+import com.main.travelApp.request.UpdateRateRequest;
+import com.main.travelApp.request.UpdateUserRequest;
 import com.main.travelApp.response.AddRateResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.response.RateDetailResponse;
@@ -21,4 +23,8 @@ public interface IRateService {
     Call<BaseResponse<RateDetailResponse>> getRateByTourId(@Path("id") long id, @Query("page") int page, @Query("limit") int limit);
     @POST("rate")
     Call<BaseResponse<AddRateResponse>> addRate(@Header("Authorization") String accessToken, @Body AddRateRequest request);
+    @POST("rate/delete/{id}")
+    Call<BaseResponse<Object>> deleteRate(@Header("Authorization") String accessToken, @Path("id") Long id);
+    @POST("rate/update")
+    Call<BaseResponse<Object>> updateRate(@Header("Authorization") String accessToken, @Body UpdateRateRequest request);
 }

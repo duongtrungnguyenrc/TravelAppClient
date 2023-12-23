@@ -11,29 +11,27 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/alata"
         android:text="Nhập địa chỉ email:"
+        android:textStyle="bold"
         android:textSize="14sp"
-        android:textStyle="bold" />
-
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_edit_text_rounded"
-        android:fontFamily="@font/alata"
-        android:hint="Nhập email tài khoản của bạn"
         android:padding="10dp"
-        android:textSize="13sp" />
-
+        android:layout_marginBottom="30dp"
+        android:textSize="12sp"
+        android:hint="Nhập email tài khoản của bạn"
+        />
     <Button
         android:id="@+id/btnSend"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/custom_button_ripple"
         android:text="Gửi"
-        app:backgroundTint="@color/colorPrimary" />
+        android:textStyle="bold"
+        app:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/custom_button_ripple"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
 </LinearLayout>

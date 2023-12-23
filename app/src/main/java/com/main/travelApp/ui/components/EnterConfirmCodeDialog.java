@@ -20,9 +20,11 @@ import com.main.travelApp.viewmodels.SignUpViewModel;
 public class EnterConfirmCodeDialog extends DialogFragment {
     private Context context;
     private SignUpViewModel viewModel;
-    public EnterConfirmCodeDialog(Context context, SignUpViewModel viewModel){
+    private boolean isExistingAccount;
+    public EnterConfirmCodeDialog(Context context, SignUpViewModel viewModel, boolean isExistingAccount){
         this.context = context;
         this.viewModel = viewModel;
+        this.isExistingAccount = isExistingAccount;
     }
     @NonNull
     @Override
@@ -41,9 +43,16 @@ public class EnterConfirmCodeDialog extends DialogFragment {
         EditText edtConfirmCode = dialogView.findViewById(R.id.edtConfirmCode);
         Button btnSend = dialogView.findViewById(R.id.btnSend);
 
-        btnSend.setOnClickListener(view -> {
-            String confirmCode = edtConfirmCode.getText().toString();
-            viewModel.validateConfirmCode(confirmCode);
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String confirmCode = edtConfirmCode.getText().toString();
+                if(isExistingAccount)
+                    viewModel.validateConfirmCode(confirmCode, dialog);
+                else{
+                    viewModel.validateConfirmCode(confirmCode);
+                }
+            }
         });
 
         return dialog;
