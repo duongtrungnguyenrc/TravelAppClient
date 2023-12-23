@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.main.travelApp.models.GeneralPost;
+import com.main.travelApp.models.MinimizePost;
 import com.main.travelApp.repositories.interfaces.PostRepository;
 import com.main.travelApp.response.AllPostResponse;
 import com.main.travelApp.response.BaseResponse;
@@ -33,12 +33,12 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public LiveData<List<GeneralPost>> findNewestPosts() {
-        MutableLiveData<List<GeneralPost>> posts = new MutableLiveData<>();
-        Call<BaseResponse<List<GeneralPost>>> call = postService.getNewestPosts();
-        call.enqueue(new Callback<BaseResponse<List<GeneralPost>>>() {
+    public LiveData<List<MinimizePost>> findNewestPosts() {
+        MutableLiveData<List<MinimizePost>> posts = new MutableLiveData<>();
+        Call<BaseResponse<List<MinimizePost>>> call = postService.getNewestPosts();
+        call.enqueue(new Callback<BaseResponse<List<MinimizePost>>>() {
             @Override
-            public void onResponse(Call<BaseResponse<List<GeneralPost>>> call, Response<BaseResponse<List<GeneralPost>>> response) {
+            public void onResponse(Call<BaseResponse<List<MinimizePost>>> call, Response<BaseResponse<List<MinimizePost>>> response) {
                 Log.d("POST_findNewestPosts", "onResponse: " + response.message());
                 if(response.isSuccessful()){
                     posts.setValue(response.body().getData());
@@ -48,7 +48,7 @@ public class PostRepositoryImpl implements PostRepository {
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<List<GeneralPost>>> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<List<MinimizePost>>> call, Throwable t) {
                 t.printStackTrace();
                 posts.setValue(null);
             }
@@ -81,19 +81,19 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public LiveData<List<GeneralPost>> findTopPosts() {
-        MutableLiveData<List<GeneralPost>> posts = new MutableLiveData<>();
-        Call<BaseResponse<List<GeneralPost>>> call = postService.getTopPosts();
-        call.enqueue(new Callback<BaseResponse<List<GeneralPost>>>() {
+    public LiveData<List<MinimizePost>> findTopPosts() {
+        MutableLiveData<List<MinimizePost>> posts = new MutableLiveData<>();
+        Call<BaseResponse<List<MinimizePost>>> call = postService.getTopPosts();
+        call.enqueue(new Callback<BaseResponse<List<MinimizePost>>>() {
             @Override
-            public void onResponse(Call<BaseResponse<List<GeneralPost>>> call, Response<BaseResponse<List<GeneralPost>>> response) {
+            public void onResponse(Call<BaseResponse<List<MinimizePost>>> call, Response<BaseResponse<List<MinimizePost>>> response) {
                 if(response.isSuccessful()){
                     posts.setValue(response.body().getData());
                 }
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<List<GeneralPost>>> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<List<MinimizePost>>> call, Throwable t) {
                 posts.setValue(null);
             }
         });

@@ -3,7 +3,6 @@ package com.main.travelApp.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.main.travelApp.R;
-import com.main.travelApp.models.GeneralTour;
+import com.main.travelApp.models.MinimizeTour;
 import com.main.travelApp.ui.activities.TourDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.ViewHolder> {
-    private List<GeneralTour> generalTours;
+    private List<MinimizeTour> generalTours;
     private ViewPager2 viewPager2;
     private final Context context;
 
@@ -39,11 +38,11 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.ViewHo
         this.viewPager2 = viewPager2;
     }
 
-    public List<GeneralTour> getTours() {
+    public List<MinimizeTour> getTours() {
         return generalTours;
     }
 
-    public void setTours(List<GeneralTour> generalTours) {
+    public void setTours(List<MinimizeTour> generalTours) {
         this.generalTours = generalTours;
         notifyDataSetChanged();
     }

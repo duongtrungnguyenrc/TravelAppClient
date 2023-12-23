@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.main.travelApp.models.GeneralPost;
+import com.main.travelApp.models.MinimizePost;
 import com.main.travelApp.repositories.impls.PostRepositoryImpl;
 import com.main.travelApp.repositories.interfaces.PostRepository;
 import com.main.travelApp.response.AllPostResponse;
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class BlogViewModel extends ViewModel {
     private PostRepository postRepository;
-    private LiveData<List<GeneralPost>> newestPosts;
+    private LiveData<List<MinimizePost>> newestPosts;
     private MutableLiveData<AllPostResponse> allPostsResponse;
-    private LiveData<List<GeneralPost>> topPosts;
+    private LiveData<List<MinimizePost>> topPosts;
     private int allPostPage;
     private int allPostLimit;
 
@@ -49,7 +49,7 @@ public class BlogViewModel extends ViewModel {
         this.allPostLimit = allPostLimit;
     }
 
-    public LiveData<List<GeneralPost>> getNewestPosts(){
+    public LiveData<List<MinimizePost>> getNewestPosts(){
         return newestPosts;
     }
 
@@ -57,7 +57,7 @@ public class BlogViewModel extends ViewModel {
         return allPostsResponse;
     }
 
-    public LiveData<List<GeneralPost>> getTopPosts() {
+    public LiveData<List<MinimizePost>> getTopPosts() {
         return topPosts;
     }
 }

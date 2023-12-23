@@ -5,9 +5,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.main.travelApp.R;
 import com.main.travelApp.databinding.ItemViewMessageMeBinding;
 import com.main.travelApp.databinding.ItemViewMessageOtherBinding;
 import com.main.travelApp.models.Message;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,8 +21,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     List<Message> messages;
 
-    public MessageAdapter(List<Message> messages) {
-        this.messages = messages;
+    public MessageAdapter() {
     }
 
     @NonNull
@@ -56,6 +57,16 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return messages.size();
     }
 
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+        notifyDataSetChanged();
+    }
+
+    public void addMessage(Message message) {
+        this.messages.add(message);
+        notifyDataSetChanged();
+    }
+
     static class OtherChatItemViewHolder extends RecyclerView.ViewHolder {
         private final ItemViewMessageOtherBinding binding;
 
@@ -67,6 +78,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public void bind(Message message) {
             binding.txtSender.setText(message.getName());
             binding.txtMessage.setText(message.getMessage());
+            Picasso.get()
+                    .load(message.getAvatar())
+                    .placeholder(R.color.light_gray)
+                    .error(R.color.light_gray)
+                    .into(binding.imgAvatar);
+
         }
     }
 
@@ -81,6 +98,11 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public void bind(Message message) {
             binding.txtSender.setText(message.getName());
             binding.txtMessage.setText(message.getMessage());
+            Picasso.get()
+                    .load(message.getAvatar())
+                    .placeholder(R.color.light_gray)
+                    .error(R.color.light_gray)
+                    .into(binding.imgAvatar);
         }
     }
 }

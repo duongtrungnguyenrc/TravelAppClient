@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -32,9 +32,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Bài viết"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:text="Bài viết"
                 android:textStyle="bold" />
 
             <TextView
@@ -51,25 +51,29 @@
                 android:background="@color/grey" />
         </LinearLayout>
     </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".activities.PostDetailActivity">
+
             <ImageView
-                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/imgPostThumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
-                app:layout_constraintTop_toBottomOf="@id/imgPostThumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:padding="15dp"
-                android:orientation="vertical">
+                app:layout_constraintTop_toBottomOf="@id/imgPostThumbnail">
 
                 <TextView
                     android:id="@+id/txtPostTitle"
@@ -126,22 +130,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </RelativeLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="Các bài viết liên quan"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/alata"/>
+                    android:textStyle="bold" />
+
                 <RelativeLayout
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcvRelevantPost"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
                 </RelativeLayout>
 
                 <TextView
@@ -149,67 +156,74 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="Bình luận"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/alata"/>
+                    android:textStyle="bold" />
+
                 <LinearLayout
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/edtComment"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/alata"
-                        android:textSize="14sp"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
+                        android:layout_weight="1"
                         android:background="@drawable/custom_edit_text_elip"
-                        android:hint="Nhập bình luận"/>
+                        android:fontFamily="@font/alata"
+                        android:hint="Nhập bình luận"
+                        android:paddingStart="15dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="15dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="14sp" />
+
                     <ImageButton
-                        app:tint="@color/white"
-                        android:padding="10dp"
-                        android:layout_marginStart="10dp"
                         android:id="@+id/btnSubmitComment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
                         android:background="@drawable/custom_button_ripple"
+                        android:padding="10dp"
                         android:src="@drawable/baseline_send_24"
-                        />
+                        app:tint="@color/white" />
                 </LinearLayout>
+
                 <RelativeLayout
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcvComment"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
                 </RelativeLayout>
+
                 <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp">
+
                     <ImageButton
                         android:id="@+id/btnPrevPage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
                         android:background="@drawable/custom_button_ripple_elip"
-                        android:src="@drawable/baseline_navigate_before_24"/>
+                        android:padding="10dp"
+                        android:src="@drawable/baseline_navigate_before_24" />
+
                     <ImageButton
-                        android:layout_marginStart="5dp"
                         android:id="@+id/btnNextPage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:layout_marginStart="5dp"
                         android:background="@drawable/custom_button_ripple_elip"
-                        android:src="@drawable/baseline_navigate_next_24"/>
+                        android:padding="10dp"
+                        android:src="@drawable/baseline_navigate_next_24" />
                 </LinearLayout>
             </LinearLayout>
 

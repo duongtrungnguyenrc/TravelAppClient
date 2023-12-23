@@ -100,7 +100,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         profileBinding.btnLoginHistory.setOnClickListener(this);
         profileBinding.btnOrderHistory.setOnClickListener(this);
         profileBinding.btnPasswordAndSecure.setOnClickListener(this);
-        profileBinding.btnPersonalInfo1.setOnClickListener(this);
+        profileBinding.btnMainPersonalInfo.setOnClickListener(this);
         profileBinding.btnPushNotification.setOnClickListener(this);
         profileBinding.btnTermsAndServices.setOnClickListener(this);
         profileBinding.userAvatar.setOnClickListener(this);
@@ -162,7 +162,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             alertDialog.show(getParentFragmentManager(), "SIGN_OUT_ALERT_DIALOG");
         }else if(view == profileBinding.btnPersonalInfo){
             showUserInfoBottomSheet();
-        }else if(view == profileBinding.btnPersonalInfo1){
+        }else if(view == profileBinding.btnMainPersonalInfo){
             Intent intent = new Intent(getContext(), EditPersonalInfoActivity.class);
             intent.putExtra("username", viewModel.getCurrentUser().getFullName());
             intent.putExtra("email", viewModel.getCurrentUser().getEmail());

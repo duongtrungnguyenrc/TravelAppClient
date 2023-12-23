@@ -12,23 +12,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
-import com.main.travelApp.models.GeneralPost;
+import com.main.travelApp.models.MinimizePost;
 import com.main.travelApp.ui.activities.PostDetailActivity;
 import com.main.travelApp.databinding.ItemViewPostBinding;
-import com.main.travelApp.models.Post;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class AllPostAdapter extends RecyclerView.Adapter<AllPostAdapter.MyViewHolder> {
-    private List<GeneralPost> posts;
+    private List<MinimizePost> posts;
     private Context context;
 
     public AllPostAdapter(Context context) {
         this.context = context;
     }
 
-    public void setPosts(List<GeneralPost> posts) {
+    public void setPosts(List<MinimizePost> posts) {
         this.posts = posts;
         notifyDataSetChanged();
     }

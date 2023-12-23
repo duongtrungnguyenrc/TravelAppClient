@@ -1,6 +1,5 @@
 package com.main.travelApp.repositories.impls;
 
-import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -10,7 +9,6 @@ import com.main.travelApp.models.Place;
 import com.main.travelApp.models.Tour;
 import com.main.travelApp.response.AllTourResponse;
 import com.main.travelApp.response.BaseResponse;
-import com.main.travelApp.models.GeneralTour;
 import com.main.travelApp.repositories.interfaces.TourRepository;
 import com.main.travelApp.response.TourDateResponse;
 import com.main.travelApp.services.api.APIClient;

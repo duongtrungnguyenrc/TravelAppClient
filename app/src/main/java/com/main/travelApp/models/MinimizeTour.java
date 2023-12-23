@@ -1,6 +1,8 @@
 package com.main.travelApp.models;
 
-public class GeneralTour {
+import androidx.annotation.Nullable;
+
+public class MinimizeTour {
     private long id;
     private String name;
     private double price;
@@ -12,6 +14,9 @@ public class GeneralTour {
     private String img;
     private String type;
     private String typeTitle;
+
+    @Nullable
+    private String activityTime;
 
     public long getId() {
         return id;
@@ -100,9 +105,14 @@ public class GeneralTour {
     public void setTypeTitle(String typeTitle) {
         this.typeTitle = typeTitle;
     }
-    public GeneralTour(){}
 
-    public GeneralTour(int id, String name, double price, double ratedStar, String depart, String location, int maxPeople, int duration, String img, String type, String typeTitle) {
+    @Nullable
+    public String getActivityTime() {
+        return activityTime;
+    }
+    public MinimizeTour(){}
+
+    public MinimizeTour(int id, String name, double price, double ratedStar, String depart, String location, int maxPeople, int duration, String img, String type, String typeTitle) {
         this.id = id;
         this.name = name;
         this.price = price;

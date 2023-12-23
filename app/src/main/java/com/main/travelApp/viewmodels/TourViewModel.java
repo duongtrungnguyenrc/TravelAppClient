@@ -4,12 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.main.travelApp.models.GeneralTour;
 import com.main.travelApp.repositories.impls.TourRepositoryImpl;
 import com.main.travelApp.repositories.interfaces.TourRepository;
 import com.main.travelApp.response.AllTourResponse;
-
-import java.util.List;
 
 public class TourViewModel extends ViewModel {
     private TourRepository tourRepository;

@@ -1,6 +1,8 @@
 package com.main.travelApp.models;
 
-public class GeneralPost {
+import androidx.annotation.Nullable;
+
+public class MinimizePost {
     private long id;
     private String title;
     private String type;
@@ -9,10 +11,12 @@ public class GeneralPost {
     private long views;
     private String img;
     private String description;
+    @Nullable
+    private String activityTime;
 
-    public GeneralPost(){}
+    public MinimizePost(){}
 
-    public GeneralPost(int id, String title, String type, String time, String author, String img, String description) {
+    public MinimizePost(int id, String title, String type, String time, String author, String img, String description) {
         this.id = id;
         this.title = title;
         this.type = type;
@@ -84,6 +88,11 @@ public class GeneralPost {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Nullable
+    public String getActivityTime() {
+        return activityTime;
     }
 }
 

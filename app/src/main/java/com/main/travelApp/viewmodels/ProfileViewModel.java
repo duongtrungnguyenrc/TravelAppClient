@@ -56,6 +56,7 @@ public class ProfileViewModel extends ViewModel {
     private void bindCurrentUser(){
         if(currentUser == null)
             currentUser = new User();
+        currentUser.setId(sharedPreferences.getString(SharedPreferenceKeys.USER_ID, ""));
         currentUser.setFullName(sharedPreferences.getString(SharedPreferenceKeys.USER_FULL_NAME, ""));
         currentUser.setAvatar(sharedPreferences.getString(SharedPreferenceKeys.USER_AVATAR, ""));
         currentUser.setAddress(sharedPreferences.getString(SharedPreferenceKeys.USER_ADDRESS, ""));
@@ -156,7 +157,7 @@ public class ProfileViewModel extends ViewModel {
                     dialog.dismiss();
                 }
             });
-        }else{
+        } else{
             Toast.makeText(context, "Có lỗi xảy ra, vui lòng chọn ảnh lại!", Toast.LENGTH_SHORT).show();
         }
     }

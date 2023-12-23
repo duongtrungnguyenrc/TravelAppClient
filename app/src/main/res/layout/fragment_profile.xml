@@ -211,7 +211,7 @@
                                 android:orientation="vertical">
 
                                 <LinearLayout
-                                    android:id="@+id/btnPersonalInfo1"
+                                    android:id="@+id/btn_main_personal_info"
                                     android:clickable="true"
                                     android:background="?android:attr/selectableItemBackground"
                                     android:layout_width="match_parent"

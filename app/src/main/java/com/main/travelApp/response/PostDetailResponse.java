@@ -1,15 +1,15 @@
 package com.main.travelApp.response;
 
-import com.main.travelApp.models.GeneralPost;
+import com.main.travelApp.models.MinimizePost;
 import com.main.travelApp.models.Post;
 
 import java.util.List;
 
 public class PostDetailResponse {
     private Post post;
-    private List<GeneralPost> relevantPosts;
+    private List<MinimizePost> relevantPosts;
 
-    public PostDetailResponse(Post post, List<GeneralPost> relevantPosts) {
+    public PostDetailResponse(Post post, List<MinimizePost> relevantPosts) {
         this.post = post;
         this.relevantPosts = relevantPosts;
     }
@@ -25,11 +25,11 @@ public class PostDetailResponse {
         this.post = post;
     }
 
-    public List<GeneralPost> getRelevantPosts() {
+    public List<MinimizePost> getRelevantPosts() {
         return relevantPosts;
     }
 
-    public void setRelevantPosts(List<GeneralPost> relevantPosts) {
+    public void setRelevantPosts(List<MinimizePost> relevantPosts) {
         this.relevantPosts = relevantPosts;
     }
 }

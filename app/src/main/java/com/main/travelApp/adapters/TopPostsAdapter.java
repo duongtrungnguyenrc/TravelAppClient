@@ -3,7 +3,6 @@ package com.main.travelApp.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
 import com.main.travelApp.databinding.ItemViewTopPostBinding;
-import com.main.travelApp.models.GeneralPost;
+import com.main.travelApp.models.MinimizePost;
 import com.main.travelApp.ui.activities.PostDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class TopPostsAdapter extends RecyclerView.Adapter<TopPostsAdapter.MyViewHolder> {
-    private List<GeneralPost> posts;
+    private List<MinimizePost> posts;
     private Context context;
 
     public Context getContext() {
@@ -32,12 +31,12 @@ public class TopPostsAdapter extends RecyclerView.Adapter<TopPostsAdapter.MyView
         this.context = context;
     }
 
-    public void setPosts(List<GeneralPost> posts) {
+    public void setPosts(List<MinimizePost> posts) {
         this.posts = posts;
         notifyDataSetChanged();
     }
 
-    public List<GeneralPost> getPosts() {
+    public List<MinimizePost> getPosts() {
         return posts;
     }
 

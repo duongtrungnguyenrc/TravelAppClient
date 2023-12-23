@@ -20,7 +20,7 @@ public class Tour {
     private boolean ratingAcceptance;
     private List<Hotel> hotels;
     private List<Schedule> schedules;
-    private List<GeneralTour> relevantTours;
+    private List<MinimizeTour> relevantTours;
 
     @Override
     public String toString() {
@@ -114,7 +114,7 @@ public class Tour {
         return schedules;
     }
 
-    public List<GeneralTour> getRelevantTours() {
+    public List<MinimizeTour> getRelevantTours() {
         return relevantTours;
     }
 }

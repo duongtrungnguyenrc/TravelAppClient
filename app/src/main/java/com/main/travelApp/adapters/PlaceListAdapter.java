@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
-import com.main.travelApp.models.GeneralTour;
 import com.main.travelApp.models.Place;
 import com.squareup.picasso.Picasso;
 

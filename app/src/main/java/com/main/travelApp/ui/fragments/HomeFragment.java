@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +51,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private SearchServiceImpl searchService;
     private SearchResultAdapter tourSearchResultAdapter;
     private SearchResultAdapter postSearchResultAdapter;
-
+    private SearchResultAdapter recentActivitiesAdapter;
     private SkeletonScreen tourSkeleton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,6 +81,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         searchService = new SearchServiceImpl();
         tourSearchResultAdapter = new SearchResultAdapter(getActivity());
         postSearchResultAdapter = new SearchResultAdapter(getActivity());
+        recentActivitiesAdapter = new SearchResultAdapter(getActivity());
 
         homeBinding.rcvTours.setAdapter(tourListAdapter);
         homeBinding.rcvTours.setLayoutManager(new LinearLayoutManager(
@@ -91,14 +94,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             hideTourSkeleton();
         });
 
+        homeBinding.rcvPlaces.setAdapter(placeListAdapter);
         homeViewModel.getPlaces().observe(getViewLifecycleOwner(), places -> {
             placeListAdapter.setPlaces(places.subList(0, 4));
         });
 
-        homeBinding.rcvPlaces.setAdapter(placeListAdapter);
-
         homeViewModel.getNewestPosts().observe(getViewLifecycleOwner(), posts -> {
             newestPostsAdapter.setPosts(posts);
+        });
+
+        homeBinding.rcvRecentActivities.setAdapter(recentActivitiesAdapter);
+        homeBinding.rcvRecentActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
+        homeViewModel.getRecentActivities().observe(getViewLifecycleOwner(), response -> {
+//            Log.d("test", response.getRecentTours().get(0).getName());
+            recentActivitiesAdapter.setTours(response.getRecentTours());
         });
 
         homeViewModel.getIsExpired().observe(getViewLifecycleOwner(), isExpired -> {

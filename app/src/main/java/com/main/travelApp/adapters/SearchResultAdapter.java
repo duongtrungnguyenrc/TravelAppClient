@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.travelApp.R;
-import com.main.travelApp.models.Post;
-import com.main.travelApp.models.Tour;
+import com.main.travelApp.models.MinimizePost;
+import com.main.travelApp.models.MinimizeTour;
 import com.main.travelApp.ui.activities.PostDetailActivity;
 import com.main.travelApp.ui.activities.TourDetailActivity;
 import com.squareup.picasso.Picasso;
@@ -22,8 +22,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
-    private List<Tour> tours = null;
-    private List<Post> posts = null;
+    private List<MinimizeTour> tours = null;
+    private List<MinimizePost> posts = null;
 
     private Context context;
 
@@ -41,7 +41,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     @Override
     public void onBindViewHolder(@NonNull SearchResultAdapter.ViewHolder holder, int position) {
         if(tours != null) {
-            Tour tour = tours.get(position);
+            MinimizeTour tour = tours.get(position);
             holder.txtName.setText(tour.getName());
             holder.txtDescription.setText("Tour " + tour.getLocation());
             Picasso.get()
@@ -56,7 +56,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                 context.startActivity(intent);
             });
         } else if (posts != null) {
-            Post post = posts.get(position);
+            MinimizePost post = posts.get(position);
             holder.txtName.setText(post.getTitle());
             holder.txtDescription.setText(post.getType() + " - " + post.getAuthor());
             Picasso.get()
@@ -84,13 +84,13 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void setTours(List<Tour> tours) {
+    public void setTours(List<MinimizeTour> tours) {
         this.tours = tours;
         notifyDataSetChanged();
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void setPosts(List<Post> posts) {
+    public void setPosts(List<MinimizePost> posts) {
         this.posts = posts;
         notifyDataSetChanged();
     }

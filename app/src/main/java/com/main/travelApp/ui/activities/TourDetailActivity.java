@@ -21,10 +21,13 @@ import com.main.travelApp.adapters.TourGalleryAdapter;
 import com.main.travelApp.databinding.ActivityTourDetailBinding;
 import com.main.travelApp.models.Paragraph;
 import com.main.travelApp.models.Tour;
+import com.main.travelApp.repositories.impls.UserRepositoryImpl;
+import com.main.travelApp.request.ActivitiesRecordRequest;
 import com.main.travelApp.ui.components.BottomSheet;
 import com.main.travelApp.ui.components.Stepper.Step;
 import com.main.travelApp.ui.components.Stepper.StepperFormListener;
 import com.main.travelApp.utils.ScreenManager;
+import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.utils.TourScheduleStep;
 import com.main.travelApp.viewmodels.TourDetailViewModel;
 import com.squareup.picasso.Picasso;
@@ -39,25 +42,27 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
     private BottomSheet overviewBottomSheet;
     private long tourId = -1;
     private Tour tour;
+    private UserRepositoryImpl userRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ScreenManager.enableFullScreen(getWindow());
         init();
     }
 
     @SuppressLint("SetTextI18n")
     private void init() {
-        overviewBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_tour_overview, "Thông tin về chuyến đi");
         this.binding = ActivityTourDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        ScreenManager.enableFullScreen(getWindow());
+
+        overviewBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_tour_overview, "Thông tin về chuyến đi");
 
         Intent intent = getIntent();
         tourId = intent.getLongExtra("tour-id", -1);
 
         binding.btnSeeAllOverview.setOnClickListener(view -> {
-            showOverviewBottomSheet(tour.getOverview().getParagraphs());
+            showOverviewBottomSheet();
         });
 
         binding.btnBack.setOnClickListener(view -> {
@@ -70,7 +75,15 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
 
         tourDetailViewModel = new ViewModelProvider(this).get(TourDetailViewModel.class);
 
+        userRepository = UserRepositoryImpl.getInstance();
+
         if(tourId != -1) {
+            userRepository.recordActivity(getSharedPreferences(
+                            SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE).
+                            getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, ""),
+                    new ActivitiesRecordRequest(tourId, null)
+            );
+
             tourDetailViewModel.getTour(tourId).observe(this, tour -> {
                 this.tour = tour;
                 binding.txtTourName.setText(tour.getName());
@@ -84,7 +97,12 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
                 TourDateAdapter tourDateAdapter = new TourDateAdapter(tour.getTourDate(), tour.getName(),this, tour.getId());
                 initViewPager(binding.pgTourGallery, tourGalleryAdapter);
                 binding.rcvTourDate.setAdapter(tourDateAdapter);
-                binding.rcvTourDate.setLayoutManager(new LinearLayoutManager(this));
+                binding.rcvTourDate.setLayoutManager(new LinearLayoutManager(this){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                });
 
                 List<Step<?>> scheduleSteps = new ArrayList<>();
                 tour.getSchedules().forEach(step -> {
@@ -160,7 +178,7 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
         return star + " " + ratingRank;
     }
 
-    private void showOverviewBottomSheet(List<Paragraph> paragraphs) {
+    private void showOverviewBottomSheet() {
         overviewBottomSheet.show();
     }
 }

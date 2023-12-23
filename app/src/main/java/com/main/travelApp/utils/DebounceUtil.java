@@ -12,6 +12,7 @@ public class DebounceUtil implements TextWatcher {
 
     public interface OnDebouncedListener {
         void onDebouncedTextChanged(CharSequence text);
+        default void onBeforeTextChanged(CharSequence text){}
     }
 
     private final OnDebouncedListener listener;
@@ -22,6 +23,7 @@ public class DebounceUtil implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        listener.onBeforeTextChanged(charSequence);
     }
 
     @Override

@@ -16,14 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.main.travelApp.R;
-import com.main.travelApp.models.GeneralPost;
+import com.main.travelApp.models.MinimizePost;
 import com.main.travelApp.ui.activities.PostDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class NewestPostsAdapter extends RecyclerView.Adapter<NewestPostsAdapter.MyViewHolder> {
-    private List<GeneralPost> posts;
+    private List<MinimizePost> posts;
     private ViewPager2 viewPager2;
     private Context context;
     private final Runnable runnable = new Runnable() {
@@ -45,11 +45,11 @@ public class NewestPostsAdapter extends RecyclerView.Adapter<NewestPostsAdapter.
         this.context = context;
     }
 
-    public List<GeneralPost> getPosts() {
+    public List<MinimizePost> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<GeneralPost> posts) {
+    public void setPosts(List<MinimizePost> posts) {
         this.posts = posts;
         notifyDataSetChanged();
     }

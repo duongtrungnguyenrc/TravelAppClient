@@ -13,7 +13,7 @@ import com.main.travelApp.utils.SharedPreferenceKeys;
 import java.util.List;
 
 public class LoginHistoryViewModel extends ViewModel {
-    private UserRepository repository;
+    private final UserRepository repository;
     private LiveData<List<LoginHistory>> loginHistory;
     private SharedPreferences sharedPreferences;
 

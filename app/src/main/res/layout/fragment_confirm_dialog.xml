@@ -14,34 +14,38 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:text="Bạn có chắc là muốn thay đổi thông tin?"/>
+
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:minHeight="0dp"
             android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            app:backgroundTint="@color/design_default_color_error"
-            android:text="Hủy"
-            android:textStyle="bold"
             android:background="@drawable/custom_button_ripple_error"
-            android:layout_height="wrap_content"/>
-        <Button
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:minHeight="0dp"
+            android:padding="10dp"
+            android:text="Hủy"
+            android:textSize="12sp"
+            app:backgroundTint="@color/design_default_color_error" />
+
+        <Button
             android:id="@+id/btnChange"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            app:backgroundTint="@color/colorPrimary"
-            android:text="Xác nhận"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/custom_button_ripple"
-            android:layout_height="wrap_content"/>
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="0dp"
+            android:padding="10dp"
+            android:text="Xác nhận"
+            android:textSize="12sp"
+            app:backgroundTint="@color/colorPrimary" />
     </LinearLayout>
 </LinearLayout>

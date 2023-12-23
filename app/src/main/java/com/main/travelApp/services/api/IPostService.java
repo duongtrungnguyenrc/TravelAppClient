@@ -1,8 +1,6 @@
 package com.main.travelApp.services.api;
 
-import androidx.lifecycle.LiveData;
-
-import com.main.travelApp.models.GeneralPost;
+import com.main.travelApp.models.MinimizePost;
 import com.main.travelApp.response.AllPostResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.response.PostDetailResponse;
@@ -16,11 +14,11 @@ import retrofit2.http.Query;
 
 public interface IPostService {
     @GET("blog/latest")
-    Call<BaseResponse<List<GeneralPost>>> getNewestPosts();
+    Call<BaseResponse<List<MinimizePost>>> getNewestPosts();
     @GET("blog/all")
     Call<BaseResponse<AllPostResponse>> getAllPosts(@Query("page") int page, @Query("limit") int limit);
     @GET("blog/top")
-    Call<BaseResponse<List<GeneralPost>>> getTopPosts();
+    Call<BaseResponse<List<MinimizePost>>> getTopPosts();
     @GET("blog/{id}")
     Call<BaseResponse<PostDetailResponse>> getPostById(@Path("id") long id);
 }

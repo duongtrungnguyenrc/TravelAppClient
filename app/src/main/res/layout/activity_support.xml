@@ -54,7 +54,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/txt_room"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -86,9 +86,9 @@
         android:padding="10dp">
 
         <EditText
-            android:id="@+id/editTextText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/edt_chat_input"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
             android:layout_weight="1"
             android:background="@drawable/bg_grey_border"
             android:ems="10"
@@ -98,7 +98,7 @@
             android:textSize="12sp" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/btn_send_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"

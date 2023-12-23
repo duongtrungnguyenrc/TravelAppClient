@@ -71,7 +71,12 @@ public class SelectTicketActivity extends AppCompatActivity {
                 binding.rcvDates.setAdapter(dateAdapter);
                 binding.rcvDates.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
                 binding.rcvHotels.setAdapter(hotelAdapter);
-                binding.rcvHotels.setLayoutManager(new LinearLayoutManager(this));
+                binding.rcvHotels.setLayoutManager(new LinearLayoutManager(this){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                });
 
                 Picasso.get()
                         .load(res.getTourImage())

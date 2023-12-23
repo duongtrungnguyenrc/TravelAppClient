@@ -1,17 +1,17 @@
 package com.main.travelApp.response;
 
-import com.main.travelApp.models.GeneralTour;
+import com.main.travelApp.models.MinimizeTour;
 
 import java.util.List;
 
 public class AllTourResponse {
     private int pages;
-    private List<GeneralTour> tours;
+    private List<MinimizeTour> tours;
 
     public AllTourResponse() {
     }
 
-    public AllTourResponse(int pages, List<GeneralTour> tours) {
+    public AllTourResponse(int pages, List<MinimizeTour> tours) {
         this.pages = pages;
         this.tours = tours;
     }
@@ -24,11 +24,11 @@ public class AllTourResponse {
         this.pages = pages;
     }
 
-    public List<GeneralTour> getTours() {
+    public List<MinimizeTour> getTours() {
         return tours;
     }
 
-    public void setTours(List<GeneralTour> tours) {
+    public void setTours(List<MinimizeTour> tours) {
         this.tours = tours;
     }
 }

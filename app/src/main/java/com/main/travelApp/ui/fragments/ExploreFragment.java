@@ -11,12 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.main.travelApp.adapters.TourListExploreAdapter;
 import com.main.travelApp.databinding.FragmentExploreBinding;
-import com.main.travelApp.models.GeneralTour;
-import com.main.travelApp.ui.activities.MainActivity;
 import com.main.travelApp.viewmodels.TourViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ExploreFragment extends Fragment {
     private TourListExploreAdapter tourAdapter;

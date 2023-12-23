@@ -22,13 +22,8 @@ import com.main.travelApp.adapters.AllPostAdapter;
 import com.main.travelApp.adapters.NewestPostsAdapter;
 import com.main.travelApp.adapters.TopPostsAdapter;
 import com.main.travelApp.databinding.FragmentBlogBinding;
-import com.main.travelApp.models.GeneralPost;
 import com.main.travelApp.utils.LayoutManagerUtil;
 import com.main.travelApp.viewmodels.BlogViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class BlogFragment extends Fragment {
     private FragmentBlogBinding blogBinding;

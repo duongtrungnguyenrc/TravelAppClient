@@ -11,11 +11,11 @@ public class Order {
     private String status;
     private double totalPrice;
     private String specialRequest;
-    private GeneralTour tour;
+    private MinimizeTour tour;
     private ContactInfo contactInfo;
     private Hotel hotel;
 
-    public Order(Long id, String orderDate, int adults, int children, String departDate, String endDate, String paymentMethod, String status, double totalPrice, String specialRequest, GeneralTour tour, ContactInfo contactInfo, Hotel hotel) {
+    public Order(Long id, String orderDate, int adults, int children, String departDate, String endDate, String paymentMethod, String status, double totalPrice, String specialRequest, MinimizeTour tour, ContactInfo contactInfo, Hotel hotel) {
         this.id = id;
         this.orderDate = orderDate;
         this.adults = adults;
@@ -114,11 +114,11 @@ public class Order {
         this.specialRequest = specialRequest;
     }
 
-    public GeneralTour getTour() {
+    public MinimizeTour getTour() {
         return tour;
     }
 
-    public void setTour(GeneralTour tour) {
+    public void setTour(MinimizeTour tour) {
         this.tour = tour;
     }
 
