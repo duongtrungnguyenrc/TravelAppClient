@@ -78,11 +78,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public void bind(Message message) {
             binding.txtSender.setText(message.getName());
             binding.txtMessage.setText(message.getMessage());
-            Picasso.get()
-                    .load(message.getAvatar())
-                    .placeholder(R.color.light_gray)
-                    .error(R.color.light_gray)
-                    .into(binding.imgAvatar);
+            if(message.getAvatar() != null && !message.getAvatar().isEmpty())
+                Picasso.get()
+                        .load(message.getAvatar())
+                        .placeholder(R.color.light_gray)
+                        .error(R.color.light_gray)
+                        .into(binding.imgAvatar);
 
         }
     }
@@ -98,11 +99,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public void bind(Message message) {
             binding.txtSender.setText(message.getName());
             binding.txtMessage.setText(message.getMessage());
-            Picasso.get()
-                    .load(message.getAvatar())
-                    .placeholder(R.color.light_gray)
-                    .error(R.color.light_gray)
-                    .into(binding.imgAvatar);
+            if(message.getAvatar() != null && !message.getAvatar().isEmpty())
+                Picasso.get()
+                        .load(message.getAvatar())
+                        .placeholder(R.color.light_gray)
+                        .error(R.color.light_gray)
+                        .into(binding.imgAvatar);
         }
     }
 }

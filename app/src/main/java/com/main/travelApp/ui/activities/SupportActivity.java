@@ -64,8 +64,8 @@ public class SupportActivity extends AppCompatActivity {
         profileViewModel = new ProfileViewModel(this.getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, Context.MODE_PRIVATE));
         chatService = new ChatService(profileViewModel.getCurrentUser().getId(), this, new ChatService.MessageListener() {
             @Override
-            public void onConnected(List<Message> messages) {
-                SupportActivity.this.messages = messages;
+            public void onConnected(List<Message> messages) {;
+                SupportActivity.this.messages = messages != null ? messages : new ArrayList<>();
                 adapter.setMessages(messages);
 
                 binding.rcvMessage.setAdapter(adapter);
@@ -80,7 +80,7 @@ public class SupportActivity extends AppCompatActivity {
                 binding.edtChatInput.setText("");
                 NotificationManager notificationHelper = new NotificationManager(getApplicationContext());
                 notificationHelper.createNotification("Tin nhắn mới từ " + message.getName(), message.getMessage(), SupportActivity.class);
-
+                scrollToBottom();
             }
 
             @Override
