@@ -51,12 +51,17 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
         init();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overviewBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_tour_overview, "Thông tin về chuyến đi");
+    }
+
     @SuppressLint("SetTextI18n")
     private void init() {
         this.binding = ActivityTourDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        overviewBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_tour_overview, "Thông tin về chuyến đi");
 
         Intent intent = getIntent();
         tourId = intent.getLongExtra("tour-id", -1);
