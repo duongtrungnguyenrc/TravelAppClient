@@ -19,6 +19,7 @@ import com.main.travelApp.services.api.APIClient;
 import com.main.travelApp.services.api.IAuthService;
 import com.main.travelApp.services.auth.AuthManager;
 import com.main.travelApp.utils.ErrorResponseHandler;
+import com.onesignal.OneSignal;
 
 import java.io.IOException;
 
@@ -50,6 +51,7 @@ public class AuthRepositoryImpl implements AuthRepository {
                 if (response.isSuccessful()) {
                     AuthManager.getInstance().setAuthInstance(response.body().getData());
                     action.onSuccess(response.body().getData());
+                    OneSignal.login(response.body().getData().getId());
                 } else {
                     String errorBody = "";
                     try {
