@@ -23,14 +23,13 @@ import java.util.List;
 
 public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
 
-    private final List<TourDate> tourDates;
+    private List<TourDate> tourDates;
     private final Context context;
     private long selectedId;
 
     private OnRecyclerViewItemClickListener<TourDate> listener;
 
-    public DateAdapter(List<TourDate> tourDates, Context context) {
-        this.tourDates = tourDates;
+    public DateAdapter(Context context) {
         this.context = context;
     }
 
@@ -47,7 +46,7 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
 
 
         if(tourDates.get(position).getId() == selectedId) {
-            holder.itemView.setBackgroundResource(R.drawable.bg_active_date);
+            holder.itemView.setBackgroundResource(R.drawable.bg_active_item);
             holder.txtDate.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
             holder.txtYear.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
         }
@@ -88,6 +87,11 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
 
     public void setOnDateSelectedChange(OnRecyclerViewItemClickListener<TourDate> listener) {
         this.listener = listener;
+    }
+
+    public void setTourDates(List<TourDate> tourDates) {
+        this.tourDates = tourDates;
+        notifyDataSetChanged();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

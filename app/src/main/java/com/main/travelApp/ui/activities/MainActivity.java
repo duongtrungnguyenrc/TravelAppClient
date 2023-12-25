@@ -12,11 +12,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.main.travelApp.R;
 import com.main.travelApp.ui.components.BottomSheet;
 import com.main.travelApp.databinding.ActivityMainBinding;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         ScreenManager.enableFullScreen(getWindow());
         init();
+        getFCMToken();
     }
 
     private void init() {
@@ -113,5 +116,18 @@ public class MainActivity extends AppCompatActivity {
     private void clearUserPrefs(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear().apply();
+    }
+
+    void getFCMToken(){
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                String token = task.getResult();
+                Log.i("token", token);
+
+            }
+            else {
+                Log.e("token", task.getException().getMessage());
+            }
+        });
     }
 }

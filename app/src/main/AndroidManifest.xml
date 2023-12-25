@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +17,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelApplication"
         android:usesCleartextTraffic="true"
+        android:name=".utils.ApplicationUtil"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="603260832482" />
+        <activity
+            android:name=".ui.activities.ConfirmOrderActivity" android:exported="false"/>
+        <activity
+            android:name=".ui.activities.CheckOutActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.main.travelApp.action.PAYMENT_RESULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.activities.TermAndServiceActivity"
             android:exported="false" />

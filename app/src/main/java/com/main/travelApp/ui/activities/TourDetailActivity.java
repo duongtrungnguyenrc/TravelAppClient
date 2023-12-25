@@ -19,7 +19,6 @@ import com.main.travelApp.adapters.RatingAdapter;
 import com.main.travelApp.adapters.TourDateAdapter;
 import com.main.travelApp.adapters.TourGalleryAdapter;
 import com.main.travelApp.databinding.ActivityTourDetailBinding;
-import com.main.travelApp.models.Paragraph;
 import com.main.travelApp.models.Tour;
 import com.main.travelApp.repositories.impls.UserRepositoryImpl;
 import com.main.travelApp.request.ActivitiesRecordRequest;
@@ -51,12 +50,17 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
         init();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overviewBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_tour_overview, "Thông tin về chuyến đi");
+    }
+
     @SuppressLint("SetTextI18n")
     private void init() {
         this.binding = ActivityTourDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        overviewBottomSheet = new BottomSheet(this, getLayoutInflater(), R.layout.frame_tour_overview, "Thông tin về chuyến đi");
 
         Intent intent = getIntent();
         tourId = intent.getLongExtra("tour-id", -1);
@@ -94,7 +98,7 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
                 binding.txtRatingCount.setText("(" + tour.getTotalRates() + " lượt đánh giá)");
 
                 TourGalleryAdapter tourGalleryAdapter = new TourGalleryAdapter(tour.getOverview().getParagraphs(), this);
-                TourDateAdapter tourDateAdapter = new TourDateAdapter(tour.getTourDate(), tour.getName(),this, tour.getId());
+                TourDateAdapter tourDateAdapter = new TourDateAdapter(tour.getTourDate(), tour.getName(),this, tour);
                 initViewPager(binding.pgTourGallery, tourGalleryAdapter);
                 binding.rcvTourDate.setAdapter(tourDateAdapter);
                 binding.rcvTourDate.setLayoutManager(new LinearLayoutManager(this){
@@ -113,12 +117,11 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
                 binding.btnSeeAllComment.setOnClickListener(view -> {
                     Intent ratingIntent = new Intent(TourDetailActivity.this, RatingActivity.class);
                     ratingIntent.putExtra("tour-id", tourId);
-                    ratingIntent.putExtra("tour-name", tour.getName());
                     startActivity(ratingIntent);
                 });
 
 
-                overviewBottomSheet.build((dialogWindow, contentView) -> {
+                overviewBottomSheet.setup((dialogWindow, contentView) -> {
                     ParagraphAdapter paragraphAdapter = new ParagraphAdapter(tour.getOverview().getParagraphs());
                     RecyclerView rcvTourOverview =  contentView.findViewById(R.id.rcv_tour_overview);
 

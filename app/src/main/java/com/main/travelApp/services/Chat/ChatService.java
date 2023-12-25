@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.main.travelApp.models.Message;
-import com.main.travelApp.request.NewMessageRequest;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,72 +59,49 @@ public class ChatService {
     }
 
     public void enableEvent() {
-        socket.on("connected", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        JSONArray messagesArray = (JSONArray) args[0];
-                        try {
-                            for (int i = 0; i < messagesArray.length(); i++) {
-                                JSONObject messageJson = messagesArray.getJSONObject(i);
+        socket.on("connected", args -> activity.runOnUiThread(() -> {
+            JSONArray messagesArray = (JSONArray) args[0];
+            try {
+                for (int i = 0; i < messagesArray.length(); i++) {
+                    JSONObject messageJson = messagesArray.getJSONObject(i);
 
-                                Message message = new Message(
-                                        messageJson.getLong("id"),
-                                        messageJson.getString("message"),
-                                        messageJson.getLong("uid"),
-                                        messageJson.getString("time"),
-                                        messageJson.getLong("room"),
-                                        messageJson.getString("name"),
-                                        messageJson.getString("role"),
-                                        messageJson.getString("avatar")
-                                );
-                                messages.add(message);
-                            }
-                            messageListener.onConnected(messages);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+                    Message message = new Message(
+                            messageJson.getLong("id"),
+                            messageJson.getString("message"),
+                            messageJson.getLong("uid"),
+                            messageJson.getString("time"),
+                            messageJson.getLong("room"),
+                            messageJson.getString("name"),
+                            messageJson.getString("role"),
+                            messageJson.getString("avatar")
+                    );
+                    messages.add(message);
+                }
+                messageListener.onConnected(messages);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }).on("receive", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        JSONObject messageJson = (JSONObject) args[0];
-                        try {
-                            Message message = new Message(
-                                    messageJson.getLong("id"),
-                                    messageJson.getString("message"),
-                                    messageJson.getLong("uid"),
-                                    messageJson.getString("time"),
-                                    messageJson.getLong("room"),
-                                    messageJson.getString("name"),
-                                    messageJson.getString("role"),
-                                    messageJson.getString("avatar")
-                            );
-                            messageListener.onMessageReceived(message);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+        }))
+        .on("receive", args -> activity.runOnUiThread(() -> {
+            JSONObject messageJson = (JSONObject) args[0];
+            try {
+                Message message = new Message(
+                        messageJson.getLong("id"),
+                        messageJson.getString("message"),
+                        messageJson.getLong("uid"),
+                        messageJson.getString("time"),
+                        messageJson.getLong("room"),
+                        messageJson.getString("name"),
+                        messageJson.getString("role"),
+                        messageJson.getString("avatar")
+                );
+                messageListener.onMessageReceived(message);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }).on("change", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                messageListener.onChange(true);
-            }
-        }).on("stop-change", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                messageListener.onStopChange();
-            }
-        });
+        }))
+        .on("change", args -> messageListener.onChange(true))
+        .on("stop-change", args -> messageListener.onStopChange());
     }
 
     public void sendChange() {

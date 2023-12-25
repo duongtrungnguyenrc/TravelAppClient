@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Yêu cầu đặc biệt"
+        android:textColor="@color/gray"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/edt_special_request"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_edit_text_rounded"
+        android:hint="Vui lòng nhập yêu cầu đặc biệt..."
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:lines="10"
+        android:gravity="top|left"
+        android:padding="10dp"
+        android:textSize="12sp"  android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_ripple_error"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="0dp"
+            android:text="Hủy"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:backgroundTint="@color/design_default_color_error" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_ripple"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="0dp"
+            android:text="Xác nhận"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorPrimary" />
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

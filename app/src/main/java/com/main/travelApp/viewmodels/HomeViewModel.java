@@ -75,8 +75,11 @@ public class HomeViewModel extends ViewModel {
     }
     private void bindCurrentUser(){
         currentUser = new User();
+        currentUser.setEmail(sharedPreferences.getString(SharedPreferenceKeys.USER_EMAIL, ""));
+        currentUser.setPhone(sharedPreferences.getString(SharedPreferenceKeys.USER_PHONE, ""));
         currentUser.setFullName(sharedPreferences.getString(SharedPreferenceKeys.USER_FULL_NAME, ""));
         currentUser.setAvatar(sharedPreferences.getString(SharedPreferenceKeys.USER_AVATAR, ""));
+        currentUser.setAddress(sharedPreferences.getString(SharedPreferenceKeys.USER_ADDRESS, ""));
     }
 
     public User getCurrentUser() {
