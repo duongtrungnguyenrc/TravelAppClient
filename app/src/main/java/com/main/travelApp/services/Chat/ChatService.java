@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatService {
-    private static final String SERVER_URL = "http://10.0.3.2:8085";
+    private static final String SERVER_URL = "http://192.168.1.15:8085";
     private Socket socket;
     private final List<Message> messages = new ArrayList<>();
     private final Activity activity;

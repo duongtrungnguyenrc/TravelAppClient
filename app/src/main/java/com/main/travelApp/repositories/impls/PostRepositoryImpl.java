@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.models.MinimizePost;
 import com.main.travelApp.repositories.interfaces.PostRepository;
 import com.main.travelApp.response.AllPostResponse;
@@ -118,5 +119,26 @@ public class PostRepositoryImpl implements PostRepository {
             }
         });
         return postResponse;
+    }
+
+    @Override
+    public void addPostView(Long id, ActionCallback<String> callback) {
+        Call<BaseResponse<Object>> call = postService.addView(id);
+        call.enqueue(new Callback<BaseResponse<Object>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<Object>> call, Response<BaseResponse<Object>> response) {
+                if(response.isSuccessful()){
+                    callback.onSuccess();
+                }else{
+                    callback.onFailure("Không tìm thấy bài viết có id: " + id);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<Object>> call, Throwable t) {
+                callback.onFailure(t.getMessage());
+                t.printStackTrace();
+            }
+        });
     }
 }

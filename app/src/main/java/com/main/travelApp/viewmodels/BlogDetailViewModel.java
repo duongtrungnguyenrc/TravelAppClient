@@ -35,6 +35,7 @@ public class BlogDetailViewModel extends ViewModel {
     private Context context;
     private String accessToken;
     private MutableLiveData<Boolean> isExpired;
+    private MutableLiveData<Boolean> isViewRisen;
 
     public void setContext(Context context) {
         this.context = context;
@@ -53,6 +54,12 @@ public class BlogDetailViewModel extends ViewModel {
         rateResponse = rateRepository.findByBlogId(this.accessToken, this.id, this.commentPage, 6);
         isExpired = new MutableLiveData<>();
         isExpired.setValue(false);
+        isViewRisen = new MutableLiveData<>();
+        isViewRisen.setValue(false);
+    }
+
+    public MutableLiveData<Boolean> getIsViewRisen() {
+        return isViewRisen;
     }
 
     public int getCommentPage() {
@@ -143,6 +150,20 @@ public class BlogDetailViewModel extends ViewModel {
             @Override
             public void onFailure(String message) {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void addView(){
+        postRepository.addPostView(id, new ActionCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                isViewRisen.setValue(true);
+            }
+
+            @Override
+            public void onFailure(String message) {
+                isViewRisen.setValue(false);
             }
         });
     }

@@ -3,6 +3,7 @@ package com.main.travelApp.repositories.interfaces;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.models.MinimizePost;
 import com.main.travelApp.response.AllPostResponse;
 import com.main.travelApp.response.PostDetailResponse;
@@ -14,4 +15,5 @@ public interface PostRepository {
     public MutableLiveData<AllPostResponse> findAll(int page, int limit);
     public LiveData<List<MinimizePost>> findTopPosts();
     public MutableLiveData<PostDetailResponse> findById(long id);
+    public void addPostView(Long id, ActionCallback<String> callback);
 }

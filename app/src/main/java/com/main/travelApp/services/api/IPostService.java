@@ -9,6 +9,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -21,4 +22,6 @@ public interface IPostService {
     Call<BaseResponse<List<MinimizePost>>> getTopPosts();
     @GET("blog/{id}")
     Call<BaseResponse<PostDetailResponse>> getPostById(@Path("id") long id);
+    @POST("blog/add-view/{id}")
+    Call<BaseResponse<Object>> addView(@Path("id") Long id);
 }

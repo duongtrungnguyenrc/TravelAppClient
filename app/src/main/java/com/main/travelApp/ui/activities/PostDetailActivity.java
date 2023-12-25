@@ -71,6 +71,8 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         postCommentAdapter.setLayoutInflater(getLayoutInflater());
         postCommentAdapter.setViewModel(viewModel);
 
+        viewModel.addView();
+
         viewModel.getPostDetailResponse().observe(this, data -> {
             paragraphAdapter.setParagraphs(data.getPost().getParagraphs());
             relevantPostAdapter.setPosts(data.getRelevantPosts());
