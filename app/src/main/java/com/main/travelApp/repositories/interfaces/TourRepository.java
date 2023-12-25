@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.main.travelApp.models.Place;
 import com.main.travelApp.models.Tour;
+import com.main.travelApp.request.TourFilterRequest;
 import com.main.travelApp.response.AllTourResponse;
 import com.main.travelApp.response.TourDateResponse;
 
@@ -15,4 +16,5 @@ public interface TourRepository {
     public LiveData<List<Place>> findTopDestination();
     public LiveData<Tour> find(long id);
     public MutableLiveData<TourDateResponse> findAllDates(long id);
+    public MutableLiveData<AllTourResponse> findByFilter(TourFilterRequest request);
 }

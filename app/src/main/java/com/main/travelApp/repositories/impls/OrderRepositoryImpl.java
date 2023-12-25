@@ -1,5 +1,6 @@
 package com.main.travelApp.repositories.impls;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.main.travelApp.callbacks.ActionCallback;
@@ -29,7 +30,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public MutableLiveData<String> createOrder(CreateOrderRequest payload, ActionCallback<String> action) {
+    public MutableLiveData<String> CreateOrder(CreateOrderRequest payload, ActionCallback<String> action) {
         MutableLiveData<String> result = new MutableLiveData<>();
         orderService.createOrder(payload).enqueue(new Callback<>() {
             @Override
@@ -52,20 +53,24 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public MutableLiveData<Order> findOrderById(Long id) {
-        MutableLiveData<Order> result = new MutableLiveData<>();
-        orderService.findOrderById(id).enqueue(new Callback<>() {
+    public LiveData<Order> getOrder(String id) {
+        MutableLiveData<Order> order = new MutableLiveData<>();
+        Call<BaseResponse<Order>> call = orderService.getOrder(id);
+        call.enqueue(new Callback<BaseResponse<Order>>() {
             @Override
             public void onResponse(Call<BaseResponse<Order>> call, Response<BaseResponse<Order>> response) {
-                result.setValue(response.body().getData());
+                if(response.isSuccessful()){
+                    order.setValue(response.body().getData());
+                }else{
+                    order.setValue(null);
+                }
             }
 
             @Override
             public void onFailure(Call<BaseResponse<Order>> call, Throwable t) {
-
+                order.setValue(null);
             }
         });
-
-        return result;
+        return order;
     }
 }

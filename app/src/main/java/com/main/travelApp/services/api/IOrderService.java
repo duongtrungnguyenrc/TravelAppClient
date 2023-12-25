@@ -13,7 +13,6 @@ import retrofit2.http.Path;
 public interface IOrderService {
     @POST("payment/app/create_payment")
     Call<BaseResponse<String>> createOrder(@Body CreateOrderRequest payload);
-
     @GET("order/{id}")
-    Call<BaseResponse<Order>> findOrderById(@Path("id") Long id);
+    Call<BaseResponse<Order>> getOrder(@Path("id") String id);
 }

@@ -1,24 +1,20 @@
 package com.main.travelApp.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.main.travelApp.R;
 import com.main.travelApp.databinding.ActivityCheckOutBinding;
+import com.main.travelApp.repositories.impls.OrderRepositoryImpl;
 import com.main.travelApp.utils.ScreenManager;
-import com.main.travelApp.viewmodels.CheckoutViewModel;
-
-import java.util.Date;
-
-import lombok.Data;
+import com.squareup.picasso.Picasso;
 
 public class CheckOutActivity extends AppCompatActivity {
 
     private ActivityCheckOutBinding binding;
-    private CheckoutViewModel checkoutViewModel;
+    private OrderRepositoryImpl repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,26 +22,39 @@ public class CheckOutActivity extends AppCompatActivity {
         binding = ActivityCheckOutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ScreenManager.enableFullScreen(getWindow());
-        init();
-    }
+        repository = OrderRepositoryImpl.getInstance();
 
-    private void init() {
-        checkoutViewModel = new ViewModelProvider(this).get(CheckoutViewModel.class);
-        Intent intent = getIntent();
-//
-//        checkoutViewModel.getOrder(1L).observe(this, order -> {
-//            binding.txtPaymentTime.setText(order.getOrderDate());
-//            binding.txtPaymentMethod.setText(order.getPaymentMethod());
-//            binding.txtPaymentStatus.setText(order.getStatus());
-//            binding.txtTourName.setText(order.getTour().getName());
-//            binding.txtAdults.setText(order.getAdults());
-//            binding.txtChild.setText(order.getChildren());
-//            binding.txtTicketRank.setText(order.getTour().getType());
-//            binding.txtStartDate.setText(order.getDepartDate());
-//            binding.txtEndDate.setText(order.getEndDate());
-//            binding.txtHotelName.setText(order.getHotel().getName());
-//            binding.txtHotelAddress.setText(order.getHotel().getAddress());
-//            binding.txtSpecialRequest.setText(order.getSpecialRequest());
-//        });
+        repository.getOrder(getIntent().getExtras().getString("orderId")).observe(this, data -> {
+            binding.textView8.setText("Thông tin chuyến đi đã được gửi đến " +
+                    data.getContactInfo().getCustomerEmail() +
+                    ". hãy kiểm tra nhé!");
+            binding.txtOrderDate.setText(data.getOrderDate());
+            binding.txtMethod.setText(data.getPaymentMethod());
+            binding.txtTotal.setText(data.getTotalPrice() + " VND");
+            binding.txtStatus.setText(data.getStatus());
+            binding.txtTourName.setText(data.getTour().getName());
+            binding.txtAdults.setText(data.getAdults() + "");
+            binding.txtChildren.setText(data.getChildren() + "");
+            binding.tourType.setText(data.getTour().getTypeTitle());
+            binding.txtDepartDate.setText(data.getDepartDate());
+            binding.txtEndDate.setText(data.getEndDate());
+            if(data.getHotel() != null){
+                if(data.getHotel().getIllustration() != null && !data.getHotel().getIllustration().isEmpty()){
+                    Picasso.get()
+                            .load(data.getHotel().getIllustration())
+                            .placeholder(R.color.light_gray)
+                            .error(R.color.light_gray)
+                            .into(binding.imgHotelThumbnail);
+                }
+                binding.txtHotelName.setText(data.getHotel().getName());
+                binding.txtHotelAddress.setText(data.getHotel().getAddress());
+            }else{
+                binding.txtHotelAddress.setVisibility(View.GONE);
+                binding.txtHotelName.setVisibility(View.GONE);
+                binding.imgHotelThumbnail.setVisibility(View.GONE);
+            }
+
+        });
+
     }
 }

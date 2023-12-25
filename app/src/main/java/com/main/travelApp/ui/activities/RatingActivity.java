@@ -8,20 +8,25 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.main.travelApp.R;
 import com.main.travelApp.adapters.RatingAdapter;
 import com.main.travelApp.databinding.ActivityRatingBinding;
 import com.main.travelApp.models.Rate;
 import com.main.travelApp.models.StarDistribution;
+import com.main.travelApp.request.AddRateRequest;
 import com.main.travelApp.ui.components.BottomSheet;
 import com.main.travelApp.utils.ScreenManager;
+import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.viewmodels.RatingViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RatingActivity extends AppCompatActivity {
 
@@ -55,6 +60,8 @@ public class RatingActivity extends AppCompatActivity {
 
         if(tourId != -1) {
             RatingViewModel ratingViewModel = new ViewModelProvider(this).get(RatingViewModel.class);
+            ratingViewModel.setSharedPreferences(getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE));
+            ratingViewModel.setContext(this);
 
             ratingViewModel.getRateResponse(tourId).observe(this, response -> {
                 RatingAdapter ratingAdapter = new RatingAdapter(response.getRates(), this);
@@ -94,11 +101,39 @@ public class RatingActivity extends AppCompatActivity {
                             });
 
                             ratingAdapter.setRates(filteredComments);
+                            
+                        }else if(checkedId == R.id.option_lowest_rating){
+                            List<Rate> filteredComments = response.getRates();
+
+                            filteredComments = filteredComments.stream().sorted(new Comparator<Rate>() {
+                                @Override
+                                public int compare(Rate rate, Rate t1) {
+                                    return rate.getRatedStar() - t1.getRatedStar();
+                                }
+                            }).collect(Collectors.toList());
+
+                            ratingAdapter.setRates(filteredComments);
                         }
                     });
                 });
 
                 binding.btnOpenFilter.setOnClickListener(view -> filterBottomSheet.show());
+                binding.btnSendComment.setOnClickListener(view -> {
+                    int ratedStar = (int) binding.rbTourRating.getRating();
+                    String comment = binding.edtComment.getText().toString();
+                    AddRateRequest request = new AddRateRequest();
+                    request.setTourId(tourId);
+                    request.setComment(comment);
+                    request.setStar(ratedStar);
+
+                    ratingViewModel.addRate(request, tourId);
+                });
+                ratingViewModel.getIsRateAdded().observe(this, data -> {
+                    if(data){
+                        binding.rbTourRating.setRating(0);
+                        binding.edtComment.setText("");
+                    }
+                });
             });
         }
     }

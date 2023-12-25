@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.main.travelApp.models.Place;
 import com.main.travelApp.models.Tour;
+import com.main.travelApp.request.TourFilterRequest;
 import com.main.travelApp.response.AllTourResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.repositories.interfaces.TourRepository;
@@ -126,5 +127,28 @@ public class TourRepositoryImpl implements TourRepository {
         });
 
         return dates;
+    }
+
+    @Override
+    public MutableLiveData<AllTourResponse> findByFilter(TourFilterRequest request) {
+        MutableLiveData<AllTourResponse> tourRepsonse = new MutableLiveData<>();
+        Call<BaseResponse<AllTourResponse>> call = tourService.findTourByFilter(request);
+        call.enqueue(new Callback<BaseResponse<AllTourResponse>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<AllTourResponse>> call, Response<BaseResponse<AllTourResponse>> response) {
+                if(response.isSuccessful() && response != null){
+                    tourRepsonse.setValue(response.body().getData());
+                }else{
+                    Log.d("TOUR_findAll", "onResponse: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<AllTourResponse>> call, Throwable t) {
+                t.printStackTrace();
+                tourRepsonse.setValue(null);
+            }
+        });
+        return tourRepsonse;
     }
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.main.travelApp.repositories.impls.TourRepositoryImpl;
 import com.main.travelApp.repositories.interfaces.TourRepository;
+import com.main.travelApp.request.TourFilterRequest;
 import com.main.travelApp.response.AllTourResponse;
 
 public class TourViewModel extends ViewModel {
@@ -21,8 +22,20 @@ public class TourViewModel extends ViewModel {
         tours = tourRepository.findAll(page, limit);
     }
 
+    public void filter(TourFilterRequest request){
+        tourRepository.findByFilter(request).observeForever(data -> {
+            tours.setValue(data);
+        });
+    }
+
     public LiveData<AllTourResponse> getTours() {
         return tours;
+    }
+
+    public LiveData<AllTourResponse> getToursInit() {
+        this.page = 1;
+        this.limit = 15;
+        return tours = tourRepository.findAll(page, limit);
     }
 
     public int getPage() {

@@ -134,6 +134,7 @@
             android:paddingEnd="10dp">
 
             <TextView
+                android:id="@+id/txtEndDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -158,6 +159,7 @@
             android:paddingEnd="10dp">
 
             <TextView
+                android:id="@+id/txtMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -183,6 +185,7 @@
             android:paddingEnd="10dp">
 
             <TextView
+                android:id="@+id/txtStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -190,6 +193,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/txtOrderDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đã thanh toán"
@@ -220,6 +224,7 @@
             android:paddingEnd="10dp">
 
             <TextView
+                android:id="@+id/txtTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -245,6 +250,7 @@
             android:paddingEnd="10dp">
 
             <TextView
+                android:id="@+id/txtTourName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -270,6 +276,7 @@
             android:paddingEnd="10dp">
 
             <TextView
+                android:id="@+id/txtAdults"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -295,6 +302,7 @@
             android:paddingEnd="10dp">
 
             <TextView
+                android:id="@+id/txtChildren"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -320,6 +328,7 @@
             android:paddingEnd="10dp">
 
             <TextView
+                android:id="@+id/tourType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -345,6 +354,7 @@
             android:paddingEnd="10dp">
 
             <TextView
+                android:id="@+id/txtDepartDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -425,6 +435,7 @@
             android:background="@color/light_grey" />
 
         <TextView
+            android:id="@+id/txtMore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"

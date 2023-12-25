@@ -320,30 +320,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <EditText
-                android:id="@+id/edt_comment"
+            android:orientation="vertical">
+            <RatingBar
+                android:id="@+id/rbTourRating"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/bg_grey_border"
-                android:ems="10"
-                android:hint="Nhập bình luận"
-                android:inputType="text"
+                style="?android:attr/ratingBarStyleSmall"
+                android:stepSize="1"
+                android:progressTint="@color/yellow"
+                android:isIndicator="false"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:padding="10dp"
-                android:textSize="12sp" />
+                android:layout_marginBottom="10dp">
 
-            <ImageButton
-                android:id="@+id/btn_send_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:background="@color/transparent"
-                app:srcCompat="@drawable/ic_send_24" />
+                <EditText
+                    android:id="@+id/edt_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_grey_border"
+                    android:ems="10"
+                    android:hint="Nhập bình luận"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textSize="12sp" />
+
+                <ImageButton
+                    android:id="@+id/btn_send_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/ic_send_24" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
