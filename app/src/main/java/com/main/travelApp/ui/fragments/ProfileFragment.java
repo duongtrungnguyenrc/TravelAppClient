@@ -13,13 +13,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -40,8 +35,6 @@ import android.widget.ToggleButton;
 
 import com.main.travelApp.R;
 import com.main.travelApp.databinding.FragmentProfileBinding;
-import com.main.travelApp.models.LoginHistory;
-import com.main.travelApp.services.auth.AuthManager;
 import com.main.travelApp.ui.activities.EditPersonalInfoActivity;
 import com.main.travelApp.ui.activities.LoginActivity;
 import com.main.travelApp.ui.activities.LoginHistoryActivity;
@@ -51,14 +44,8 @@ import com.main.travelApp.ui.components.BottomSheet;
 import com.main.travelApp.ui.components.MyDialog;
 import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.viewmodels.ProfileViewModel;
-import com.main.travelApp.viewmodels.UserOrderViewModel;
 import com.main.travelApp.viewmodels.factories.ProfileViewModelFactory;
 import com.squareup.picasso.Picasso;
-
-import java.io.File;
-
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private FragmentProfileBinding profileBinding;
@@ -121,7 +108,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showUserInfoBottomSheet(){
-        userInfoBottomSheet.build((dialog, contentView) -> {
+        userInfoBottomSheet.setup((dialog, contentView) -> {
             TextView txtFullName = contentView.findViewById(R.id.txtUserName);
             TextView txtEmail = contentView.findViewById(R.id.txtEmail);
             TextView txtAddress = contentView.findViewById(R.id.txtAddress);

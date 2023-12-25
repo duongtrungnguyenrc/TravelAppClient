@@ -1,0 +1,35 @@
+<animated-vector xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="84dp"
+            android:height="84dp"
+            android:viewportWidth="84"
+            android:viewportHeight="84">
+
+            <path
+                android:name="cross"
+                android:pathData="M 14.14 14.14 L 69.86 69.86 M 14.14 69.86 L 69.86 14.14"
+                android:strokeColor="#FF0000"
+                android:strokeWidth="10"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round"
+                android:trimPathStart="0"
+                android:trimPathEnd="0" />
+        </vector>
+    </aapt:attr>
+
+    <target android:name="cross">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="trimPathEnd"
+                android:duration="500"
+                android:valueFrom="0"
+                android:valueTo="1"
+                android:valueType="floatType"
+                android:interpolator="@android:interpolator/fast_out_slow_in" />
+        </aapt:attr>
+    </target>
+</animated-vector>

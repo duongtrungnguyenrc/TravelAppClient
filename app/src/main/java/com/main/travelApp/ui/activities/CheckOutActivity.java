@@ -5,12 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.main.travelApp.R;
+import com.main.travelApp.databinding.ActivityCheckOutBinding;
+import com.main.travelApp.utils.ScreenManager;
 
 public class CheckOutActivity extends AppCompatActivity {
+
+    private ActivityCheckOutBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_out);
+        binding = ActivityCheckOutBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        ScreenManager.enableFullScreen(getWindow());
     }
 }

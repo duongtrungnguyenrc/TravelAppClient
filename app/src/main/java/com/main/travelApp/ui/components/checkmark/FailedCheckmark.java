@@ -13,16 +13,16 @@ import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import com.main.travelApp.R;
 
-public class SuccessCheckmark extends LinearLayout {
+public class FailedCheckmark extends LinearLayout {
     private final Context mContext;
 
-    public SuccessCheckmark(Context context) {
+    public FailedCheckmark(Context context) {
         super(context);
         this.mContext = context;
         init();
     }
 
-    public SuccessCheckmark(Context context, AttributeSet attrs) {
+    public FailedCheckmark(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
         init();
@@ -30,15 +30,15 @@ public class SuccessCheckmark extends LinearLayout {
 
     private void init() {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.component_success_checkmark, this, true);
+        View view = inflater.inflate(R.layout.component_failed_checkmark, this, true);
 
 
-        ImageView imgDone = view.findViewById(R.id.img_done);
+        ImageView imgDone = view.findViewById(R.id.img_failed);
         Drawable drawable = imgDone.getDrawable();
         if(drawable instanceof AnimatedVectorDrawableCompat) {
             AnimatedVectorDrawableCompat animatedVectorDrawableCompat = (AnimatedVectorDrawableCompat) drawable;
             animatedVectorDrawableCompat.start();
-        } else if (drawable instanceof  AnimatedVectorDrawable) {
+        } else if (drawable instanceof AnimatedVectorDrawable) {
             AnimatedVectorDrawable animatedVectorDrawable = (AnimatedVectorDrawable) drawable;
             animatedVectorDrawable.start();
         }

@@ -13,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.main.travelApp.R;
+import com.main.travelApp.models.Tour;
 import com.main.travelApp.models.TourDate;
 import com.main.travelApp.ui.activities.SelectTicketActivity;
 
@@ -25,13 +27,13 @@ public class TourDateAdapter extends RecyclerView.Adapter<TourDateAdapter.ViewHo
     private final Context context;
     private final String tourName;
 
-    private final long tourId;
+    private final Tour tour;
 
-    public TourDateAdapter(List<TourDate> dates, String tourName, Context context, long tourId) {
+    public TourDateAdapter(List<TourDate> dates, String tourName, Context context, Tour tour) {
         this.dates = dates;
         this.context = context;
         this.tourName = tourName;
-        this.tourId = tourId;
+        this.tour = tour;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -88,7 +90,7 @@ public class TourDateAdapter extends RecyclerView.Adapter<TourDateAdapter.ViewHo
 
             holder.getBtnSelectDate().setOnClickListener(view -> {
                 Intent intent = new Intent(context, SelectTicketActivity.class);
-                intent.putExtra("tour-id", tourId);
+                intent.putExtra("tour", new Gson().toJson(tour));
                 intent.putExtra("date-id", tourDate.getId());
                 context.startActivity(intent);
         });

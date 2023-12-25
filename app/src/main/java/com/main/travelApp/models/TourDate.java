@@ -1,6 +1,8 @@
 package com.main.travelApp.models;
 
+import java.text.NumberFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class TourDate {
     private long id;
@@ -37,8 +39,18 @@ public class TourDate {
         return adultPrice;
     }
 
+    public String getStringAdultPrice() {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.ENGLISH);
+        return numberFormat.format(adultPrice) + " VND";
+    }
+
     public double getChildPrice() {
         return childPrice;
+    }
+
+    public String getStringChildPrice() {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.ENGLISH);
+        return numberFormat.format(childPrice) + " VND";
     }
 
     public int getMaxPeople() {

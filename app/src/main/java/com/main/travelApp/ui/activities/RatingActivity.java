@@ -75,7 +75,7 @@ public class RatingActivity extends AppCompatActivity {
                 binding.prgsThreeStar.setProgress((int) Math.round(starDistribution.getThreeStar() / (response.getAverage() / 100)));
                 binding.prgsTwoStar.setProgress((int) Math.round(starDistribution.getTwoStar() / (response.getAverage() / 100)));
 
-                filterBottomSheet.build((dialogWindow, contentView) -> {
+                filterBottomSheet.setup((dialogWindow, contentView) -> {
                     ((RadioGroup) contentView.findViewById(R.id.filter_group)).setOnCheckedChangeListener((radioGroup, checkedId) -> {
                         if (checkedId == R.id.option_newest) {
                             @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

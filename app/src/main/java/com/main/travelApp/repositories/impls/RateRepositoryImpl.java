@@ -38,10 +38,10 @@ public class RateRepositoryImpl implements RateRepository {
     public MutableLiveData<RateResponse> findByBlogId(String accessToken, long id, int page, int limit) {
         MutableLiveData<RateResponse> rateResponse = new MutableLiveData<>();
         Call<BaseResponse<RateResponse>> call = rateService.getRateByBlogId(accessToken, id, page, limit);
-        call.enqueue(new Callback<BaseResponse<RateResponse>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<BaseResponse<RateResponse>> call, Response<BaseResponse<RateResponse>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     rateResponse.setValue(response.body().getData());
                 }
             }
@@ -80,12 +80,12 @@ public class RateRepositoryImpl implements RateRepository {
     @Override
     public void deleteRate(String accessToken, Long id, ActionCallback<String> callback) {
         Call<BaseResponse<Object>> call = rateService.deleteRate(accessToken, id);
-        call.enqueue(new Callback<BaseResponse<Object>>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<BaseResponse<Object>> call, Response<BaseResponse<Object>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     callback.onSuccess(response.body().getMessage());
-                }else{
+                } else {
                     ErrorResponseHandler<BaseResponse<Object>> errorResponseHandler = new ErrorResponseHandler<>();
                     BaseResponse<Object> errorBody = errorResponseHandler.getResponseBody(response);
                     callback.onFailure(errorBody.getMessage());

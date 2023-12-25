@@ -1,8 +1,5 @@
 package com.main.travelApp.ui.components;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -22,10 +19,10 @@ import com.main.travelApp.R;
 import com.main.travelApp.callbacks.BottomSheetActionHandler;
 
 public class BottomSheet {
-    private static Dialog dialog;
+    private final Dialog dialog;
     private final View contentView;
 
-    private GestureDetector gestureDetector;
+    private final GestureDetector gestureDetector;
     private float initialY;
     private float downY;
 
@@ -39,9 +36,7 @@ public class BottomSheet {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
-        if (heading != null) {
-            ((TextView) dialog.findViewById(R.id.txt_heading)).setText(heading);
-        }
+        ((TextView) dialog.findViewById(R.id.txt_heading)).setText(heading);
 
         gestureDetector = new GestureDetector(context, new GestureListener());
         dialog.getWindow().getDecorView().setOnTouchListener((v, event) -> {
@@ -56,7 +51,7 @@ public class BottomSheet {
         root.addView(contentView);
     }
 
-    public void build(BottomSheetActionHandler actionHandler) {
+    public void setup(BottomSheetActionHandler actionHandler) {
         actionHandler.action(dialog, contentView);
     }
 
