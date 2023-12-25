@@ -147,7 +147,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
             }
         });
         binding.btnContinue.setOnClickListener(view -> {
-            OrderRepositoryImpl.getInstance().CreateOrder(createPaymentRequest, new ActionCallback<String>() {
+            OrderRepositoryImpl.getInstance().createOrder(createPaymentRequest, new ActionCallback<String>() {
                 @Override
                 public void onSuccess(String url) {
                     Intent paymentIntent = new Intent(Intent.ACTION_VIEW);
