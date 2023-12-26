@@ -78,8 +78,8 @@ public class SupportActivity extends AppCompatActivity {
                 adapter.addMessage(message);
 
                 binding.edtChatInput.setText("");
-                NotificationManager notificationHelper = new NotificationManager(getApplicationContext());
-                notificationHelper.createNotification("Tin nhắn mới từ " + message.getName(), message.getMessage(), SupportActivity.class);
+//                NotificationManager notificationHelper = new NotificationManager(getApplicationContext());
+//                notificationHelper.createNotification("Tin nhắn mới từ " + message.getName(), message.getMessage(), SupportActivity.class);
                 scrollToBottom();
             }
 

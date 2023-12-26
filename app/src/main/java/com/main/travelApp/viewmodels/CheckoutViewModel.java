@@ -14,7 +14,7 @@ public class CheckoutViewModel extends ViewModel {
         orderRepository = OrderRepositoryImpl.getInstance();
     }
 
-    public LiveData<Order> getOrder(Long id) {
-        return orderRepository.findOrderById(id);
+    public LiveData<Order> getOrder(String id) {
+        return orderRepository.getOrder(id);
     }
 }

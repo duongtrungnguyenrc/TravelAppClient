@@ -25,7 +25,7 @@ public class CheckOutActivity extends AppCompatActivity {
         repository = OrderRepositoryImpl.getInstance();
 
         repository.getOrder(getIntent().getExtras().getString("orderId")).observe(this, data -> {
-            binding.textView8.setText("Thông tin chuyến đi đã được gửi đến " +
+            binding.txtNotify.setText("Thông tin chuyến đi đã được gửi đến " +
                     data.getContactInfo().getCustomerEmail() +
                     ". hãy kiểm tra nhé!");
             binding.txtOrderDate.setText(data.getOrderDate());

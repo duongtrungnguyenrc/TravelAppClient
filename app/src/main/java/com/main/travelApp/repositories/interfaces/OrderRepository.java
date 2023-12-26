@@ -8,6 +8,6 @@ import com.main.travelApp.models.Order;
 import com.main.travelApp.request.CreateOrderRequest;
 
 public interface OrderRepository {
-    public MutableLiveData<String> CreateOrder(CreateOrderRequest payload, ActionCallback<String> action);
+    public MutableLiveData<String> createOrder(CreateOrderRequest payload, ActionCallback<String> action);
     public LiveData<Order> getOrder(String id);
 }

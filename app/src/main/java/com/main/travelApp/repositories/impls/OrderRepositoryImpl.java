@@ -30,7 +30,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public MutableLiveData<String> CreateOrder(CreateOrderRequest payload, ActionCallback<String> action) {
+    public MutableLiveData<String> createOrder(CreateOrderRequest payload, ActionCallback<String> action) {
         MutableLiveData<String> result = new MutableLiveData<>();
         orderService.createOrder(payload).enqueue(new Callback<>() {
             @Override
