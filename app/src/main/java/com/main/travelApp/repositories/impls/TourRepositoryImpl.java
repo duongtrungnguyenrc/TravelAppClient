@@ -12,8 +12,8 @@ import com.main.travelApp.response.AllTourResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.repositories.interfaces.TourRepository;
 import com.main.travelApp.response.TourDateResponse;
-import com.main.travelApp.services.api.APIClient;
-import com.main.travelApp.services.api.ITourService;
+import com.main.travelApp.ui.services.api.APIClient;
+import com.main.travelApp.ui.services.api.ITourService;
 
 import java.util.List;
 

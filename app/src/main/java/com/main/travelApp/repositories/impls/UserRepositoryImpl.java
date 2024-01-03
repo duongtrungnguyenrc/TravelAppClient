@@ -12,8 +12,8 @@ import com.main.travelApp.request.UpdateUserRequest;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.models.LoginHistory;
 import com.main.travelApp.response.RecentActivitiesResponse;
-import com.main.travelApp.services.api.APIClient;
-import com.main.travelApp.services.api.IUserService;
+import com.main.travelApp.ui.services.api.APIClient;
+import com.main.travelApp.ui.services.api.IUserService;
 import com.main.travelApp.utils.ErrorResponseHandler;
 
 import java.util.List;

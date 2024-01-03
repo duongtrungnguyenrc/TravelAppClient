@@ -1,13 +1,11 @@
 package com.main.travelApp.repositories.impls;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.main.travelApp.callbacks.ActionCallback;
 import com.main.travelApp.repositories.interfaces.SearchRepository;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.response.SearchResponse;
-import com.main.travelApp.services.api.APIClient;
-import com.main.travelApp.services.api.ISearchService;
+import com.main.travelApp.ui.services.api.APIClient;
+import com.main.travelApp.ui.services.api.ISearchService;
 
 import java.io.IOException;
 

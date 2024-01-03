@@ -1013,30 +1013,32 @@ public class VerticalStepperFormView extends LinearLayout {
             String[] errorMessages,
             boolean formCompleted) {
 
-        for (int i = 0; i < completedSteps.length; i++) {
-            StepHelper stepHelper = stepHelpers.get(i);
-            Step<?> step = stepHelper.getStepInstance();
+        if(stepHelpers != null){
+            for (int i = 0; i < completedSteps.length; i++) {
+                StepHelper stepHelper = stepHelpers.get(i);
+                Step<?> step = stepHelper.getStepInstance();
 
-            step.restoreStepDataInternal(stepsData[i]);
-            step.restoreErrorStateInternal(errorSteps[i]);
-            step.updateTitle(titles[i], false);
-            step.updateSubtitle(subtitles[i], false);
-            step.updateNextButtonText(buttonTexts[i], false);
-            if (completedSteps[i]) {
-                step.markAsCompleted(false);
-            } else {
-                step.markAsUncompleted(errorMessages[i], false);
+                step.restoreStepDataInternal(stepsData[i]);
+                step.restoreErrorStateInternal(errorSteps[i]);
+                step.updateTitle(titles[i], false);
+                step.updateSubtitle(subtitles[i], false);
+                step.updateNextButtonText(buttonTexts[i], false);
+                if (completedSteps[i]) {
+                    step.markAsCompleted(false);
+                } else {
+                    step.markAsUncompleted(errorMessages[i], false);
+                }
             }
+
+            goToStep(positionToOpen, false);
+
+            if (formCompleted) {
+                this.formCompleted = true;
+                stepHelpers.get(getOpenStepPosition()).disableAllButtons();
+            }
+
+            refreshFormProgress();
         }
-
-        goToStep(positionToOpen, false);
-
-        if (formCompleted) {
-            this.formCompleted = true;
-            stepHelpers.get(getOpenStepPosition()).disableAllButtons();
-        }
-
-        refreshFormProgress();
     }
 
     class FormStepListener implements Step.InternalFormStepListener {

@@ -60,7 +60,7 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtTourName.setText(generalTours.get(position).getName());
-        holder.txtPrice.setText(String.valueOf(generalTours.get(position).getPrice()) + " VND");
+        holder.txtPrice.setText(generalTours.get(position).getStringPrice());
         holder.txtLocation.setText(generalTours.get(position).getLocation());
         holder.rbRating.setRating((float) generalTours.get(position).getRatedStar());
         Picasso.get()

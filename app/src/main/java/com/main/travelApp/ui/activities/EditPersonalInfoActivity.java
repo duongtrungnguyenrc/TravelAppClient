@@ -95,7 +95,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
             Toast.makeText(this, "Đã sao chép vào bộ nhớ tạm!", Toast.LENGTH_SHORT).show();
 
         }else if(view == binding.btnAddress){
-            MyDialog editUserNameDialog = new MyDialog(this, getLayoutInflater(), R.layout.fragment_enter_info_dialog, new MyDialog.Handler() {
+            MyDialog editAddressDialog = new MyDialog(this, getLayoutInflater(), R.layout.fragment_enter_info_dialog, new MyDialog.Handler() {
                 @Override
                 public void handle(AlertDialog dialog, View contentView) {
                     TextView txtTitle = contentView.findViewById(R.id.txtTitle);
@@ -104,6 +104,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
                     EditText edtAddress = contentView.findViewById(R.id.edtContent);
 
                     txtTitle.setText("Nhập địa chỉ");
+                    edtAddress.setHint("phường Tân Phong, quận 7, TP.HCM");
                     edtAddress.setText(binding.txtAddress.getText());
 
                     btnCancel.setOnClickListener(view -> dialog.dismiss());
@@ -116,10 +117,10 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
                     });
                 }
             });
-            editUserNameDialog.show(getSupportFragmentManager(), "EDIT_ADDRESS_DIALOG");
+            editAddressDialog.show(getSupportFragmentManager(), "EDIT_ADDRESS_DIALOG");
 
         }else if(view == binding.btnPhone){
-            MyDialog editUserNameDialog = new MyDialog(this, getLayoutInflater(), R.layout.fragment_enter_info_dialog, new MyDialog.Handler() {
+            MyDialog editPhoneDialog = new MyDialog(this, getLayoutInflater(), R.layout.fragment_enter_info_dialog, new MyDialog.Handler() {
                 @Override
                 public void handle(AlertDialog dialog, View contentView) {
                     TextView txtTitle = contentView.findViewById(R.id.txtTitle);
@@ -128,6 +129,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
                     EditText edtPhone = contentView.findViewById(R.id.edtContent);
 
                     txtTitle.setText("Nhập số điện thoại");
+                    edtPhone.setHint("0123456789");
                     edtPhone.setText(binding.txtPhone.getText());
 
                     btnCancel.setOnClickListener(view -> dialog.dismiss());
@@ -140,7 +142,7 @@ public class EditPersonalInfoActivity extends AppCompatActivity implements View.
                     });
                 }
             });
-            editUserNameDialog.show(getSupportFragmentManager(), "EDIT_ADDRESS_DIALOG");
+            editPhoneDialog.show(getSupportFragmentManager(), "EDIT_ADDRESS_DIALOG");
 
         }else if(view == binding.btnSave){
             MyDialog alertDialog = new MyDialog(this, getLayoutInflater(), R.layout.fragment_confirm_dialog, new MyDialog.Handler() {

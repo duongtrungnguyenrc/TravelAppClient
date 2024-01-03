@@ -72,7 +72,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusableInTouchMode="true"/>
 
     <View
         android:layout_width="match_parent"

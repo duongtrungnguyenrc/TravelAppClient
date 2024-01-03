@@ -1,4 +1,4 @@
-package com.main.travelApp.services.auth;
+package com.main.travelApp.ui.services.auth;
 
 import com.main.travelApp.models.AuthInstance;
 import com.main.travelApp.models.User;

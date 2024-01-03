@@ -2,6 +2,9 @@ package com.main.travelApp.models;
 
 import androidx.annotation.Nullable;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class MinimizeTour {
     private long id;
     private String name;
@@ -106,6 +109,10 @@ public class MinimizeTour {
         this.typeTitle = typeTitle;
     }
 
+    public String getStringPrice(){
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.ENGLISH);
+        return numberFormat.format(price) + " VND";
+    }
     @Nullable
     public String getActivityTime() {
         return activityTime;

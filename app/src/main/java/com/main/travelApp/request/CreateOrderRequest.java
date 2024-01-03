@@ -1,6 +1,7 @@
 package com.main.travelApp.request;
 
 import com.main.travelApp.models.ContactInfo;
+import com.main.travelApp.models.HotelRoom;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -98,31 +99,37 @@ public class CreateOrderRequest {
         this.contactInfo = contactInfo;
     }
 
-    public void increaseAdults() {
+    public void increaseAdults(HotelRoom room) {
         if(adults < 10) {
             adults++;
-            amount += adultPrice;
+            amount += adultPrice + (room != null ? room.getPrice() : 0);
         }
     }
 
-    public void decreaseAdults() {
+    public void decreaseAdults(HotelRoom room) {
         if(adults > 0) {
             adults--;
-            amount -= adultPrice;
+            amount -= adultPrice + (room != null ? room.getPrice() : 0);
         }
     }
 
-    public void increaseChilds() {
+    public void increaseChilds(HotelRoom room) {
         if(children < 10) {
             children++;
-            amount += childPrice;
+            amount += childPrice + (
+                    children % 2 == 0 ?
+                    (room != null ? room.getPrice() : 0) : 0
+            );
         }
     }
 
-    public void decreaseChilds() {
+    public void decreaseChilds(HotelRoom room) {
         if(children > 0) {
             children--;
-            amount -= childPrice;
+            amount -= childPrice + (
+                    children % 2 == 0 ?
+                    0 : (room != null ? room.getPrice() : 0)
+            );
         }
     }
 

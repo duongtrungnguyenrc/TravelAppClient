@@ -1,5 +1,6 @@
 package com.main.travelApp.ui.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,8 +11,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.main.travelApp.R;
 import com.main.travelApp.adapters.ParagraphAdapter;
@@ -39,6 +43,7 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
     private ActivityTourDetailBinding binding;
     private TourDetailViewModel tourDetailViewModel;
     private BottomSheet overviewBottomSheet;
+    private SharedPreferences sharedPreferences;
     private long tourId = -1;
     private Tour tour;
     private UserRepositoryImpl userRepository;
@@ -61,6 +66,7 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
         this.binding = ActivityTourDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        sharedPreferences = getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE);
 
         Intent intent = getIntent();
         tourId = intent.getLongExtra("tour-id", -1);
@@ -142,9 +148,10 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
     }
 
     private void fetchRate(long id) {
-        tourDetailViewModel.getRates(id).observe(this, res -> {
+        tourDetailViewModel.getRates(sharedPreferences.getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, ""), id).observe(this, res -> {
             Log.d("rating", res.toString());
             RatingAdapter ratingAdapter = new RatingAdapter(res.getRates(), this);
+            ratingAdapter.setAllScreen(false);
             binding.rcvRating.setAdapter(ratingAdapter);
             binding.rcvRating.setLayoutManager(new LinearLayoutManager(this));
         });
@@ -183,5 +190,17 @@ public class TourDetailActivity extends AppCompatActivity implements StepperForm
 
     private void showOverviewBottomSheet() {
         overviewBottomSheet.show();
+    }
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case 0 -> {
+                Toast.makeText(this, "Sửa " + item.getGroupId(), Toast.LENGTH_SHORT).show();
+            }
+            case 1 -> {
+                Toast.makeText(this, "Xóa " + item.getGroupId(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        return true;
     }
 }

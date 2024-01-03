@@ -11,8 +11,8 @@ import com.main.travelApp.repositories.interfaces.PostRepository;
 import com.main.travelApp.response.AllPostResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.response.PostDetailResponse;
-import com.main.travelApp.services.api.APIClient;
-import com.main.travelApp.services.api.IPostService;
+import com.main.travelApp.ui.services.api.APIClient;
+import com.main.travelApp.ui.services.api.IPostService;
 
 import java.util.List;
 

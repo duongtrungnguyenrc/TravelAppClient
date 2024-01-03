@@ -53,12 +53,6 @@ public class HomeViewModel extends ViewModel {
         this();
         this.sharedPreferences = sharedPreferences;
 
-        recentActivities = userRepository.getRecentActivities(sharedPreferences.getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, ""), new ActionCallback<>() {
-            @Override
-            public void onFailure(String message) {
-                Log.e("request-error", message);
-            }
-        });
 
         isExpired = new MutableLiveData<>();
         isExpired.setValue(false);
@@ -100,6 +94,11 @@ public class HomeViewModel extends ViewModel {
     }
 
     public LiveData<RecentActivitiesResponse> getRecentActivities() {
-        return recentActivities;
+        return recentActivities = userRepository.getRecentActivities(sharedPreferences.getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, ""), new ActionCallback<>() {
+            @Override
+            public void onFailure(String message) {
+                Log.e("request-error", message);
+            }
+        });
     }
 }

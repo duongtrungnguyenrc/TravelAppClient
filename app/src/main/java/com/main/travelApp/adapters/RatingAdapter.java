@@ -1,7 +1,9 @@
 package com.main.travelApp.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,11 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.ViewHolder
 
     private List<Rate> rates;
     private final Context context;
+    private boolean isAllScreen = false;
+
+    public void setAllScreen(boolean allScreen) {
+        isAllScreen = allScreen;
+    }
 
     public RatingAdapter(List<Rate> rates, Context context) {
         this.rates = rates;
@@ -38,9 +45,23 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RatingAdapter.ViewHolder holder, int position) {
-        final Rate rate = rates.get(position);
-        holder.txtUserName.setText(rate.getUsername());
+    public void onBindViewHolder(@NonNull RatingAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        Rate rate = rates.get(position);
+        Log.d("avatar", "==================== " + rate.getUsername() + " ======================");
+        Log.d("avatar", "onBindViewHolder: " + rate.isActive());
+        Log.d("avatar", "==================== " + rate.getUsername() + " ======================");
+        String userName = rate.getUsername();
+        if(rate.isActive()){
+            userName += " (Bạn)";
+            holder.itemView.setEnabled(true);
+        }else{
+            holder.itemView.setEnabled(false);
+        }
+
+        if(!isAllScreen){
+            holder.itemView.setEnabled(false);
+        }
+        holder.txtUserName.setText(userName);
         holder.txtRatedStar.setText(String.valueOf(rate.getStar()));
         holder.txtComment.setText(rate.getContent());
         if(rate.getAvatar() != null && !rate.getAvatar().isEmpty()) {
@@ -49,7 +70,16 @@ public class RatingAdapter extends RecyclerView.Adapter<RatingAdapter.ViewHolder
                     .placeholder(R.color.light_gray)
                     .error(R.drawable.avatar_profile)
                     .into(holder.imgAvatar);
+        }else{
+            holder.imgAvatar.setImageResource(R.drawable.avatar_profile);
         }
+        holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+            @Override
+            public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+                contextMenu.add(Integer.parseInt(rate.getId()), 0, 0, "Sửa");
+                contextMenu.add(Integer.parseInt(rate.getId()),  1, 1, "Xóa");
+            }
+        });
     }
 
     @Override

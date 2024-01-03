@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="7dp">
+    android:padding="7dp"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground">
 
     <androidx.cardview.widget.CardView
         android:layout_width="35dp"

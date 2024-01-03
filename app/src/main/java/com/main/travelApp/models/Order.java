@@ -1,5 +1,8 @@
 package com.main.travelApp.models;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Order {
     private Long id;
     private String orderDate;
@@ -100,6 +103,10 @@ public class Order {
 
     public double getTotalPrice() {
         return totalPrice;
+    }
+    public String getStringTotalPrice(){
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.ENGLISH);
+        return numberFormat.format(totalPrice) + " VND";
     }
 
     public void setTotalPrice(double totalPrice) {

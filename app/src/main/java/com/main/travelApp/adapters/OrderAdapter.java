@@ -96,7 +96,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         holder.binding.txtOrderedDate.setText("Ngày đặt: " + currentOrder.getOrderDate());
         holder.binding.txtEndDate.setText("Kết thúc: " + currentOrder.getEndDate());
         holder.binding.txtStartDate.setText("Khởi hành: " + currentOrder.getDepartDate());
-        holder.binding.txtOrderPrice.setText(currentOrder.getTotalPrice() + " VNĐ");
+        holder.binding.txtOrderPrice.setText(currentOrder.getStringTotalPrice());
         holder.binding.txtStatus.setText(currentOrder.getStatus());
         switch (currentOrder.getStatus()){
             case "Đã thanh toán" -> {
@@ -125,7 +125,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
                     ((TextView) contentView.findViewById(R.id.txtDepart)).setText("Xuất phát: " + currentOrder.getTour().getDepart());
                     ((TextView) contentView.findViewById(R.id.txtDestination)).setText("Đích: " + currentOrder.getTour().getLocation());
                     ((TextView) contentView.findViewById(R.id.txtPaymentMethod)).setText("PTTT: " + currentOrder.getPaymentMethod());
-                    ((TextView) contentView.findViewById(R.id.txtOrderPrice)).setText(currentOrder.getTotalPrice() + " VNĐ");
+                    ((TextView) contentView.findViewById(R.id.txtOrderPrice)).setText(currentOrder.getStringTotalPrice());
                     ((TextView) contentView.findViewById(R.id.txtFullName)).setText(currentOrder.getContactInfo().getCustomerFullName());
                     ((TextView) contentView.findViewById(R.id.txtPhone)).setText(currentOrder.getContactInfo().getCustomerPhone());
                     ((TextView) contentView.findViewById(R.id.txtEmail)).setText(currentOrder.getContactInfo().getCustomerEmail());

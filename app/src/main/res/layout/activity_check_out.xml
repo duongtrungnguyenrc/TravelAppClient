@@ -8,7 +8,7 @@
     tools:context=".ui.activities.CheckOutActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/statusBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -46,27 +46,39 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.main.travelApp.ui.components.checkmark.SuccessCheckmark
-            android:id="@+id/successCheckmark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_heading">
+        android:id="@+id/successCheckmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_heading">
 
-        </com.main.travelApp.ui.components.checkmark.SuccessCheckmark>
+    </com.main.travelApp.ui.components.checkmark.SuccessCheckmark>
+    <com.main.travelApp.ui.components.checkmark.FailedCheckmark
+        android:id="@+id/failedCheckmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_heading">
+
+    </com.main.travelApp.ui.components.checkmark.FailedCheckmark>
 
         <TextView
             android:id="@+id/txt_payment_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_weight="1"
             android:text="Giao dịch thành công"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/successCheckmark"
+            app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="@+id/successCheckmark"
             app:layout_constraintTop_toBottomOf="@+id/successCheckmark" />
 
@@ -77,7 +89,6 @@
             android:layout_marginTop="5dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="Thông tin chuyến đi đã được gửi đến duongtrungnguyen@gmail.com. hãy kiểm tra nhé!"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="13sp"
@@ -93,7 +104,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/statusBackground">
 
         <TextView
             android:layout_width="match_parent"
@@ -134,7 +145,6 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/txtEndDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -159,7 +169,6 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/txtMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -185,7 +194,6 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/txtStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -193,7 +201,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/txtOrderDate"
+                android:id="@+id/txtStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đã thanh toán"
@@ -224,7 +232,6 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/txtTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -250,7 +257,6 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/txtTourName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -276,7 +282,6 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/txtAdults"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -284,7 +289,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/txt_child"
+                android:id="@+id/txt_children"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -302,7 +307,6 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/txtChildren"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -328,7 +332,6 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/tourType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -354,7 +357,6 @@
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/txtDepartDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -435,7 +437,6 @@
             android:background="@color/light_grey" />
 
         <TextView
-            android:id="@+id/txtMore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"

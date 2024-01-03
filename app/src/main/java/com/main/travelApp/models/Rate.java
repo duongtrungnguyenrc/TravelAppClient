@@ -23,6 +23,21 @@ public class Rate {
         this.isActive = isActive;
     }
 
+    @Override
+    public String toString() {
+        return "Rate{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", star=" + star +
+                ", avatar='" + avatar + '\'' +
+                ", ratedStar=" + ratedStar +
+                ", ratedDate='" + ratedDate + '\'' +
+                ", content='" + content + '\'' +
+                ", isActive=" + isActive +
+                '}';
+    }
+
     public Rate() {
     }
 

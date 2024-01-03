@@ -1,4 +1,4 @@
-package com.main.travelApp.services.api;
+package com.main.travelApp.ui.services.api;
 
 import com.main.travelApp.models.MinimizeTour;
 import com.main.travelApp.models.Place;

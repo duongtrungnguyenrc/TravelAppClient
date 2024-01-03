@@ -8,6 +8,7 @@
     tools:context=".ui.activities.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp">
@@ -83,9 +84,8 @@
                 android:layout_marginTop="5dp"
                 android:height="40dp"
                 android:background="@drawable/custom_edit_text_rounded"
-                android:hint="example233@gmail.com"
                 android:padding="10dp"
-                android:text="duongtrungnguyen00@gmail.com"
+                android:hint="duongtrungnguyen00@gmail.com"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -117,7 +117,6 @@
                     android:height="45dp"
                     android:background="@drawable/custom_edit_text_rounded"
                     android:padding="10dp"
-                    android:text="Nguyen@123"
                     android:textSize="13sp"/>
                 <ToggleButton
                     android:clickable="true"
@@ -227,35 +226,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView">
-
-            <Button
-                android:id="@+id/btnFacebook"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_button_outline"
-                android:fontFamily="@font/alata"
-                android:padding="10dp"
-                android:singleLine="false"
-                android:text="Facebook"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                app:backgroundTint="@color/black" />
-
-            <Button
-                android:id="@+id/btnLinkdedIn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_button_outline"
-                android:fontFamily="@font/alata"
-                android:padding="10dp"
-                android:text="Linked in"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                app:backgroundTint="@color/black" />
 
             <Button
                 android:id="@+id/btnGoogle"

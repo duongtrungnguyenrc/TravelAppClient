@@ -1,6 +1,7 @@
 package com.main.travelApp.ui.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -134,6 +136,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     .placeholder(R.color.light_gray)
                     .error(R.color.light_gray)
                     .into(homeBinding.imgAvatar);
+
+        homeBinding.layoutFloatingSearchResult.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                hideKeyboard();
+                return true;
+            }
+        });
     }
 
     private void hideKeyboard() {
@@ -176,6 +186,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 homeBinding.layoutFloatingSearchResult.startAnimation(animation);
                 homeBinding.layoutFloatingSearchResult.setVisibility(View.VISIBLE);
                 homeBinding.btnSearchCancel.setVisibility(View.VISIBLE);
+                homeBinding.scrollView.setVisibility(View.GONE);
                 homeBinding.btnSupport.setVisibility(View.GONE);
             }
         });
@@ -186,6 +197,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             homeBinding.layoutFloatingSearchResult.setVisibility(View.GONE);
             homeBinding.btnSearchCancel.setVisibility(View.GONE);
             homeBinding.btnSupport.setVisibility(View.VISIBLE);
+            homeBinding.scrollView.setVisibility(View.VISIBLE);
             hideKeyboard();
             homeBinding.edtSearch.setText("");
             homeBinding.edtSearch.clearFocus();
@@ -221,7 +233,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     postSearchResultAdapter.setPosts(response.getPosts());
                     homeBinding.layoutRecentActivity.setVisibility(View.GONE);
                     homeBinding.layoutSearchResult.setVisibility(View.VISIBLE);
-                    hideKeyboard();
+//                    hideKeyboard();
                 }
 
                 @Override

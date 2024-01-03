@@ -47,6 +47,7 @@ import com.main.travelApp.ui.components.EnterConfirmCodeDialog;
 import com.main.travelApp.ui.components.EnterConfirmResetPassCodeDialog;
 import com.main.travelApp.ui.components.EnterEmailDialog;
 import com.main.travelApp.ui.components.EnterNewPasswordDialog;
+import com.main.travelApp.utils.KeyBoardUtils;
 import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.viewmodels.SignUpViewModel;
@@ -104,6 +105,13 @@ public class LoginActivity extends AppCompatActivity {
         mSpannableString.setSpan(new UnderlineSpan(), 0, forgotPassword.length(), 0);
         binding.txtForgotPassword.setText(mSpannableString);
 
+        binding.mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                KeyBoardUtils.hideKeyboard(LoginActivity.this);
+                return true;
+            }
+        });
         binding.edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

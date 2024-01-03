@@ -7,6 +7,7 @@
     android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
@@ -96,7 +97,7 @@
                         android:layout_marginRight="5dp"
                         android:height="40dp"
                         android:background="@drawable/custom_edit_text_rounded"
-                        android:hint="John"
+                        android:hint="Nguyễn Văn"
                         android:padding="10dp"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -125,7 +126,7 @@
                         android:layout_marginTop="5dp"
                         android:height="40dp"
                         android:background="@drawable/custom_edit_text_rounded"
-                        android:hint="Doe"
+                        android:hint="A"
                         android:padding="10dp"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -154,7 +155,7 @@
                     android:layout_marginTop="5dp"
                     android:height="40dp"
                     android:background="@drawable/custom_edit_text_rounded"
-                    android:hint="example223@gmail.com"
+                    android:hint="nguyenvana223@gmail.com"
                     android:padding="10dp"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -176,6 +177,7 @@
                     android:textSize="12sp" />
 
                 <EditText
+                    android:inputType="number"
                     android:id="@+id/edtPhone"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -381,34 +383,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView">
-
-            <Button
-                android:id="@+id/btnFacebook"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_button_outline"
-                android:fontFamily="@font/alata"
-                android:padding="10dp"
-                android:text="Facebook"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                app:backgroundTint="@color/black" />
-
-            <Button
-                android:id="@+id/btnLinkdedIn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_button_outline"
-                android:fontFamily="@font/alata"
-                android:padding="10dp"
-                android:text="Linked in"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                app:backgroundTint="@color/black" />
 
             <Button
                 android:id="@+id/btnGoogle"

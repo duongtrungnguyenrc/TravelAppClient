@@ -1,7 +1,6 @@
 package com.main.travelApp.models;
 
 import java.text.NumberFormat;
-import java.util.Date;
 import java.util.Locale;
 
 public class TourDate {
@@ -59,5 +58,20 @@ public class TourDate {
 
     public int getCurrentPeople() {
         return currentPeople;
+    }
+
+    @Override
+    public String toString() {
+        return "TourDate{" +
+                "id=" + id +
+                ", departDate='" + departDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", type='" + type + '\'' +
+                ", duration=" + duration +
+                ", adultPrice=" + adultPrice +
+                ", childPrice=" + childPrice +
+                ", maxPeople=" + maxPeople +
+                ", currentPeople=" + currentPeople +
+                '}';
     }
 }

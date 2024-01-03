@@ -91,9 +91,11 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             if(selectedHotel != null && selectedRoom != null) listener.onBlur(selectedHotel, selectedRoom);
             if(selectedHotel != null && Objects.equals(selectedHotel.getId(), hotel.getId())) {
                setSelectedHotel(null);
+               selectedRoom = null;
             }
             else {
                 setSelectedHotel(hotel);
+                selectedRoom = null;
             }
             listener.onClick(hotel, position);
         });

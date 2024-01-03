@@ -15,9 +15,9 @@ import com.main.travelApp.request.SignUpRequest;
 import com.main.travelApp.request.TokenAuthRequest;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.response.SignUpResponse;
-import com.main.travelApp.services.api.APIClient;
-import com.main.travelApp.services.api.IAuthService;
-import com.main.travelApp.services.auth.AuthManager;
+import com.main.travelApp.ui.services.api.APIClient;
+import com.main.travelApp.ui.services.api.IAuthService;
+import com.main.travelApp.ui.services.auth.AuthManager;
 import com.main.travelApp.utils.ErrorResponseHandler;
 import com.onesignal.OneSignal;
 

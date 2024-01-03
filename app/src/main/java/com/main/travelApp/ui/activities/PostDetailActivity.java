@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.main.travelApp.R;
@@ -19,6 +20,7 @@ import com.main.travelApp.databinding.ActivityPostDetailBinding;
 import com.main.travelApp.request.AddRateRequest;
 import com.main.travelApp.response.RateResponse;
 import com.main.travelApp.ui.components.ExpiredDialog;
+import com.main.travelApp.utils.KeyBoardUtils;
 import com.main.travelApp.utils.LayoutManagerUtil;
 import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.utils.ScreenManager;
@@ -108,6 +110,13 @@ public class PostDetailActivity extends AppCompatActivity implements View.OnClic
         binding.rcvComment.setAdapter(postCommentAdapter);
         binding.btnBack.setOnClickListener(view -> finish());
         binding.btnSubmitComment.setEnabled(false);
+        binding.mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                KeyBoardUtils.hideKeyboard(PostDetailActivity.this);
+                return true;
+            }
+        });
     }
 
     public void setEvents(){

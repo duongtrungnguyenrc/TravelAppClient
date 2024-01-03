@@ -8,9 +8,9 @@ import com.main.travelApp.models.Order;
 import com.main.travelApp.repositories.interfaces.OrderRepository;
 import com.main.travelApp.request.CreateOrderRequest;
 import com.main.travelApp.response.BaseResponse;
-import com.main.travelApp.services.api.APIClient;
-import com.main.travelApp.services.api.IOrderService;
-import com.main.travelApp.services.api.IPostService;
+import com.main.travelApp.ui.services.api.APIClient;
+import com.main.travelApp.ui.services.api.IOrderService;
+import com.main.travelApp.utils.ErrorResponseHandler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,17 +30,19 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     @Override
-    public MutableLiveData<String> createOrder(CreateOrderRequest payload, ActionCallback<String> action) {
+    public MutableLiveData<String> createOrder(String header, CreateOrderRequest payload, ActionCallback<String> action) {
         MutableLiveData<String> result = new MutableLiveData<>();
-        orderService.createOrder(payload).enqueue(new Callback<>() {
+        orderService.createOrder(header, payload).enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
-                if(response.isSuccessful() && response.body().getData() != null) {
+                if(response.isSuccessful()) {
                     action.onSuccess(response.body().getData());
                     result.setValue(response.body().getData());
                 }
                 else {
-                    action.onFailure(response.message());
+                    ErrorResponseHandler<BaseResponse<String>> errorResponseHandler = new ErrorResponseHandler<>();
+                    BaseResponse<String> errorBody = errorResponseHandler.getResponseBody(response);
+                    action.onFailure(errorBody.getMessage());
                 }
             }
 

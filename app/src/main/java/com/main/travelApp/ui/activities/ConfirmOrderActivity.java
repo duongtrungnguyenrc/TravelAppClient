@@ -108,12 +108,16 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                 .placeholder(R.color.light_gray)
                 .error(R.color.light_gray)
                 .into(binding.imgThumbnail);
-        Picasso.get()
-                .load(homeViewModel.getCurrentUser().getAvatar())
-                .placeholder(R.color.light_gray)
-                .error(R.color.light_gray)
-                .into(binding.imgAvatar);
 
+        String userAvatar = homeViewModel.getCurrentUser().getAvatar();
+        if(userAvatar != null && !userAvatar.isEmpty())
+            Picasso.get()
+                    .load(homeViewModel.getCurrentUser().getAvatar())
+                    .placeholder(R.color.light_gray)
+                    .error(R.color.light_gray)
+                    .into(binding.imgAvatar);
+
+        binding.btnBack.setOnClickListener(view -> onBackPressed());
         binding.txtCurrentUserName.setText(homeViewModel.getCurrentUser().getFullName());
         binding.txtCurrentUserEmail.setText(homeViewModel.getCurrentUser().getEmail() + " + " + homeViewModel.getCurrentUser().getPhone());
         binding.txtTicketRank.setText("Hạng vé: " + tourDate.getType());
@@ -137,6 +141,9 @@ public class ConfirmOrderActivity extends AppCompatActivity {
             specialRequestBottomSheet.show();
         });
 
+        binding.itemCash.setChecked(true);
+        createPaymentRequest.setPaymentMethod("cash");
+
         binding.radioGroupPaymentMethod.setOnCheckedChangeListener((radioGroup, i) -> {
             if(i == R.id.item_cash) {
                 createPaymentRequest.setPaymentMethod("cash");
@@ -147,12 +154,26 @@ public class ConfirmOrderActivity extends AppCompatActivity {
             }
         });
         binding.btnContinue.setOnClickListener(view -> {
-            OrderRepositoryImpl.getInstance().createOrder(createPaymentRequest, new ActionCallback<String>() {
+            OrderRepositoryImpl.getInstance().createOrder(
+                    getSharedPreferences(SharedPreferenceKeys.USER_SHARED_PREFS, MODE_PRIVATE).getString(SharedPreferenceKeys.USER_ACCESS_TOKEN, ""),
+                    createPaymentRequest,
+                    new ActionCallback<String>() {
                 @Override
                 public void onSuccess(String url) {
-                    Intent paymentIntent = new Intent(Intent.ACTION_VIEW);
-                    paymentIntent.setData(Uri.parse(url));
-                    startActivity(paymentIntent);
+                    try {
+                        Intent paymentIntent = new Intent(Intent.ACTION_VIEW);
+                        paymentIntent.setData(Uri.parse(url));
+                        startActivity(paymentIntent);
+                    }catch (Exception e){
+                        try {
+                            Intent checkOutIntent = new Intent(ConfirmOrderActivity.this, CheckOutActivity.class);
+                            checkOutIntent.putExtra("orderId", url);
+                            checkOutIntent.putExtra("status", "true");
+                            startActivity(checkOutIntent);
+                        }catch (Exception ex){
+                            ex.printStackTrace();
+                        }
+                    }
                 }
 
                 @Override

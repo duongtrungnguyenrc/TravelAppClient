@@ -1,4 +1,4 @@
-package com.main.travelApp.services.api;
+package com.main.travelApp.ui.services.api;
 
 import com.main.travelApp.models.Order;
 import com.main.travelApp.models.User;

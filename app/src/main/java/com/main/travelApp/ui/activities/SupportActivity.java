@@ -1,25 +1,21 @@
 package com.main.travelApp.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.main.travelApp.R;
 import com.main.travelApp.adapters.MessageAdapter;
 import com.main.travelApp.databinding.ActivitySupportBinding;
 import com.main.travelApp.models.Message;
-import com.main.travelApp.request.NewMessageRequest;
-import com.main.travelApp.services.Chat.ChatService;
+import com.main.travelApp.ui.services.Chat.ChatService;
 import com.main.travelApp.utils.DebounceUtil;
-import com.main.travelApp.utils.NotificationManager;
+import com.main.travelApp.utils.KeyBoardUtils;
 import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.viewmodels.ProfileViewModel;
@@ -30,8 +26,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import lombok.Data;
 
 public class SupportActivity extends AppCompatActivity {
 
@@ -66,7 +60,7 @@ public class SupportActivity extends AppCompatActivity {
             @Override
             public void onConnected(List<Message> messages) {;
                 SupportActivity.this.messages = messages != null ? messages : new ArrayList<>();
-                adapter.setMessages(messages);
+                adapter.setMessages(SupportActivity.this.messages);
 
                 binding.rcvMessage.setAdapter(adapter);
                 binding.rcvMessage.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -96,7 +90,15 @@ public class SupportActivity extends AppCompatActivity {
         handleChat();
         binding.btnBack.setOnClickListener(view -> finish());
         binding.txtRoom.setText("Phòng: " + profileViewModel.getCurrentUser().getId());
+        binding.rcvMessage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                KeyBoardUtils.hideKeyboard(SupportActivity.this);
+                return true;
+            }
+        });
     }
+
 
     private void handleChat() {
 

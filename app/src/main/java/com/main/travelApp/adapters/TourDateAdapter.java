@@ -86,7 +86,7 @@ public class TourDateAdapter extends RecyclerView.Adapter<TourDateAdapter.ViewHo
         TourDate tourDate = dates.get(position);
             holder.getTxtDateName().setText(tourName + " hạng vé " + tourDate.getType());
             holder.getTxtStartDate().setText(tourDate.getDepartDate());
-            holder.getTxtDatePrice().setText(tourDate.getAdultPrice() + " VND");
+            holder.getTxtDatePrice().setText(tourDate.getStringAdultPrice());
 
             holder.getBtnSelectDate().setOnClickListener(view -> {
                 Intent intent = new Intent(context, SelectTicketActivity.class);

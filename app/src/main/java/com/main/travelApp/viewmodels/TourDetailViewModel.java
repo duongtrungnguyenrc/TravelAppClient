@@ -28,8 +28,8 @@ public class TourDetailViewModel extends ViewModel {
         return tourRepository.find(id);
     }
 
-    public MutableLiveData<RateDetailResponse> getRates(long id) {
-        this.rateResponse = rateRepository.findByTourId(id, ratingPage, 10);
+    public MutableLiveData<RateDetailResponse> getRates(String accessToken, long id) {
+        this.rateResponse = rateRepository.findByTourId(accessToken, id, ratingPage, 10);
         return rateResponse;
     }
 
@@ -41,9 +41,9 @@ public class TourDetailViewModel extends ViewModel {
         return ratingPage;
     }
 
-    public void setRatingPage(int commentPage, long id) {
+    public void setRatingPage(String accessToken, int commentPage, long id) {
         this.ratingPage = commentPage;
-        rateRepository.findByTourId(id, commentPage, 6).observeForever(data -> {
+        rateRepository.findByTourId(accessToken, id, commentPage, 6).observeForever(data -> {
             rateResponse.setValue(data);
         });
     }

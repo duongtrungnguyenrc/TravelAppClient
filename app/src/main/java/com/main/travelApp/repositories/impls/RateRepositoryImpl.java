@@ -1,7 +1,5 @@
 package com.main.travelApp.repositories.impls;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 
 import com.main.travelApp.callbacks.ActionCallback;
@@ -13,11 +11,9 @@ import com.main.travelApp.response.AddRateResponse;
 import com.main.travelApp.response.BaseResponse;
 import com.main.travelApp.response.RateDetailResponse;
 import com.main.travelApp.response.RateResponse;
-import com.main.travelApp.services.api.APIClient;
-import com.main.travelApp.services.api.IRateService;
+import com.main.travelApp.ui.services.api.APIClient;
+import com.main.travelApp.ui.services.api.IRateService;
 import com.main.travelApp.utils.ErrorResponseHandler;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,9 +52,9 @@ public class RateRepositoryImpl implements RateRepository {
     }
 
     @Override
-    public MutableLiveData<RateDetailResponse> findByTourId(long id, int page, int limit) {
+    public MutableLiveData<RateDetailResponse> findByTourId(String accessToken, long id, int page, int limit) {
         MutableLiveData<RateDetailResponse> rateResponse = new MutableLiveData<>();
-        Call<BaseResponse<RateDetailResponse>> call = rateService.getRateByTourId(id, page, limit);
+        Call<BaseResponse<RateDetailResponse>> call = rateService.getRateByTourId(accessToken, id, page, limit);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<BaseResponse<RateDetailResponse>> call, Response<BaseResponse<RateDetailResponse>> response) {

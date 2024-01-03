@@ -16,6 +16,7 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ import com.main.travelApp.ui.components.EnterConfirmCodeDialog;
 import com.main.travelApp.ui.components.EnterConfirmResetPassCodeDialog;
 import com.main.travelApp.ui.components.EnterEmailDialog;
 import com.main.travelApp.ui.components.EnterNewPasswordDialog;
+import com.main.travelApp.utils.KeyBoardUtils;
 import com.main.travelApp.utils.ScreenManager;
 import com.main.travelApp.utils.SharedPreferenceKeys;
 import com.main.travelApp.viewmodels.SignUpViewModel;
@@ -106,6 +108,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         binding.btnGoogle.setOnClickListener(this);
         binding.edtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
         binding.edtRePassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        binding.mainLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                KeyBoardUtils.hideKeyboard(SignUpActivity.this);
+                return true;
+            }
+        });
         binding.btnInputType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
